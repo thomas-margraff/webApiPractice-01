@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using DAL_SqlServer;
+using Microsoft.EntityFrameworkCore;
 
 namespace webApiPractice_01
 {
@@ -25,6 +27,12 @@ namespace webApiPractice_01
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ntpContext>(cfg =>
+            {
+                cfg.UseSqlServer(this.Configuration.GetConnectionString("ntpConnectionString"));
+            }
+            );
+
             services.AddControllers();
         }
 
