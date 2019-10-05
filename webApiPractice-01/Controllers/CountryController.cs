@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace webApiPractice_01.Controllers
 {
+    // comment
+
     [Route("api/[controller]")]
     [ApiController]
     public class CountryController : ControllerBase
@@ -20,22 +22,61 @@ namespace webApiPractice_01.Controllers
             this._ctx = ctx;
         }
 
-        public async Task<IEnumerable<Countries>> Get()
+        [HttpGet("GetByStatus/{active:bool?}")]
+        public async Task<IEnumerable<Countries>> GetByStatus(bool? active)
+        {
+            //return await _ctx.Countries.ToListAsync();
+            if (active == null)
+            {
+                return await this.GetAll();
+            }
+            if (active.Value == false)
+            {
+                return await this.GetInActive();
+            }
+
+            return await this.GetActive();
+
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<IEnumerable<Countries>> GetAll()
         {
             return await _ctx.Countries.ToListAsync();
         }
 
-        [HttpGet("{CountryId:int}")]
-        public async Task<Countries> GetById(int CountryId)
+        [HttpGet("GetActive")]
+        public async Task<IEnumerable<Countries>> GetActive()
         {
-            return await _ctx.Countries.FirstOrDefaultAsync(r => r.CountryId == CountryId);
+            return await _ctx.Countries.Where(r => r.Active).ToListAsync();
         }
 
-
-        [HttpGet("{CountryCode}")]
-        public async Task<Countries> GetByCode(string CountryCode)
+        [HttpGet("GetInActive")]
+        public async Task<IEnumerable<Countries>> GetInActive()
         {
-            return await _ctx.Countries.FirstOrDefaultAsync(r => r.CountryCode == CountryCode);
+            return await _ctx.Countries.Where(r => !r.Active).ToListAsync();
+        }
+
+        [HttpGet("GetById/{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var rec = await _ctx.Countries.FirstOrDefaultAsync(r => r.CountryId == id);
+            if (rec == null)
+            {
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
+            return Ok(rec);
+        }
+
+        [HttpGet("GetByCode/{code}")]
+        public async Task<IActionResult> GetByCode(string code)
+        {
+            var rec = await _ctx.Countries.FirstOrDefaultAsync(r => r.CountryCode == code);
+            if (rec == null)
+            {
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
+            return Ok(rec);
         }
 
     }
