@@ -11,6 +11,7 @@ namespace webApiPractice_01
 {
     public class Program
     {
+        // a comment
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
