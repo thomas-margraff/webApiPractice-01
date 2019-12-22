@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DAL_SqlServer
+namespace DAL_SqlServer.Models
 {
     public partial class VwIndicatorCountry
     {

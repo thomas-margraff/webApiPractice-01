@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DAL_SqlServer;
+using DAL_SqlServer.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace webApiPractice_01.Controllers

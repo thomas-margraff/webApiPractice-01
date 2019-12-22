@@ -12,6 +12,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using DAL_SqlServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using DAL_SqlServer.Repository;
 
 namespace webApiPractice_01
 {
@@ -27,11 +31,22 @@ namespace webApiPractice_01
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var allowedOrigins = Configuration.GetValue<string>("AllowedOrigins")?.Split(",") ?? new string[0];
+            services.AddCors(options =>
+            {
+                options.AddPolicy("localAngularApp", 
+                    builder => builder.WithOrigins(allowedOrigins).AllowAnyMethod().WithHeaders("Authentication").AllowCredentials());
+                options.AddPolicy("PublicApi", builder => builder.AllowAnyOrigin().WithMethods("Get").WithHeaders("Content-Type"));
+            });
+
             services.AddDbContext<ntpContext>(cfg =>
             {
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("ntpConnectionString"));
             }
             );
+
+            services.AddScoped<IRepository, Repository<ntpContext>>();
+            services.AddScoped<ICountriesRepository, CountriesRepository<ntpContext>>();
 
             services.AddControllers();
         }
@@ -47,7 +62,8 @@ namespace webApiPractice_01
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("localAngularApp");
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
