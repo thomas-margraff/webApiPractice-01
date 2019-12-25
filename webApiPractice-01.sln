@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webApiPractice-01", "webApi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL-SqlServer", "DAL-SqlServer\DAL-SqlServer.csproj", "{81FF4B63-38A1-41D8-BBAD-AA87F534AFD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkDataOps", "BulkDataOps\BulkDataOps.csproj", "{FC3EC561-7C8B-4F51-ACE6-21FEC5FF213F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulkDataOps", "BulkDataOps\BulkDataOps.csproj", "{FC3EC561-7C8B-4F51-ACE6-21FEC5FF213F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

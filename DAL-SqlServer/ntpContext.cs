@@ -25,6 +25,7 @@ namespace DAL_SqlServer
         public virtual DbSet<VwIndicatorCountry> VwIndicatorCountry { get; set; }
         public virtual DbSet<VwPrices> VwPrices { get; set; }
         public virtual DbSet<IndicatorData> IndicatorData { get; set; }
+        public virtual DbSet<vwCountryIndicator> vwCountryIndicator { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,6 +38,11 @@ namespace DAL_SqlServer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<vwCountryIndicator>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
             modelBuilder.Entity<Countries>(entity =>
             {
                 entity.HasKey(e => e.CountryId);

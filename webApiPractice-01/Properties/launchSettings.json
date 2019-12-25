@@ -11,10 +11,12 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchUrl": "api/ntp",
+      "launchBrowser": true,
+      "launchUrl": "api/indicatordata/GetCurrencyIndicatorsByCcy/USD",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "sqlDebugging": true
     },
     "webApiPractice_01": {
       "commandName": "IISExpress",

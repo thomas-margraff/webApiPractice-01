@@ -35,8 +35,16 @@ namespace webApiPractice_01
             services.AddCors(options =>
             {
                 options.AddPolicy("localAngularApp", 
-                    builder => builder.WithOrigins(allowedOrigins).AllowAnyMethod().WithHeaders("Authentication").AllowCredentials());
-                options.AddPolicy("PublicApi", builder => builder.AllowAnyOrigin().WithMethods("Get").WithHeaders("Content-Type"));
+                    builder => builder
+                                .WithOrigins(allowedOrigins)
+                                .AllowAnyMethod()
+                                .WithHeaders("Authentication")
+                                .AllowCredentials());
+
+                options.AddPolicy("PublicApi", builder => builder
+                                .AllowAnyOrigin()
+                                .WithMethods("Get")
+                                .WithHeaders("Content-Type"));
             });
 
             services.AddDbContext<ntpContext>(cfg =>

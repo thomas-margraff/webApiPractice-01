@@ -29,5 +29,16 @@ namespace webApiPractice_01.Controllers
             return await this._repository.GetByCurrency(currency);
         }
 
+        [HttpGet("GetCurrencyIndicators/")]
+        public async Task<IEnumerable<vwCountryIndicator>> GetCurrencyIndicators()
+        {
+            return await this._repository.GetCurrencyIndicators();
+        }
+        [HttpGet("GetCurrencyIndicatorsByCcy/{currency}")]
+        public async Task<IEnumerable<vwCountryIndicator>> GetCurrencyIndicatorsByCcy(string currency)
+        {
+            return await this._repository.GetCurrencyIndicatorsByCcy(currency);
+        }
+
     }
 }
