@@ -31,7 +31,7 @@ namespace webApiPractice_01.Controllers
         [HttpGet("GetScrape/")]
         public async Task<IEnumerable<IndicatorData>> GetScrape(string currency)
         {
-            string url = "http://localhost:3000/api/scrape/week/this";
+            string url = "http://localhost:3000/api/v1/scraper/week/this";
             string jsonData = CallRestMethod(url);
             JObject calendar = JObject.Parse(jsonData);
             List<JToken> results = calendar["calendarData"].Children().ToList();

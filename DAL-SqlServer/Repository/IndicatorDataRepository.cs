@@ -26,6 +26,14 @@ namespace DAL_SqlServer.Repository
                 .ToListAsync();
         }
 
+        public async Task<List<IndicatorData>> GetIndicatorsForDate(DateTime dt)
+        {
+            return await this.dbContext.Set<IndicatorData>()
+                .Where(r => r.ReleaseDateTime >= dt && r.ReleaseDateTime < dt.AddDays(1).AddSeconds(-1))
+                .OrderBy(r => r.ReleaseDateTime)
+                .ToListAsync();
+        }
+
         public IndicatorData Create(IndicatorData data)
         {
             throw new NotImplementedException();

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL-SqlServer", "DAL-SqlSer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulkDataOps", "BulkDataOps\BulkDataOps.csproj", "{FC3EC561-7C8B-4F51-ACE6-21FEC5FF213F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapeScheduleService", "ScrapeScheduleService\ScrapeScheduleService.csproj", "{DA25B808-7116-4711-A4E7-AF032A5FD1DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FC3EC561-7C8B-4F51-ACE6-21FEC5FF213F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC3EC561-7C8B-4F51-ACE6-21FEC5FF213F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC3EC561-7C8B-4F51-ACE6-21FEC5FF213F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA25B808-7116-4711-A4E7-AF032A5FD1DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA25B808-7116-4711-A4E7-AF032A5FD1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA25B808-7116-4711-A4E7-AF032A5FD1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA25B808-7116-4711-A4E7-AF032A5FD1DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

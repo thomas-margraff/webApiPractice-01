@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/indicatordata/GetCurrencyIndicatorsByCcy/USD",
+      "launchUrl": "api/indicatordata/GetIndicatorsForToday",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

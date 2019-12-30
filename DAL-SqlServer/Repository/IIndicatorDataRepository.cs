@@ -11,9 +11,11 @@ namespace DAL_SqlServer.Repository
         IndicatorData Create(IndicatorData data);
         void Create(List<IndicatorData> data);
         Task<List<IndicatorData>> GetByCurrency(string currency);
+        Task<List<IndicatorData>> GetIndicatorsForDate(DateTime dt);
         List<IndicatorData> BulkUpdate(List<IndicatorData> recs);
         Task<List<vwCountryIndicator>> GetCurrencyIndicators();
         Task<List<vwCountryIndicator>> GetCurrencyIndicatorsByCcy(string currency);
+
 
     }
 }
