@@ -15,11 +15,13 @@ namespace ScrapeScheduleService
             IHost host = CreateHostBuilder(args).Build();
             host.Services.UseScheduler(scheduler =>
             {
+                Console.WriteLine("Scrape job started...");
+                Console.WriteLine("First Scrape job starts in 30 minutes: " + DateTime.Now.AddMinutes(60));
+
                 // Easy peasy
                 scheduler
                     .Schedule<NestScraper>()
-                    .EveryFiveSeconds()
-                    .Weekday();
+                    .HourlyAt(54);
             });
             host.Run();
         }

@@ -1,34 +1,49 @@
-﻿using System;
+﻿using Coravel.Invocable;
+using Coravel.Queuing.Interfaces;
+using DAL_SqlServer;
+using DAL_SqlServer.Models;
+using DAL_SqlServer.Repository;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Coravel.Invocable;
-using DAL_SqlServer.Models;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace ScrapeScheduleService
+namespace ScrapeServiceWorker
 {
-    public class NestScraper : IInvocable
+    public class ScraperInvocable : IInvocable
     {
+        private readonly ntpContext _ctx;
+        private readonly IIndicatorDataRepository _repository;
+        
+        public ScraperInvocable(ntpContext ctx, IIndicatorDataRepository repository)
+        {
+            this._ctx = ctx;
+            this._repository = repository;
+        }
+
         public Task Invoke()
         {
-            Console.WriteLine("Before scrape: "+ DateTime.Now);
-            
+            Console.WriteLine("Before scrape: " + DateTime.Now);
+
             var recs = this.InvokeScraper();
-            
+
             Console.WriteLine("after scrape: " + DateTime.Now);
             Console.WriteLine("recs scraped: " + recs.Count());
             Console.WriteLine("next scrape : " + DateTime.Now.AddMinutes(30));
+            string jsonData = JsonConvert.SerializeObject(recs, Formatting.Indented);
+            Console.WriteLine(jsonData);
+
             Console.WriteLine("");
 
+
             return Task.CompletedTask;
+
         }
 
         public List<IndicatorData> InvokeScraper()
@@ -36,8 +51,16 @@ namespace ScrapeScheduleService
             string url = "http://localhost:7000/api/scrape/getscrape/";
             string jsonData = CallRestMethod(url);
             var recs = JsonConvert.DeserializeObject<List<IndicatorData>>(jsonData);
-            jsonData = JsonConvert.SerializeObject(recs, Formatting.Indented);
-            Console.WriteLine(jsonData);
+            
+            try
+            {
+                recs = _repository.BulkUpdate(recs.ToList());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
             return recs;
 
         }
@@ -54,6 +77,5 @@ namespace ScrapeScheduleService
             webresponse.Close();
             return result;
         }
-
     }
 }

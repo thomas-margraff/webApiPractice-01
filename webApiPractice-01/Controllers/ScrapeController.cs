@@ -27,9 +27,14 @@ namespace webApiPractice_01.Controllers
             this._repository = repository;
         }
 
+        //[HttpGet("TestScrape/")]
+        //public async Task<IEnumerable<IndicatorData>> TestScrape()
+        //{
+
+        //}
 
         [HttpGet("GetScrape/")]
-        public async Task<IEnumerable<IndicatorData>> GetScrape(string currency)
+        public async Task<IEnumerable<IndicatorData>> GetScrape()
         {
             string url = "http://localhost:3000/api/v1/scraper/week/this";
             string jsonData = CallRestMethod(url);

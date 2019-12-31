@@ -15,7 +15,7 @@ namespace DAL_SqlServer.Repository
         List<IndicatorData> BulkUpdate(List<IndicatorData> recs);
         Task<List<vwCountryIndicator>> GetCurrencyIndicators();
         Task<List<vwCountryIndicator>> GetCurrencyIndicatorsByCcy(string currency);
-
+        Task<List<IndicatorData>> ThisWeek();
 
     }
 }

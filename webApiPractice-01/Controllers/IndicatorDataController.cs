@@ -56,6 +56,12 @@ namespace webApiPractice_01.Controllers
             return await this._repository.GetIndicatorsForDate(dt);
         }
 
+        [HttpGet("thisweek/")]
+        public async Task<IEnumerable<IndicatorData>> ThisWeek()
+        {
+            return await this._repository.ThisWeek();
+        }
+
 
     }
 }

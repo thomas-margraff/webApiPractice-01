@@ -91,5 +91,17 @@ namespace DAL_SqlServer.Repository
                 .ToListAsync();
         }
 
+        public async Task<List<IndicatorData>> ThisWeek()
+        {
+            var dtToday = DateTime.Now;
+            var dayOfWeek = Convert.ToInt16(dtToday.DayOfWeek);
+            var sun = dtToday.AddDays(dayOfWeek * -1);
+            var sat = sun.AddDays(6);
+
+            return await this.dbContext.Set<IndicatorData>()
+                .Where(r => r.ReleaseDateTime >= sun && r.ReleaseDateTime <= sat)
+                .OrderBy(r => r.ReleaseDateTime)
+                .ToListAsync();
+        }
     }
 }

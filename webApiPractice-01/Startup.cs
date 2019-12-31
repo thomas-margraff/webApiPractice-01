@@ -56,7 +56,7 @@ namespace webApiPractice_01
             services.AddScoped<IRepository, Repository<ntpContext>>();
             services.AddScoped<ICountriesRepository, CountriesRepository<ntpContext>>();
             services.AddScoped<IIndicatorDataRepository, IndicatorDataRepository<ntpContext>>();
-
+       
             services.AddControllers();
         }
 

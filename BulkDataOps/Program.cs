@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace BulkDataOps
 {
@@ -18,6 +20,26 @@ namespace BulkDataOps
         {
             BulkOps ops = new BulkOps();
             // ops.BulkUpdate();
+
+            getRecs();
+
         }
+
+        static async void testHttpClient()
+        {
+            Tester tester = new Tester();
+            var recs = await tester.getRecs();
+        }
+
+        public static async void getRecs()
+        {
+            var url = "http://localhost:3000/api/v1/scraper/week/this";
+            using (var client = new HttpClient())
+            {
+                var content = await client.GetStringAsync(url);
+                var x = 2;
+            }
+        }
+
     }
 }
