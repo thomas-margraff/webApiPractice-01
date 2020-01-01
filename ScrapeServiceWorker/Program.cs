@@ -24,7 +24,10 @@ namespace ScrapeServiceWorker
 
                 scheduler
                     .Schedule<ScraperInvocable>()
-                    .HourlyAt(40);
+                    //.EveryFifteenSeconds();
+                    //.Cron("* * * * *")
+                    //.Cron("2 0 0 0 0");
+                    .HourlyAt(53);
             });
             host.Run();
         }

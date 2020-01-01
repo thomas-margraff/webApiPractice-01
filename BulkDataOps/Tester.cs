@@ -19,10 +19,22 @@ namespace BulkDataOps
 {
     public class Tester
     {
-		public async Task<List<IndicatorData>> getRecs()
+		public async Task GetRecs()
+		{
+			var url = "http://localhost:7000/api/scrape/getscrape/";
+			using (var client = new HttpClient())
+			{
+				var json = await client.GetStringAsync(url);
+				var recs = JsonConvert.DeserializeObject<List<IndicatorData>>(json);
+				Console.WriteLine(json);
+				Console.WriteLine(recs.Count());
+			}
+		}
+
+		public async Task<List<IndicatorData>> getRecs1()
 		{
 			List<IndicatorData> recs = new List<IndicatorData>();
-			var url = "http://localhost:3000/api/v1/scraper/week/this";
+			string url = "http://localhost:3000/api/v1/scraper/week/this";
 			using (var client = new HttpClient())
 			{
 				string jsonData = "";

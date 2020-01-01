@@ -16,29 +16,28 @@ namespace BulkDataOps
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             BulkOps ops = new BulkOps();
             // ops.BulkUpdate();
 
-            getRecs();
-
+            Tester t = new Tester();
+            await t.GetRecs();
+            
+            Console.WriteLine("DONE");
         }
 
-        static async void testHttpClient()
-        {
-            Tester tester = new Tester();
-            var recs = await tester.getRecs();
-        }
 
         public static async void getRecs()
         {
             var url = "http://localhost:3000/api/v1/scraper/week/this";
+            url = "http://localhost:7000/api/scrape/getscrape/";
             using (var client = new HttpClient())
             {
                 var content = await client.GetStringAsync(url);
-                var x = 2;
+                Console.WriteLine(content);
             }
+            
         }
 
     }
