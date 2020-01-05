@@ -1,7 +1,10 @@
-﻿using DAL_SqlServer.Models;
+﻿using DAL_SqlServer.Dto;
+using DAL_SqlServer.Models;
+using DAL_SqlServer.SearchModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +31,9 @@ namespace DAL_SqlServer.Repository
 
         public async Task<List<IndicatorData>> GetIndicatorsForDate(DateTime dt)
         {
+            DateTime dtNext = dt.AddDays(1);
             return await this.dbContext.Set<IndicatorData>()
-                .Where(r => r.ReleaseDateTime >= dt && r.ReleaseDateTime < dt.AddDays(1).AddSeconds(-1))
+                .Where(r => r.ReleaseDateTime >= dt && r.ReleaseDateTime < dtNext)
                 .OrderBy(r => r.ReleaseDateTime)
                 .ToListAsync();
         }
@@ -101,6 +105,109 @@ namespace DAL_SqlServer.Repository
             return await this.dbContext.Set<IndicatorData>()
                 .Where(r => r.ReleaseDateTime >= sun && r.ReleaseDateTime <= sat)
                 .OrderBy(r => r.ReleaseDateTime)
+                .ToListAsync();
+        }
+
+        public async Task<List<IndicatorData>> NextWeek()
+        {
+            var dt = DateTime.Now;
+            var dtSunday = new GregorianCalendar().AddDays(dt, -((int)dt.DayOfWeek) + 7);
+            var dtFriday = dtSunday.AddDays(6);
+
+            return await this.dbContext.Set<IndicatorData>()
+                .Where(r => r.ReleaseDateTime >= dtSunday && r.ReleaseDateTime <= dtFriday)
+                .OrderBy(r => r.ReleaseDateTime)
+                .ToListAsync();
+        }
+
+        public async Task<List<IndicatorData>> IndicatorsToday()
+        {
+            var dtToday = DateTime.Now;
+
+            return await this.dbContext.Set<IndicatorData>()
+                .Where(r => r.ReleaseDateTime >= dtToday.Date &&
+                       r.ReleaseDateTime <= dtToday.Date.AddDays(1).AddMinutes(-1))
+                .OrderBy(r => r.ReleaseDateTime)
+                .ToListAsync();
+        }
+
+        public async Task<List<string>> CountriesGetAll()
+        {
+            // var ccy = IndicatorData.Select(r => r.Currency).Distinct().OrderBy(r => r).Dump();
+            return await this.dbContext.Set<IndicatorData>()
+                .Select(r => r.Currency)
+                .Distinct()
+                .OrderBy(r => r)
+                .ToListAsync();
+
+        }
+        public List<ReleaseDto> IndicatorsGroupByCcyIndicator(string currency)
+        {
+            var dtos = (from r in this.dbContext.Set<IndicatorData>()
+                        where r.Currency == currency
+                        select new ReleaseDto()
+                        {
+                            Id = 0,
+                            Currency = r.Currency,
+                            Indicator = r.Indicator
+                        }).Distinct().OrderBy(d => d.Indicator).ToList();
+
+            foreach (var dto in dtos)
+            {
+                dto.IndicatorDataDto = (from r in this.dbContext.Set<IndicatorData>()
+                                        where r.Currency == dto.Currency && r.Indicator == dto.Indicator
+                                        select new IndicatorDataDto()
+                                        {
+                                            Actual = r.Actual,
+                                            EventId = r.EventId,
+                                            Forecast = r.Forecast,
+                                            IndicatorId = r.Id,
+                                            Previous = r.Previous,
+                                            ReleaseDate = r.ReleaseDate,
+                                            ReleaseDateTime = r.ReleaseDateTime,
+                                            ReleaseTime = r.ReleaseTime
+                                        }).OrderByDescending(idd => idd.ReleaseDateTime).ToList();
+            }
+
+            return dtos;
+        }
+
+        public List<ReleaseDto> GetIndicatorsGroupByCcyIndicatorName(string currency, string indicatorName)
+        {
+            var dtos = (from r in this.dbContext.Set<IndicatorData>()
+                        where r.Currency == currency && r.Indicator == indicatorName
+                        select new ReleaseDto()
+                        {
+                            Id = 0,
+                            Currency = r.Currency,
+                            Indicator = r.Indicator
+                        }).Distinct().OrderBy(d => d.Indicator).ToList();
+
+            foreach (var dto in dtos)
+            {
+                dto.IndicatorDataDto = (from r in this.dbContext.Set<IndicatorData>()
+                                        where r.Currency == dto.Currency && r.Indicator == dto.Indicator
+                                        select new IndicatorDataDto()
+                                        {
+                                            Actual = r.Actual,
+                                            EventId = r.EventId,
+                                            Forecast = r.Forecast,
+                                            IndicatorId = r.Id,
+                                            Previous = r.Previous,
+                                            ReleaseDate = r.ReleaseDate,
+                                            ReleaseDateTime = r.ReleaseDateTime,
+                                            ReleaseTime = r.ReleaseTime
+                                        }).OrderByDescending(idd => idd.ReleaseDateTime).ToList();
+            }
+
+            return dtos;
+        }
+
+        public async Task<List<IndicatorData>> GetIndicatorHistory(IndicatorDataSearchModel search)
+        {
+            return await this.dbContext.Set<IndicatorData>()
+                .Where(r => r.Currency == search.Currency && r.Indicator == search.Indicator)
+                .OrderByDescending(r => r.ReleaseDateTime)
                 .ToListAsync();
         }
     }

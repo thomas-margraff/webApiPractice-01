@@ -27,7 +27,7 @@ namespace ScrapeServiceWorker
                     //.EveryFifteenSeconds();
                     //.Cron("* * * * *")
                     //.Cron("2 0 0 0 0");
-                    .HourlyAt(53);
+                    .DailyAtHour(23);
             });
             host.Run();
         }

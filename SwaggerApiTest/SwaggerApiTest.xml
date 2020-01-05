@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwaggerApiTest</name>
+    </assembly>
+    <members>
+        <member name="M:SwaggerApiTest.IndicatorDataController.#ctor(DAL_SqlServer.ntpContext,DAL_SqlServer.Repository.IIndicatorDataRepository)">
+            <summary>
+            
+            </summary>
+            <param name="ctx = ntpContext=ntpContext"></param>
+            <param name="repository = data repository=datarepository"></param>
+        </member>
+        <member name="M:SwaggerApiTest.IndicatorDataController.CountriesGetAll">
+            <summary>
+            Get a list of all Countries
+            </summary>
+            <returns>list of countries</returns>
+        </member>
+        <member name="M:SwaggerApiTest.IndicatorDataController.GetByCountry(System.String)">
+            <summary>
+            Top 300 IndicatorData records (sorted by ReleaseDateTime descending)
+            </summary>
+            <param name="country"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwaggerApiTest.IndicatorDataController.CountryIndicatorsGetAll">
+            <summary>
+            get all indicators for all countries
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwaggerApiTest.IndicatorDataController.CountryIndicatorsByCountry(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="country"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

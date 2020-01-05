@@ -26,7 +26,7 @@ namespace DAL_SqlServer
         public virtual DbSet<VwPrices> VwPrices { get; set; }
         public virtual DbSet<IndicatorData> IndicatorData { get; set; }
         public virtual DbSet<vwCountryIndicator> vwCountryIndicator { get; set; }
-
+        public virtual DbSet<IndicatorDataCcyName> IndicatorDataCcyName { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

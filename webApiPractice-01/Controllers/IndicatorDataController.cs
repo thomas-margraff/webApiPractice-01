@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DAL_SqlServer;
+using DAL_SqlServer.Dto;
 using DAL_SqlServer.Models;
 using DAL_SqlServer.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace webApiPractice_01.Controllers
 {
@@ -22,7 +24,21 @@ namespace webApiPractice_01.Controllers
             this._ctx = ctx;
             this._repository = repository;
         }
+       /// <summary>
+       /// get all
+       /// </summary>
+       /// <returns></returns>
+        [HttpGet("CountriesGetAll")]
+        public async Task<IEnumerable<string>> CountriesGetAll()
+        {
+            return await this._repository.CountriesGetAll();
+        }
 
+        /// <summary>
+        /// by ccy
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
         [HttpGet("GetByCurrency/{currency}")]
         public async Task<IEnumerable<IndicatorData>> GetByCurrency(string currency)
         {
@@ -62,6 +78,23 @@ namespace webApiPractice_01.Controllers
             return await this._repository.ThisWeek();
         }
 
+        [HttpGet("GroupByCcyIndicators/{currency}")]
+        public List<ReleaseDto> GroupByCcyIndicators(string currency)
+        {
+            var recs = this._repository.IndicatorsGroupByCcyIndicator(currency);
+            // var json = JsonConvert.SerializeObject(recs, Formatting.Indented);
+
+            return recs;
+        }
+
+        [HttpGet("GetIndicatorsGroupByCcyIndicatorName/{currency}/{indicatorName}")]
+        public List<ReleaseDto> GetIndicatorsGroupByCcyIndicatorName(string currency, string indicatorName)
+        {
+            var recs = this._repository.GetIndicatorsGroupByCcyIndicatorName(currency, indicatorName);
+            // var json = JsonConvert.SerializeObject(recs, Formatting.Indented);
+
+            return recs;
+        }
 
     }
 }

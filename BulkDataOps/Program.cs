@@ -19,10 +19,11 @@ namespace BulkDataOps
         static async Task Main(string[] args)
         {
             BulkOps ops = new BulkOps();
-            // ops.BulkUpdate();
+            // ops.FixBadDates();
+            // ops.BulkInsertCurrencyIndicatorTable();
 
-            Tester t = new Tester();
-            await t.GetRecs();
+            //Tester t = new Tester();
+            //await t.GetRecs();
             
             Console.WriteLine("DONE");
         }

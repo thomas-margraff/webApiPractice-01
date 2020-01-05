@@ -10,11 +10,67 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using DAL_SqlServer.Dto;
 
 namespace BulkDataOps
 {
     public class BulkOps
     {
+        public void FixBadDates()
+        {
+            using (var ctx = new ntpContext())
+            {
+                var dt = new DateTime(2020, 12, 30);
+                var recs = (from r in ctx.IndicatorData where r.ReleaseDateTime >= dt select r).ToList();
+                foreach (var rec in recs)
+                {
+                    var exist = ctx.IndicatorData.Where(r => r.EventId == rec.EventId).FirstOrDefault();
+
+                    exist.Actual = rec.Actual;
+                    exist.Forecast = rec.Forecast;
+                    exist.Indicator = rec.Indicator;
+                    exist.Previous = rec.Previous;
+                    exist.ReleaseDate = rec.ReleaseDate.Replace("2021", "2020");
+                    exist.ReleaseDateTime = rec.ReleaseDateTime.AddYears(-1);
+                    exist.ReleaseTime = rec.ReleaseTime;
+
+                    ctx.Entry(exist).State = EntityState.Modified;
+                }
+                ctx.SaveChanges();
+            }
+        }
+
+        public void BulkInsertCurrencyIndicatorTable()
+        {
+            using (var ctx = new ntpContext())
+            {
+                var recs = (from r in ctx.IndicatorData
+                            select new ReleaseDto()
+                            {
+                                Id = 0,
+                                Currency = r.Currency,
+                                Indicator = r.Indicator
+                            }).Distinct().OrderBy(r => r.Currency).ThenBy(d => d.Indicator).ToList();
+
+                foreach (var rec in recs)
+                {
+                    var dto = new IndicatorDataCcyName()
+                    {
+                        CreateDate = DateTime.Now,
+                        Currency = rec.Currency,
+                        Indicator = rec.Indicator,
+                        IsActive = true,
+                    };
+
+                    Console.WriteLine(dto.Currency + " " + dto.Indicator);
+                    ctx.IndicatorDataCcyName.Add(dto);
+                }
+
+                ctx.SaveChanges();
+
+            }
+
+        }
         public void BulkInsert()
         {
             var path = @"C:\____projecrts\___dev_scrapers\data\jsondata";
@@ -51,7 +107,6 @@ namespace BulkDataOps
             }
 
         }
-    
         public void BulkUpdate()
         {
             string url = "http://localhost:3000/api/scrape/week/this";
@@ -76,7 +131,8 @@ namespace BulkDataOps
                     {
                         rec.CreateDate = DateTime.Now;
                         ctx.IndicatorData.Add(rec);
-                    } else
+                    }
+                    else
                     {
                         exist.ModifyDate = DateTime.Now;
                         exist.Actual = rec.Actual;
@@ -86,7 +142,7 @@ namespace BulkDataOps
                         exist.ReleaseDate = rec.ReleaseDate;
                         exist.ReleaseDateTime = rec.ReleaseDateTime;
                         exist.ReleaseTime = rec.ReleaseTime;
-                        
+
                         ctx.Entry(exist).State = EntityState.Modified;
                     }
                 }
