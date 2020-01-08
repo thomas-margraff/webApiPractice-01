@@ -31,7 +31,7 @@ namespace BulkDataOps
 			}
 		}
 
-		public async Task<List<IndicatorData>> getRecs1()
+		public async Task<List<IndicatorData>> GetRecs1()
 		{
 			List<IndicatorData> recs = new List<IndicatorData>();
 			string url = "http://localhost:3000/api/v1/scraper/week/this";
@@ -46,8 +46,16 @@ namespace BulkDataOps
 				{
 					throw;
 				}
+				JObject calendar = JObject.Parse(jsonData);
+				List<JToken> results = calendar["calendarData"].Children().ToList();
 				
-				recs = JsonConvert.DeserializeObject<List<IndicatorData>>(jsonData);
+				foreach (JToken result in results)
+				{
+					// JToken.ToObject is a helper method that uses JsonSerializer internally
+					IndicatorData rec = result.ToObject<IndicatorData>();
+					recs.Add(rec);
+				}
+
 				jsonData = JsonConvert.SerializeObject(recs, Formatting.Indented);
 				Console.WriteLine(jsonData);
 			}

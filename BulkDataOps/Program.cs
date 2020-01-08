@@ -22,8 +22,8 @@ namespace BulkDataOps
             // ops.FixBadDates();
             // ops.BulkInsertCurrencyIndicatorTable();
 
-            //Tester t = new Tester();
-            //await t.GetRecs();
+            Tester t = new Tester();
+            var recs = await t.GetRecs1();
             
             Console.WriteLine("DONE");
         }
