@@ -16,6 +16,7 @@ using DAL_SqlServer;
 using DAL_SqlServer.Repository;
 using System.Reflection;
 using System.IO;
+using Microsoft.Net.Http.Headers;
 
 namespace ntpWebApi
 {
@@ -32,19 +33,22 @@ namespace ntpWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             var allowedOrigins = Configuration.GetValue<string>("AllowedOrigins")?.Split(",") ?? new string[0];
+
             services.AddCors(options =>
             {
+                // https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-3.1
                 options.AddPolicy("localAngularApp",
                     builder => builder
                                 .WithOrigins(allowedOrigins)
                                 .AllowAnyMethod()
-                                .WithHeaders("Authentication")
+                                .WithHeaders(HeaderNames.Authorization, "Authorization")
+                                .WithHeaders(HeaderNames.ContentType, "multipart/form-data")
                                 .AllowCredentials());
 
-                options.AddPolicy("PublicApi", builder => builder
-                                .AllowAnyOrigin()
-                                .WithMethods("Get")
-                                .WithHeaders("Content-Type"));
+                //options.AddPolicy("PublicApi", builder => builder
+                //                .AllowAnyOrigin()
+                //                .WithMethods("Get")
+                //                .WithHeaders("Content-Type"));
             });
 
             services.AddDbContext<ntpContext>(cfg =>
@@ -75,6 +79,9 @@ namespace ntpWebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            } else
+            {
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
@@ -91,7 +98,9 @@ namespace ntpWebApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            // enable cors
             app.UseCors("localAngularApp");
+
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

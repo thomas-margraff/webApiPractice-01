@@ -14,7 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace ntpWebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class IndicatorDataController : Controller
+    [ApiController]
+    public class IndicatorDataController : ControllerBase
     {
         private readonly ntpContext _ctx;
         private readonly IIndicatorDataRepository _repository;
@@ -37,7 +38,19 @@ namespace ntpWebApi.Controllers
         [HttpGet("CountriesGetAll")]
         public async Task<IEnumerable<string>> CountriesGetAll()
         {
-            return await this._repository.CountriesGetAll();
+            try
+            {
+                return await this._repository.CountriesGetAll();
+            }
+            catch (Exception ex)
+            {
+                return new List<string>()
+                {
+                    "broken!",
+                    ex.Message
+                };
+            }
+            
         }
 
         /// <summary>
@@ -133,6 +146,19 @@ namespace ntpWebApi.Controllers
             // var json = JsonConvert.SerializeObject(recs, Formatting.Indented);
 
             return recs;
+        }
+
+        [HttpGet("GetIndicatorsForCcyAndName/{currency}/{indicatorName}")]
+        public async Task<List<IndicatorData>> GetIndicatorsForCcyAndName(string currency, string indicatorName)
+        {
+            string ind = Uri.UnescapeDataString(indicatorName);
+            return await this._repository.GetIndicatorsForCcyAndName(currency, ind);
+        }
+
+        [HttpGet("test")]
+        public string Test()
+        {
+            return "ok!";
         }
 
     }

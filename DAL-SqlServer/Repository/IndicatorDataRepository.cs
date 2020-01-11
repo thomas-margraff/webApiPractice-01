@@ -210,5 +210,13 @@ namespace DAL_SqlServer.Repository
                 .OrderByDescending(r => r.ReleaseDateTime)
                 .ToListAsync();
         }
+
+        public async Task<List<IndicatorData>> GetIndicatorsForCcyAndName(string ccy, string indicatorName)
+        {
+            return await this.dbContext.Set<IndicatorData>()
+                .Where(r => r.Currency == ccy && r.Indicator == indicatorName)
+                .OrderByDescending(r => r.ReleaseDateTime)
+                .ToListAsync();
+        }
     }
 }

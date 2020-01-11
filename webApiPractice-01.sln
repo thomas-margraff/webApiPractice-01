@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL-SqlServer", "DAL-SqlSer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulkDataOps", "BulkDataOps\BulkDataOps.csproj", "{FC3EC561-7C8B-4F51-ACE6-21FEC5FF213F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapeServiceWorker", "ScrapeServiceWorker\ScrapeServiceWorker.csproj", "{6AA71E53-CDAD-4031-8CB5-6A855446A170}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScrapeServiceWorker", "ScrapeServiceWorker\ScrapeServiceWorker.csproj", "{6AA71E53-CDAD-4031-8CB5-6A855446A170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ntpWebApi", "ntpWebApi\ntpWebApi.csproj", "{73409BC8-7A9C-45CA-9528-E26FBD46F50E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ntpWebApi", "ntpWebApi\ntpWebApi.csproj", "{73409BC8-7A9C-45CA-9528-E26FBD46F50E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webApiPractice-01", "webApiPractice-01\webApiPractice-01.csproj", "{049E94F9-3AE1-4273-AC9C-EA6EE0E08D6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "..\JWT\webapi\webapi-jwt\WebApi.csproj", "{E5522BBA-CB76-4683-83D3-C1C7444A53CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{049E94F9-3AE1-4273-AC9C-EA6EE0E08D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{049E94F9-3AE1-4273-AC9C-EA6EE0E08D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{049E94F9-3AE1-4273-AC9C-EA6EE0E08D6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5522BBA-CB76-4683-83D3-C1C7444A53CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5522BBA-CB76-4683-83D3-C1C7444A53CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5522BBA-CB76-4683-83D3-C1C7444A53CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5522BBA-CB76-4683-83D3-C1C7444A53CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

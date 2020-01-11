@@ -34,6 +34,8 @@ namespace ntpWebApi.Controllers
         {
             string jsonData = "";
             string url = "http://localhost:3000/api/v1/scraper/week/this";
+            url = "https://nestjs-scrape.azurewebsites.net/api/scraper/week/this";
+
             using (var client = new HttpClient())
             {
                 try
