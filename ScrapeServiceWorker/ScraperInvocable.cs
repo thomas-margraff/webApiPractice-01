@@ -37,6 +37,9 @@ namespace ScrapeServiceWorker
 
         public Task Invoke()
         {
+            var dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+            Console.WriteLine("Start scrape at {0}", dtFmt);
+
             try
             {
                 this.DoScrape().Wait();
@@ -45,6 +48,11 @@ namespace ScrapeServiceWorker
             {
                 return Task.FromException(ex);
             }
+            
+            dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+            Console.WriteLine("End scrape at {0}", dtFmt);
+            Console.WriteLine("");
+
             return Task.CompletedTask;
         }
 
@@ -76,13 +84,15 @@ namespace ScrapeServiceWorker
 
             if (this._scrapeConfig.BulkUpdate)
             {
+                Console.WriteLine("Begin update database {0} records", recs.Count());
                 var recsUpd = _repository.BulkUpdate(recs);
+                Console.WriteLine("End   update database {0} records", recsUpd.Count());
                 return recsUpd;
             }
 
+            Console.WriteLine("Scraped {0} records no database update", recs.Count());
             return recs;
         }
-
 
         public async Task GetRecs()
         {

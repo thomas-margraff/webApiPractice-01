@@ -121,6 +121,12 @@ namespace ntpWebApi.Controllers
             return await this._repository.NextWeek();
         }
 
+        [HttpGet("lastweek/")]
+        public async Task<IEnumerable<IndicatorData>> LastWeek()
+        {
+            return await this._repository.LastWeek();
+        }
+
         [HttpPost("GetIndicatorHistory/search")]
         public async Task<IEnumerable<IndicatorData>> GetIndicatorHistory(IndicatorDataSearchModel search)
         {

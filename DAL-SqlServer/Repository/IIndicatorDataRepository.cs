@@ -21,6 +21,7 @@ namespace DAL_SqlServer.Repository
         Task<List<IndicatorData>> GetIndicatorHistory(IndicatorDataSearchModel search);
         Task<List<IndicatorData>> ThisWeek();
         Task<List<IndicatorData>> NextWeek();
+        Task<List<IndicatorData>> LastWeek();
         Task<List<string>> CountriesGetAll();
 
         List<ReleaseDto> IndicatorsGroupByCcyIndicator(string currency);

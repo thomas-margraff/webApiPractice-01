@@ -75,7 +75,29 @@ namespace DAL_SqlServer.Repository
                     updRecs.Add(exist);
                 }
             }
-            this.dbContext.SaveChanges();
+
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            IndicatorDataScrapeHistory hist = new IndicatorDataScrapeHistory();
+            hist.ScrapeDate = DateTime.Now;
+            hist.RecordCount = recs.Count();
+            this.dbContext.Set<IndicatorDataScrapeHistory>().Add(hist);
+
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             return updRecs;
         }
@@ -112,6 +134,18 @@ namespace DAL_SqlServer.Repository
         {
             var dt = DateTime.Now;
             var dtSunday = new GregorianCalendar().AddDays(dt, -((int)dt.DayOfWeek) + 7);
+            var dtFriday = dtSunday.AddDays(6);
+
+            return await this.dbContext.Set<IndicatorData>()
+                .Where(r => r.ReleaseDateTime >= dtSunday && r.ReleaseDateTime <= dtFriday)
+                .OrderBy(r => r.ReleaseDateTime)
+                .ToListAsync();
+        }
+
+        public async Task<List<IndicatorData>> LastWeek()
+        {
+            var dt = DateTime.Now;
+            var dtSunday = new System.Globalization.GregorianCalendar().AddDays(dt, -((int)dt.DayOfWeek) - 7);
             var dtFriday = dtSunday.AddDays(6);
 
             return await this.dbContext.Set<IndicatorData>()

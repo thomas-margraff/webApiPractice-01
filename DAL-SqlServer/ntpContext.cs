@@ -27,6 +27,8 @@ namespace DAL_SqlServer
         public virtual DbSet<IndicatorData> IndicatorData { get; set; }
         public virtual DbSet<vwCountryIndicator> vwCountryIndicator { get; set; }
         public virtual DbSet<IndicatorDataCcyName> IndicatorDataCcyName { get; set; }
+        public virtual DbSet<IndicatorDataScrapeHistory> IndicatorDataScrapeHistory { get; set; }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

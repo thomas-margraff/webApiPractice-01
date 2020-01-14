@@ -23,16 +23,16 @@ namespace ScrapeServiceWorker
             Program.Configuration = builder.Build();
 
             IHost host = CreateHostBuilder(args).Build();
-            
+
             host.Services.UseScheduler(scheduler =>
             {
                 Console.WriteLine("Scrape job started...");
-
-                scheduler
-                    .Schedule<ScraperInvocable>()
-                    .EveryFifteenSeconds();
-                    //.Cron("2 0 0 0 0");
-                    //.DailyAtHour(23);
+                // var hrCal = DateTime.Now.ToUniversalTime().TimeOfDay.Hours;
+                var hrPrices = new DateTime(2020, 1, 13, 23, 59, 0).ToUniversalTime().TimeOfDay.Hours;
+                var hrCal = hrPrices + 2;
+                scheduler.Schedule<PriceDownloaderInvocable>().DailyAt(hrCal, 0); ;
+                scheduler.Schedule<ScraperInvocable>().DailyAt(hrCal, 21);
+                // scheduler.Schedule<ScraperInvocable>().EveryFifteenSeconds();
 
             }).OnError((exception) =>
                 {
@@ -55,6 +55,7 @@ namespace ScrapeServiceWorker
                     services.AddScoped<IIndicatorDataRepository, IndicatorDataRepository<ntpContext>>();
                     services.AddScheduler();
                     services.AddTransient<ScraperInvocable>();
+                    services.AddTransient<PriceDownloaderInvocable>();
                     services.AddSingleton<IConfiguration>(Program.Configuration);
 
                     var scrapeConfig = new ScrapeConfig();

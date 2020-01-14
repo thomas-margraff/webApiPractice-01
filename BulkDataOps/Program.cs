@@ -22,9 +22,9 @@ namespace BulkDataOps
             // ops.FixBadDates();
             // ops.BulkInsertCurrencyIndicatorTable();
 
-            Tester t = new Tester();
-            var recs = await t.GetRecs1();
-            
+            var p = new PricesDownloader();
+            p.DownloadPrices();
+
             Console.WriteLine("DONE");
         }
 
