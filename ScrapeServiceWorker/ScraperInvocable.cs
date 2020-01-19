@@ -59,7 +59,7 @@ namespace ScrapeServiceWorker
         public async Task<IEnumerable<IndicatorData>> DoScrape()
         {
             string jsonData = "";
-            string url = this._scrapeConfig.ScrapeUrl;  // "http://localhost:3000/api/v1/scraper/week/this";
+            string url = this._scrapeConfig.ScrapeUrl;
             using (var client = new HttpClient())
             {
                 try

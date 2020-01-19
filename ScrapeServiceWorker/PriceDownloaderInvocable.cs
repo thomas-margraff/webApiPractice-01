@@ -82,7 +82,7 @@ namespace ScrapeServiceWorker
                 // 2020/01/100120
                 var urlDt = string.Format("{0}/{1}/{2}{3}{04}", yyyy, mm, dd, mm, yy);
 
-                string url = "https://www.forexite.com/free_forex_quotes/" + urlDt + ".zip";
+                string url = this._scrapeConfig.ForexiteUrl + urlDt + ".zip";
                 using (WebClient client = new WebClient())
                 {
                     try

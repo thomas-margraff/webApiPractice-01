@@ -22,8 +22,8 @@ namespace BulkDataOps
             // ops.FixBadDates();
             // ops.BulkInsertCurrencyIndicatorTable();
 
-            var p = new PricesDownloader();
-            p.DownloadPrices();
+            //var p = new PricesDownloader();
+            //p.DownloadPrices();
 
             Console.WriteLine("DONE");
         }

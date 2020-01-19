@@ -15,6 +15,7 @@ namespace ScrapeServiceWorker
 {
     public class Program
     {
+        static ScrapeConfig scrapeConfig;
         static IConfiguration Configuration { get; set; }
 
         public static void Main(string[] args)
@@ -27,13 +28,23 @@ namespace ScrapeServiceWorker
             host.Services.UseScheduler(scheduler =>
             {
                 Console.WriteLine("Scrape job started...");
-                // var hrCal = DateTime.Now.ToUniversalTime().TimeOfDay.Hours;
-                var hrPrices = new DateTime(2020, 1, 13, 23, 59, 0).ToUniversalTime().TimeOfDay.Hours;
-                var hrCal = hrPrices + 2;
-                scheduler.Schedule<PriceDownloaderInvocable>().DailyAt(hrCal, 0); ;
-                scheduler.Schedule<ScraperInvocable>().DailyAt(hrCal, 21);
-                // scheduler.Schedule<ScraperInvocable>().EveryFifteenSeconds();
+                Console.WriteLine(scrapeConfig.Note);
 
+                var hrStart = scrapeConfig.StartHour;
+                var minStart = scrapeConfig.StartMinute;
+                var hrStartCalendarOffsetHours = scrapeConfig.CalendarOffsetHours;
+
+                if (!scrapeConfig.IsDebug)
+                {
+                    scheduler.Schedule<PriceDownloaderInvocable>().DailyAt(hrStart, minStart);
+                    scheduler.Schedule<ScraperInvocable>().DailyAt(hrStartCalendarOffsetHours, minStart);
+                }
+                else
+                {
+                    //debug
+                    scheduler.Schedule<PriceDownloaderInvocable>().EveryFifteenSeconds();
+                    scheduler.Schedule<ScraperInvocable>().EveryFifteenSeconds();
+                }
             }).OnError((exception) =>
                 {
                     Console.WriteLine("It's broken!");
@@ -58,7 +69,7 @@ namespace ScrapeServiceWorker
                     services.AddTransient<PriceDownloaderInvocable>();
                     services.AddSingleton<IConfiguration>(Program.Configuration);
 
-                    var scrapeConfig = new ScrapeConfig();
+                    scrapeConfig = new ScrapeConfig();
                     Configuration.GetSection("ScrapeConfiguration").Bind(scrapeConfig);
                     services.AddSingleton(scrapeConfig);
 

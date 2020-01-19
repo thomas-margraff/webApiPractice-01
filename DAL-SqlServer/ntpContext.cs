@@ -14,6 +14,7 @@ namespace DAL_SqlServer
         public ntpContext(DbContextOptions<ntpContext> options)
             : base(options)
         {
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public virtual DbSet<Countries> Countries { get; set; }
