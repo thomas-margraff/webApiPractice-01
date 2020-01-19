@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ntpWebApi", "ntpWebApi\ntpW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webApiPractice-01", "webApiPractice-01\webApiPractice-01.csproj", "{049E94F9-3AE1-4273-AC9C-EA6EE0E08D6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "..\JWT\webapi\webapi-jwt\WebApi.csproj", "{E5522BBA-CB76-4683-83D3-C1C7444A53CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiAuth", "..\JWT\webapi\webapi-jwt\WebApiAuth.csproj", "{E5522BBA-CB76-4683-83D3-C1C7444A53CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
