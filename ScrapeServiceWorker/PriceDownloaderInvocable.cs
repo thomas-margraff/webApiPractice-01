@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using ForexPriceLib.Utils;
 
 namespace ScrapeServiceWorker
 {
@@ -24,6 +25,7 @@ namespace ScrapeServiceWorker
         private readonly IIndicatorDataRepository _repository;
         private readonly IConfiguration _configuration;
         private readonly ScrapeConfig _scrapeConfig;
+        private bool isRunning = false;
 
         public PriceDownloaderInvocable(ntpContext ctx,
                                 IIndicatorDataRepository repository,
@@ -38,20 +40,30 @@ namespace ScrapeServiceWorker
 
         public Task Invoke()
         {
+            if (isRunning)
+            {
+                return Task.CompletedTask;
+            }
+
+            isRunning = true;
+
             var dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
             Console.WriteLine("Start Price Download at {0}", dtFmt);
 
             try
             {
                 this.DownloadPrices();
+                this.updateSymbolsList();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("ERROR {0}", ex.Message);
+                isRunning = false;
                 return Task.FromException(ex);
             }
             Console.WriteLine("End Price Download at {0}", dtFmt);
             Console.WriteLine("");
+            isRunning = false;
             return Task.CompletedTask;
         }
 
@@ -93,14 +105,21 @@ namespace ScrapeServiceWorker
                     {
                         Console.WriteLine("error downloading: " + ex.Message);
                     }
-                    
                 }
-                dt = dt.AddDays(1);
 
+                dt = dt.AddDays(1);
                 Thread.Sleep(2500);
             }
         }
+        private void updateSymbolsList()
+        {
+            // update symbol list
+            var sutils = new SymbolUtils();
+            var symbols = sutils.GetSymbolListFromFiles();
 
+            var syms = this._repository.BulkUpdateSymbols(symbols);
+
+        }
         private DateTime getLastScrape()
         {
             var file = Directory.GetFiles(@"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL").OrderByDescending(r => r).FirstOrDefault();

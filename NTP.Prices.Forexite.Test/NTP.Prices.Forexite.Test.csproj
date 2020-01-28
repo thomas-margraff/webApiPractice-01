@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DateTime\**" />
+    <Compile Remove="Downloader\**" />
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Models\**" />
+    <Compile Remove="Utils\**" />
+    <EmbeddedResource Remove="DateTime\**" />
+    <EmbeddedResource Remove="Downloader\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Utils\**" />
+    <None Remove="DateTime\**" />
+    <None Remove="Downloader\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Models\**" />
+    <None Remove="Utils\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="UnZip.cs" />
+    <Compile Remove="ZipStorer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="NTP.Prices.Forexite.Test.7z" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetZip" Version="1.13.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.IO.Compression.ZipFile" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DAL-SqlServer\DAL-SqlServer.csproj" />
+    <ProjectReference Include="..\ForexPriceLib\ForexPriceLib.csproj" />
+    <ProjectReference Include="..\IndicatorDataLib\IndicatorDataLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

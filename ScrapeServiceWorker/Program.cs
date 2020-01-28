@@ -42,8 +42,8 @@ namespace ScrapeServiceWorker
                 else
                 {
                     //debug
-                    scheduler.Schedule<PriceDownloaderInvocable>().EveryFifteenSeconds();
                     scheduler.Schedule<ScraperInvocable>().EveryFifteenSeconds();
+                    scheduler.Schedule<PriceDownloaderInvocable>().EveryFifteenSeconds();
                 }
             }).OnError((exception) =>
                 {

@@ -16,6 +16,8 @@ namespace DAL_SqlServer.Repository
         Task<List<IndicatorData>> GetIndicatorsForDate(DateTime dt);
         Task<List<IndicatorData>> GetIndicatorsForCcyAndName(string ccy, string indicatorName);
         List<IndicatorData> BulkUpdate(List<IndicatorData> recs);
+        List<IndicatorDataCcyName> BulkUpdateCcyNames();
+        List<Symbols> BulkUpdateSymbols(List<string>symbols);
         Task<List<vwCountryIndicator>> GetCurrencyIndicators();
         Task<List<vwCountryIndicator>> GetCurrencyIndicatorsByCcy(string currency);
         Task<List<IndicatorData>> GetIndicatorHistory(IndicatorDataSearchModel search);
@@ -23,9 +25,8 @@ namespace DAL_SqlServer.Repository
         Task<List<IndicatorData>> NextWeek();
         Task<List<IndicatorData>> LastWeek();
         Task<List<string>> CountriesGetAll();
-
         List<ReleaseDto> IndicatorsGroupByCcyIndicator(string currency);
         List<ReleaseDto> GetIndicatorsGroupByCcyIndicatorName(string currency, string indicatorName);
-
+        Task<Configuration> GetConfig(string name);
     }
 }

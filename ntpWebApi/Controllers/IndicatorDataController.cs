@@ -10,7 +10,27 @@ using DAL_SqlServer.SearchModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+/*
+ * ActionResult<T> type:
+    ASP.NET Core 2.1 adds new programming conventions that make it easier to build clean and descriptive web APIs. 
+    ActionResult<T> is a new type added to allow an app to return either a response type or any other action result 
+    (similar to IActionResult), while still indicating the response type.
 
+    ActionResult<T> is more specific to Web APIs in ASP.NET Core >= 2.1 and ActionResult<T> offers the following 
+    benefits over the IActionResult type:
+
+    The [ProducesResponseType] attribute's Type property can be excluded. 
+    For example, [ProducesResponseType(200, Type = typeof(Product))] is simplified to [ProducesResponseType(200)]. 
+    The action's expected return type is instead inferred from the T in ActionResult<T>.
+    Implicit cast operators support the conversion of both T and ActionResult to ActionResult<T>. 
+    T converts to ObjectResult, which means return new ObjectResult(T); is simplified to return T;.
+    For more details: Controller action return types in ASP.NET Core Web API
+ * 
+ * 
+ * 
+ * return types
+ * https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.1
+*/
 namespace ntpWebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -31,6 +51,19 @@ namespace ntpWebApi.Controllers
             this._repository = repository;
         }
 
+        [HttpGet("CountriesGetAllAsync")]
+        public async Task<ActionResult<IEnumerable<string>>> CountriesGetAllAsync()
+        {
+            try
+            {
+                return Ok(await this._repository.CountriesGetAll());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         /// <summary>
         /// Get a list of all Countries
         /// </summary>
@@ -44,11 +77,12 @@ namespace ntpWebApi.Controllers
             }
             catch (Exception ex)
             {
-                return new List<string>()
-                {
-                    "broken!",
-                    ex.Message
-                };
+                throw ex;
+                //return new List<string>()
+                //{
+                //    "broken!",
+                //    ex.Message
+                //};
             }
             
         }
@@ -160,6 +194,13 @@ namespace ntpWebApi.Controllers
             string ind = Uri.UnescapeDataString(indicatorName);
             return await this._repository.GetIndicatorsForCcyAndName(currency, ind);
         }
+
+        [HttpGet("GetConfig/{name}")]
+        public async Task<Configuration> GetConfig(string name)
+        {
+            return await this._repository.GetConfig(name);
+        }
+
 
         [HttpGet("test")]
         public string Test()

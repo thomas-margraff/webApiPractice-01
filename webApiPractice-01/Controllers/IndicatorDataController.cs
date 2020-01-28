@@ -24,14 +24,33 @@ namespace webApiPractice_01.Controllers
             this._ctx = ctx;
             this._repository = repository;
         }
-       /// <summary>
-       /// get all
-       /// </summary>
-       /// <returns></returns>
+        /// <summary>
+        /// get all
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("CountriesGetAll")]
+        // Task<ActionResult<IEnumerable<AppProfile>>>
+        public async Task<ActionResult<IEnumerable<string>>> CountriesGetAllAsync()
+        {
+            try
+            {
+                return Ok(await this._repository.CountriesGetAll());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
         public async Task<IEnumerable<string>> CountriesGetAll()
         {
-            return await this._repository.CountriesGetAll();
+            try
+            {
+                return await this._repository.CountriesGetAll();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>

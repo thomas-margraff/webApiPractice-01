@@ -38,7 +38,7 @@ namespace ScrapeServiceWorker
         public Task Invoke()
         {
             var dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
-            Console.WriteLine("Start scrape at {0}", dtFmt);
+            Console.WriteLine("Start calendar scrape at {0}", dtFmt);
 
             try
             {
@@ -50,7 +50,7 @@ namespace ScrapeServiceWorker
             }
             
             dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
-            Console.WriteLine("End scrape at {0}", dtFmt);
+            Console.WriteLine("End calendar scrape at {0}", dtFmt);
             Console.WriteLine("");
 
             return Task.CompletedTask;
@@ -84,13 +84,13 @@ namespace ScrapeServiceWorker
 
             if (this._scrapeConfig.BulkUpdate)
             {
-                Console.WriteLine("Begin update database {0} records", recs.Count());
+                Console.WriteLine("Begin update database {0} calendar records", recs.Count());
                 var recsUpd = _repository.BulkUpdate(recs);
-                Console.WriteLine("End   update database {0} records", recsUpd.Count());
+                Console.WriteLine("End   update database {0} calendar records", recsUpd.Count());
                 return recsUpd;
             }
 
-            Console.WriteLine("Scraped {0} records no database update", recs.Count());
+            Console.WriteLine("Scraped {0} calendar records no database update", recs.Count());
             return recs;
         }
 

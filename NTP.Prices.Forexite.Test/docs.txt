@@ -1,0 +1,2 @@
+﻿zip component docs:
+https://github.com/haf/DotNetZip.Semverd

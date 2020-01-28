@@ -29,7 +29,8 @@ namespace DAL_SqlServer
         public virtual DbSet<vwCountryIndicator> vwCountryIndicator { get; set; }
         public virtual DbSet<IndicatorDataCcyName> IndicatorDataCcyName { get; set; }
         public virtual DbSet<IndicatorDataScrapeHistory> IndicatorDataScrapeHistory { get; set; }
-        
+        public virtual DbSet<Configuration> Configuration { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -119,23 +120,18 @@ namespace DAL_SqlServer
 
                 entity.Property(e => e.PriceDateTime).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Symbol)
-                    .WithMany(p => p.Prices)
-                    .HasForeignKey(d => d.SymbolId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Prices_Symbols");
             });
 
-            modelBuilder.Entity<Symbols>(entity =>
-            {
-                entity.HasKey(e => e.SymbolId);
+            //modelBuilder.Entity<Symbols>(entity =>
+            //{
+            //    entity.HasKey(e => e.SymbolId);
 
-                entity.Property(e => e.SymbolId).ValueGeneratedNever();
+            //    entity.Property(e => e.SymbolId).ValueGeneratedNever();
 
-                entity.Property(e => e.SymbolCode)
-                    .IsRequired()
-                    .HasMaxLength(6);
-            });
+            //    entity.Property(e => e.SymbolCode)
+            //        .IsRequired()
+            //        .HasMaxLength(6);
+            //});
 
             modelBuilder.Entity<VwEconomicIndicators>(entity =>
             {

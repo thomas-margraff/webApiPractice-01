@@ -1,0 +1,16 @@
+EF database first - generate classes
+https://www.c-sharpcorner.com/article/build-asp-net-core-api-using-existing-database2/?mc_cid=fcab61950f&mc_eid=50485edd38
+
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.Design
+Install-Package Microsoft.EntityFrameworkCore.Tools
+
+Scaffold-DbContext "Server=TOM-HPENVY-16;Database=ntp;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context CoreDbContext -DataAnnotations  
+
+  "ConnectionStrings": {
+    "Database": "Data Source=TOM-HPENVY-16;Initial Catalog=ntp;User Id=sa;Password=t0mmyb0y;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+  },
+
+Startup.cs
+services.AddDbContext<CoreDbContext>(op => op.UseSqlServer(Configuration.GetConnectionString("Database"))); 
+

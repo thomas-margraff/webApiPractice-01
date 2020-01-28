@@ -15,6 +15,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webApiPractice-01", "webApi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiAuth", "..\JWT\webapi\webapi-jwt\WebApiAuth.csproj", "{E5522BBA-CB76-4683-83D3-C1C7444A53CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTP.Prices.Forexite.Test", "NTP.Prices.Forexite.Test\NTP.Prices.Forexite.Test.csproj", "{8BA3F3CB-D048-4E9A-8C69-E250DEDDF937}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForexPriceLib", "ForexPriceLib\ForexPriceLib.csproj", "{C853B6D9-6F86-4E99-B86C-E408E985BE4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndicatorDataLib", "IndicatorDataLib\IndicatorDataLib.csproj", "{1119CD5D-3BDC-4535-B3D0-A8EE41A1C94D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapiDatabaseFirst", "webapiDatabaseFirst\webapiDatabaseFirst.csproj", "{B0D2A05B-25BA-4D56-A54F-6E91DF7F3366}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B624552-54C4-41E2-A748-C69A0DCC5CCE}"
+	ProjectSection(SolutionItems) = preProject
+		docs.txt = docs.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL-SqlServer-Models", "DAL-SqlServer-Models\DAL-SqlServer-Models.csproj", "{7A8FA6DD-6E13-40CE-8A1B-DB0F1BF4CFC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +60,26 @@ Global
 		{E5522BBA-CB76-4683-83D3-C1C7444A53CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5522BBA-CB76-4683-83D3-C1C7444A53CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5522BBA-CB76-4683-83D3-C1C7444A53CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA3F3CB-D048-4E9A-8C69-E250DEDDF937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA3F3CB-D048-4E9A-8C69-E250DEDDF937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA3F3CB-D048-4E9A-8C69-E250DEDDF937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA3F3CB-D048-4E9A-8C69-E250DEDDF937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C853B6D9-6F86-4E99-B86C-E408E985BE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C853B6D9-6F86-4E99-B86C-E408E985BE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C853B6D9-6F86-4E99-B86C-E408E985BE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C853B6D9-6F86-4E99-B86C-E408E985BE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1119CD5D-3BDC-4535-B3D0-A8EE41A1C94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1119CD5D-3BDC-4535-B3D0-A8EE41A1C94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1119CD5D-3BDC-4535-B3D0-A8EE41A1C94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1119CD5D-3BDC-4535-B3D0-A8EE41A1C94D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D2A05B-25BA-4D56-A54F-6E91DF7F3366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D2A05B-25BA-4D56-A54F-6E91DF7F3366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D2A05B-25BA-4D56-A54F-6E91DF7F3366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D2A05B-25BA-4D56-A54F-6E91DF7F3366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A8FA6DD-6E13-40CE-8A1B-DB0F1BF4CFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A8FA6DD-6E13-40CE-8A1B-DB0F1BF4CFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A8FA6DD-6E13-40CE-8A1B-DB0F1BF4CFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A8FA6DD-6E13-40CE-8A1B-DB0F1BF4CFC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

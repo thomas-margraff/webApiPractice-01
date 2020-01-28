@@ -85,6 +85,9 @@ namespace DAL_SqlServer.Repository
                 throw ex;
             }
 
+            var ccyRecs = this.BulkUpdateCcyNames();
+
+            // scrape history
             IndicatorDataScrapeHistory hist = new IndicatorDataScrapeHistory();
             hist.ScrapeDate = DateTime.Now;
             hist.RecordCount = recs.Count();
@@ -100,6 +103,86 @@ namespace DAL_SqlServer.Repository
             }
 
             return updRecs;
+        }
+
+        public List<Symbols> BulkUpdateSymbols(List<string> symbols)
+        {
+            var syms = new List<Symbols>();
+            foreach (var symbol in symbols)
+            {
+                var exist = this.dbContext.Set<Symbols>().Where(r => r.SymbolCode == symbol).FirstOrDefault();
+                if (exist == null)
+                {
+                    var sym = new Symbols { 
+                        IsActive = true, 
+                        SymbolCode = symbol, 
+                        DateCreate = DateTime.Now 
+                    };
+                    this.dbContext.Set<Symbols>().Add(sym);
+                    syms.Add(sym);
+                }
+            }
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return syms;
+        }
+
+        public List<IndicatorDataCcyName> BulkUpdateCcyNames()
+        {
+            // ccy indicator table
+            var ccyRecs = (from r in this.dbContext.Set<IndicatorData>()
+                           select new ReleaseDto()
+                           {
+                               Currency = r.Currency,
+                               Indicator = r.Indicator
+                           }).Distinct().OrderBy(r => r.Currency).ThenBy(d => d.Indicator).ToList();
+
+            List<IndicatorDataCcyName> updateRecs = new List<IndicatorDataCcyName>();
+
+            foreach (var rec in ccyRecs)
+            {
+                var exist = this.dbContext.Set<IndicatorDataCcyName>()
+                            .Where(r => r.Currency == rec.Currency && r.Indicator == rec.Indicator)
+                            .FirstOrDefault();
+
+                if (exist == null)
+                {
+                    var newRec = new IndicatorDataCcyName
+                    {
+                        Id = 0,
+                        CreateDate = DateTime.Now,
+                        Currency = rec.Currency,
+                        Indicator = rec.Indicator,
+                        IsActive = true
+                    };
+                    this.dbContext.Set<IndicatorDataCcyName>().Add(newRec);
+                }
+                else
+                {
+                    exist.ModifyDate = DateTime.Now;
+                    exist.Currency = rec.Currency;
+                    exist.Indicator = rec.Indicator;
+
+                    this.dbContext.Entry(exist).State = EntityState.Modified;
+                    updateRecs.Add(exist);
+                }
+            }
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return this.dbContext.Set<IndicatorDataCcyName>().ToList();
         }
 
         public async Task<List<vwCountryIndicator>> GetCurrencyIndicators()
@@ -164,7 +247,6 @@ namespace DAL_SqlServer.Repository
                 .OrderBy(r => r.ReleaseDateTime)
                 .ToListAsync();
         }
-
         public async Task<List<string>> CountriesGetAll()
         {
             // var ccy = IndicatorData.Select(r => r.Currency).Distinct().OrderBy(r => r).Dump();
@@ -205,7 +287,6 @@ namespace DAL_SqlServer.Repository
 
             return dtos;
         }
-
         public List<ReleaseDto> GetIndicatorsGroupByCcyIndicatorName(string currency, string indicatorName)
         {
             var dtos = (from r in this.dbContext.Set<IndicatorData>()
@@ -236,7 +317,6 @@ namespace DAL_SqlServer.Repository
 
             return dtos;
         }
-
         public async Task<List<IndicatorData>> GetIndicatorHistory(IndicatorDataSearchModel search)
         {
             return await this.dbContext.Set<IndicatorData>()
@@ -244,13 +324,19 @@ namespace DAL_SqlServer.Repository
                 .OrderByDescending(r => r.ReleaseDateTime)
                 .ToListAsync();
         }
-
         public async Task<List<IndicatorData>> GetIndicatorsForCcyAndName(string ccy, string indicatorName)
         {
             return await this.dbContext.Set<IndicatorData>()
                 .Where(r => r.Currency == ccy && r.Indicator == indicatorName)
                 .OrderByDescending(r => r.ReleaseDateTime)
                 .ToListAsync();
+        }
+
+        public async Task<Configuration> GetConfig(string name)
+        {
+            return await this.dbContext.Set<Configuration>()
+                .Where(r => r.Name == name)
+                .FirstOrDefaultAsync();
         }
     }
 }
