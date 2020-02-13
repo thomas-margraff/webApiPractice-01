@@ -10,7 +10,7 @@ namespace DAL_SqlServer_Models.Models
         [Key]
         public int Id { get; set; }
         public int EventId { get; set; }
-        [Column(TypeName = "datetime")]
+        [Column(TypeName = "datetime")] 
         public DateTime ReleaseDateTime { get; set; }
         [Required]
         [StringLength(20)]

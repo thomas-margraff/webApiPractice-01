@@ -6,17 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coravel" Version="3.1.0" />
+    <PackageReference Include="Coravel" Version="3.2.0" />
+    <PackageReference Include="CsQuery" Version="1.3.5-beta5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Scrappy" Version="0.1.27" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DAL-SqlServer\DAL-SqlServer.csproj" />
+    <ProjectReference Include="..\EmailLib\EmailLib.csproj" />
     <ProjectReference Include="..\ForexPriceLib\ForexPriceLib.csproj" />
   </ItemGroup>
 </Project>

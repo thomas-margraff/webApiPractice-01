@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace ForexPriceLib.Models
 {
+    [Serializable]
     public class ForexPriceRecord : ForexPriceRecordBase
     {
         public enum ShowPriceOptionsEnum

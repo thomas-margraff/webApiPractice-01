@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DAL-SqlServer\DAL-SqlServer.csproj" />
+    <ProjectReference Include="..\ForexPriceLib\ForexPriceLib.csproj" />
+    <ProjectReference Include="..\IndicatorDataLib\IndicatorDataLib.csproj" />
+  </ItemGroup>
+
+</Project>

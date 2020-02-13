@@ -46,6 +46,7 @@
     <ProjectReference Include="..\DAL-SqlServer\DAL-SqlServer.csproj" />
     <ProjectReference Include="..\ForexPriceLib\ForexPriceLib.csproj" />
     <ProjectReference Include="..\IndicatorDataLib\IndicatorDataLib.csproj" />
+    <ProjectReference Include="..\NtpDataLib\NtpDataLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

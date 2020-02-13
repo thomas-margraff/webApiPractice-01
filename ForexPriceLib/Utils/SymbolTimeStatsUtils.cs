@@ -9,7 +9,7 @@ namespace ForexPriceLib.Utils
 {
     public class SymbolTimeStatsUtils
     {
-        public List<ForexTimePeriodStats> GetTimeStats(List<DateTime> dts, string symbol = "")
+        public List<ForexTimePeriodStats> GetSymbolTimePeriodStats(List<DateTime> dts, string symbol = "")
         {
             List<ForexTimePeriodStats> recs = new List<ForexTimePeriodStats>();
 

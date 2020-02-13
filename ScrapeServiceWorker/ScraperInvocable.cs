@@ -3,6 +3,7 @@ using Coravel.Queuing.Interfaces;
 using DAL_SqlServer;
 using DAL_SqlServer.Models;
 using DAL_SqlServer.Repository;
+using EmailLib;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -23,6 +24,9 @@ namespace ScrapeServiceWorker
         private readonly IIndicatorDataRepository _repository;
         private readonly IConfiguration _configuration;
         private readonly ScrapeConfig _scrapeConfig;
+        StringBuilder emailBody;
+        string subject = "Calendar Scrape";
+        string recipient = "tmargraff@gmail.com";
 
         public ScraperInvocable(ntpContext ctx, 
                                 IIndicatorDataRepository repository, 
@@ -37,8 +41,9 @@ namespace ScrapeServiceWorker
 
         public Task Invoke()
         {
+            emailBody = new StringBuilder();
             var dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
-            Console.WriteLine("Start calendar scrape at {0}", dtFmt);
+            emailBody.AppendLine(string.Format("Start calendar scrape at {0}", dtFmt));
 
             try
             {
@@ -46,12 +51,17 @@ namespace ScrapeServiceWorker
             }
             catch (Exception ex)
             {
+                emailBody.AppendLine(string.Format("ERROR {0}", ex.Message));
+                Console.WriteLine("ERROR " + emailBody.ToString());
+                Gmail.Send(subject + " ERROR " + DateTime.Now, emailBody.ToString(), recipient);
+
                 return Task.FromException(ex);
             }
             
             dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
-            Console.WriteLine("End calendar scrape at {0}", dtFmt);
-            Console.WriteLine("");
+            emailBody.AppendLine(string.Format("End calendar scrape at {0}", dtFmt));
+            Gmail.Send(subject + " " + DateTime.Now, emailBody.ToString(), recipient);
+            Console.WriteLine(emailBody.ToString());
 
             return Task.CompletedTask;
         }
@@ -84,28 +94,28 @@ namespace ScrapeServiceWorker
 
             if (this._scrapeConfig.BulkUpdate)
             {
-                Console.WriteLine("Begin update database {0} calendar records", recs.Count());
+                emailBody.AppendLine(string.Format("Begin update database {0} calendar records", recs.Count()));
                 var recsUpd = _repository.BulkUpdate(recs);
-                Console.WriteLine("End   update database {0} calendar records", recsUpd.Count());
+                emailBody.AppendLine(string.Format("End   update database {0} calendar records", recs.Count()));
                 return recsUpd;
             }
 
-            Console.WriteLine("Scraped {0} calendar records no database update", recs.Count());
+            emailBody.AppendLine(string.Format("Scraped {0} calendar records no database update", recs.Count()));
             return recs;
         }
 
-        public async Task GetRecs()
-        {
-            Console.WriteLine("Before scrape: " + DateTime.Now);
-            var url = "http://localhost:7000/api/scrape/getscrape/";
-            using (var client = new HttpClient())
-            {
-                var json = await client.GetStringAsync(url);
-                var recs = JsonConvert.DeserializeObject<List<IndicatorData>>(json);
-                Console.WriteLine("after scrape: " + DateTime.Now);
-                Console.WriteLine("recs scraped: " + recs.Count());
-                Console.WriteLine("");
-            }
-        }
+        //public async Task GetRecs()
+        //{
+        //    emailBody.AppendLine("Before scrape: " + DateTime.Now);
+        //    var url = "http://localhost:7000/api/scrape/getscrape/";
+        //    using (var client = new HttpClient())
+        //    {
+        //        var json = await client.GetStringAsync(url);
+        //        var recs = JsonConvert.DeserializeObject<List<IndicatorData>>(json);
+        //        emailBody.AppendLine("After scrape: " + DateTime.Now);
+        //        emailBody.AppendLine("recs scraped: " + recs.Count());
+        //        emailBody.AppendLine("");
+        //    }
+        //}
     }
 }

@@ -16,6 +16,7 @@ namespace ScrapeServiceWorker
     public class Program
     {
         static ScrapeConfig scrapeConfig;
+        static ScrapeCache scrapeCache;
         static IConfiguration Configuration { get; set; }
 
         public static void Main(string[] args)
@@ -38,19 +39,48 @@ namespace ScrapeServiceWorker
                 {
                     scheduler.Schedule<PriceDownloaderInvocable>().DailyAt(hrStart, minStart);
                     scheduler.Schedule<ScraperInvocable>().DailyAt(hrStartCalendarOffsetHours, minStart);
+                    scheduler.Schedule<CVScraperInvocable>().HourlyAt(27);
+
+                    #region cron docs
+                    //  run every two hours and 11 minutes
+                    // scheduler.Schedule<CVScraperInvocable>().Cron("11 */2 * * *");
+
+                    /* 
+                              1 2 3 4 5                  
+                        Cron("* * * * *)
+
+                        1	Minute	0 to 59, or * (no specific value)
+                        2	Hour	0 to 23, or * for any value. All times UTC.
+                        3	Day of the month	1 to 31, or * (no specific value)
+                        4	Month	1 to 12, or * (no specific value)
+                        5	Day of the week	0 to 7 (0 and 7 both represent Sunday), or * (no specific value)
+
+                        Examples: Cron time string format
+                        https://support.acquia.com/hc/en-us/articles/360004224494-Cron-time-string-format
+
+                        https://support.acquia.com/hc/en-us/articles/360004224494-Cron-time-string-format
+
+                     */
+
+                    // run every two hours on the hour
+                    // scheduler.Schedule<CVScraperInvocable>().Cron("00 */2 * * *");
+                    #endregion
                 }
                 else
                 {
+                    #region debug
                     //debug
-                    scheduler.Schedule<ScraperInvocable>().EveryFifteenSeconds();
-                    scheduler.Schedule<PriceDownloaderInvocable>().EveryFifteenSeconds();
+                    //scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds();
+                    //scheduler.Schedule<ScraperInvocable>().EveryFifteenSeconds();
+                    //scheduler.Schedule<PriceDownloaderInvocable>().EveryFifteenSeconds();
+                    #endregion
                 }
             }).OnError((exception) =>
                 {
                     Console.WriteLine("It's broken!");
                     Console.WriteLine(exception.Message);
                 }
-            );
+            );            
             host.Run();
         }
 
@@ -65,13 +95,19 @@ namespace ScrapeServiceWorker
 
                     services.AddScoped<IIndicatorDataRepository, IndicatorDataRepository<ntpContext>>();
                     services.AddScheduler();
+
                     services.AddTransient<ScraperInvocable>();
                     services.AddTransient<PriceDownloaderInvocable>();
+                    services.AddTransient<CVScraperInvocable>();
+                    
                     services.AddSingleton<IConfiguration>(Program.Configuration);
 
                     scrapeConfig = new ScrapeConfig();
                     Configuration.GetSection("ScrapeConfiguration").Bind(scrapeConfig);
                     services.AddSingleton(scrapeConfig);
+
+                    scrapeCache = new ScrapeCache();
+                    services.AddSingleton(scrapeCache);
 
                     //services.AddHostedService<Worker>();
                 });

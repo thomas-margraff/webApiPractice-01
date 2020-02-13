@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using ForexPriceLib.Utils;
+using EmailLib;
 
 namespace ScrapeServiceWorker
 {
@@ -26,6 +27,9 @@ namespace ScrapeServiceWorker
         private readonly IConfiguration _configuration;
         private readonly ScrapeConfig _scrapeConfig;
         private bool isRunning = false;
+        StringBuilder emailBody;
+        string subject = "Forex Prices Download";
+        string recipient = "tmargraff@gmail.com";
 
         public PriceDownloaderInvocable(ntpContext ctx,
                                 IIndicatorDataRepository repository,
@@ -45,10 +49,11 @@ namespace ScrapeServiceWorker
                 return Task.CompletedTask;
             }
 
+            emailBody = new StringBuilder();
             isRunning = true;
 
             var dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
-            Console.WriteLine("Start Price Download at {0}", dtFmt);
+            emailBody.AppendLine(string.Format("Start Price Download at {0}", dtFmt));
 
             try
             {
@@ -57,13 +62,18 @@ namespace ScrapeServiceWorker
             }
             catch (Exception ex)
             {
-                Console.WriteLine("ERROR {0}", ex.Message);
                 isRunning = false;
+                emailBody.AppendLine(string.Format("ERROR {0}", ex.Message));
+                Console.WriteLine("ERROR " + emailBody.ToString());
+                Gmail.Send(subject + " ERROR " + DateTime.Now, emailBody.ToString(), recipient);
                 return Task.FromException(ex);
             }
-            Console.WriteLine("End Price Download at {0}", dtFmt);
-            Console.WriteLine("");
+            emailBody.AppendLine(string.Format("End Price Download at {0}", dtFmt));
+            emailBody.AppendLine("");
+            
             isRunning = false;
+            Gmail.Send(subject + " " + DateTime.Now, emailBody.ToString(), recipient);
+            Console.WriteLine(emailBody.ToString());
             return Task.CompletedTask;
         }
 
@@ -88,7 +98,8 @@ namespace ScrapeServiceWorker
                 if (dd.Length == 1) dd = "0" + dd;
 
                 var fname = string.Format("FXIT-{0}{1}{2}.zip", yyyy, mm, dd);
-                Console.WriteLine(fname);
+                emailBody.AppendLine(fname);
+                
 
                 // "https://www.forexite.com/free_forex_quotes/2020/01/100120.zip";
                 // 2020/01/100120
@@ -103,7 +114,7 @@ namespace ScrapeServiceWorker
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("error downloading: " + ex.Message);
+                        emailBody.AppendLine("error downloading: " + ex.Message);
                     }
                 }
 

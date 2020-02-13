@@ -22,6 +22,8 @@ namespace ForexPriceLib.Utils
     /// container for prices that span a timeframe
     /// prices can include multiple symbols
     /// </summary>
+    
+    [Serializable]
     public class ForexPrices
     {
         public ForexPrices()

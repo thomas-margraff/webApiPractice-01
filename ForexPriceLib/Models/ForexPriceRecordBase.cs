@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ForexPriceLib.Models
 {
+    [Serializable]
     public class ForexPriceRecordBase
     {
         private double _open;

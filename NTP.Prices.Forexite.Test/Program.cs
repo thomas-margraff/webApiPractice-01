@@ -12,6 +12,10 @@ using IndicatorDataLib;
 using DAL_SqlServer.Models;
 using Newtonsoft.Json;
 using DAL_SqlServer.ModelExtensions;
+using NtpDataLib.Models;
+using NtpDataLib.Extensions;
+using System.IO.Compression;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace NTP.Prices.Forexite.Test
 {
@@ -35,13 +39,21 @@ namespace NTP.Prices.Forexite.Test
 
             #endregion
 
-            var fxp = new ForexPrices();
-            fxp.Read(DateTime.Now.AddDays(-2));
-            var x = fxp.PriceRecords.ToSymbols();
+            // var newbytes = File.ReadAllBytes("nfpbytes.zip");
+            // var x = DecompressAndDeserialize<IndicatorPrices>(newbytes);
+
+
+            // await getNfpTimeStats();
+            await getNfpIndicatorDetail();
+
+            int i = 0;
+
+            //var fxp = new ForexPrices();
+            //fxp.Read(DateTime.Now.AddDays(-1));
+            //var x = fxp.PriceRecords.ToSymbols();
+
 
             // var y = fxp.SymbolTimeStats.ToCsv();
-            
-            int i = 0;
 
             //var csv = fxp.SymbolTimeStats.ToCsv();
             //csv.Insert(0, ForexTimePeriodStats.ToTimeStatCsvHeader());
@@ -61,6 +73,95 @@ namespace NTP.Prices.Forexite.Test
             wait();
         }
 
+        static async Task getNfpIndicatorDetail()
+        {
+            //var ntpIndicatorData = new NtpIndicatorData();
+            //List<IndicatorData> recs = await ntpIndicatorData.GetIndicatorsForCcyAndName("USD", "Non-Farm Employment Change");
+
+            IndicatorPrices nfp = await new IndicatorPrices().Load("USD", "Non-Farm Employment Change");
+                        
+            var bytes = SerializeAndCompress(nfp);
+            File.WriteAllBytes("nfpbytes.byt", bytes);
+
+            int i = 1;
+
+        }
+
+        public static byte[] ObjectToByteArray(Object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }
+
+        public static byte[] Zip(IndicatorPrices textToZip)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var zipArchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    var demoFile = zipArchive.CreateEntry("zipped.txt");
+
+                    using (var entryStream = demoFile.Open())
+                    {
+                        using (var streamWriter = new StreamWriter(entryStream))
+                        {
+                            streamWriter.Write(textToZip);
+                        }
+                    }
+                }
+
+                return memoryStream.ToArray();
+            }
+        }
+
+        public static void dozip(object obj)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    var demoFile = archive.CreateEntry("nfp");
+
+                    using (var entryStream = demoFile.Open())
+                    using (var streamWriter = new StreamWriter(entryStream))
+                    {
+                        streamWriter.Write(obj);
+                    }
+                }
+
+                using (var fileStream = new FileStream("test.zip", FileMode.Create))
+                {
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    memoryStream.CopyTo(fileStream);
+                }
+            }
+        }
+
+        public static byte[] SerializeAndCompress(object obj)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            using (GZipStream zs = new GZipStream(ms, CompressionMode.Compress, true))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(zs, obj);
+                return ms.ToArray();
+            }
+        }
+
+        public static T DecompressAndDeserialize<T>(byte[] data)
+        {
+            using (MemoryStream ms = new MemoryStream(data))
+            using (GZipStream zs = new GZipStream(ms, CompressionMode.Decompress, true))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                return (T)bf.Deserialize(zs);
+            }
+        }
+
         static async Task getNfpTimeStats()
         {
             var ntpIndicatorData = new NtpIndicatorData();
@@ -74,7 +175,7 @@ namespace NTP.Prices.Forexite.Test
             }
 
             SymbolTimeStatsUtils utils = new SymbolTimeStatsUtils();
-            var tstats = utils.GetTimeStats(dts);
+            var tstats = utils.GetSymbolTimePeriodStats(dts);
 
             var tJson = (from r in tstats
                          select new
@@ -116,7 +217,6 @@ namespace NTP.Prices.Forexite.Test
             // var jsonTimeStats = tstats.ToJson();
             File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "nfpTimeStats.json"), jsonTimeStats);
         }
-
 
         static async Task getIndicators()
         {

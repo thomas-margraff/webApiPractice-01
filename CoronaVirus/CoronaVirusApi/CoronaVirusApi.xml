@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CoronaVirusApi</name>
+    </assembly>
+    <members>
+        <member name="T:CoronaVirusApi.Controllers.ScrapeRunsController">
+            <summary>
+            class
+            </summary>
+        </member>
+        <member name="M:CoronaVirusApi.Controllers.ScrapeRunsController.#ctor(CoronaVirusDAL.CvContext)">
+            <summary>
+             ctor
+            </summary>
+        </member>
+        <member name="M:CoronaVirusApi.Controllers.ScrapeRunsController.GetScrapeRuns">
+            <summary>
+            GET: api/ScrapeRuns 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CoronaVirusApi.Controllers.ScrapeRunsController.GetScrapeRun(System.Int32)">
+            <summary>
+            GET: api/ScrapeRuns/5
+            </summary>
+        </member>
+        <member name="M:CoronaVirusApi.Controllers.ScrapeRunsController.PutScrapeRun(System.Int32,CoronaVirusDAL.Entities.ScrapeRun)">
+            <summary>
+            <param name="id"></param>
+            <param name="scrapeRun"></param>
+            <returns></returns>
+            PUT: api/ScrapeRuns/5
+            To protect from overposting attacks, please enable the specific properties you want to bind to, for
+            more details see https://aka.ms/RazorPagesCRUD.
+            </summary>
+        </member>
+        <member name="M:CoronaVirusApi.Controllers.ScrapeRunsController.ScrapeRunExists(System.Int32)">
+            <summary>
+            ScrapeRunExists
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CoronaVirusApi.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CoronaVirusApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:CoronaVirusApi.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CoronaVirusApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container. 
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:CoronaVirusApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>
