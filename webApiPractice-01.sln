@@ -25,6 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapiDatabaseFirst", "weba
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solutionItems", "_solutionItems", "{4B624552-54C4-41E2-A748-C69A0DCC5CCE}"
 	ProjectSection(SolutionItems) = preProject
+		GooglePubSub\cvPubSub\cvPubSub-1955bd13e99f.json = GooglePubSub\cvPubSub\cvPubSub-1955bd13e99f.json
 		docs.txt = docs.txt
 	EndProjectSection
 EndProject
@@ -32,27 +33,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL-SqlServer-Models", "DAL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NtpDataLib", "NtpDataLib\NtpDataLib.csproj", "{CC6635C6-BBD9-418B-AFFA-8DFEC25AAF16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapeTester", "ScrapeTester\ScrapeTester.csproj", "{675691B0-A8FB-4578-8C9C-02BECEBFA8E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScrapeTester", "ScrapeTester\ScrapeTester.csproj", "{675691B0-A8FB-4578-8C9C-02BECEBFA8E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailLib", "EmailLib\EmailLib.csproj", "{14C80EAE-15CF-4D04-AF06-03D28A45CA9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailLib", "EmailLib\EmailLib.csproj", "{14C80EAE-15CF-4D04-AF06-03D28A45CA9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaVirusDAL", "CoronaVirus\CoronaVirusDAL\CoronaVirusDAL.csproj", "{6D86A823-3974-407A-A642-8D46B677DB3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaVirusDAL", "CoronaVirus\CoronaVirusDAL\CoronaVirusDAL.csproj", "{6D86A823-3974-407A-A642-8D46B677DB3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoronaVirus", "CoronaVirus", "{9DF60326-3EB6-42EF-A5A5-3CBB1153E765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaVirusApi", "CoronaVirus\CoronaVirusApi\CoronaVirusApi.csproj", "{01E2814A-2F68-4399-9B5F-08DD04FE370E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaVirusApi", "CoronaVirus\CoronaVirusApi\CoronaVirusApi.csproj", "{01E2814A-2F68-4399-9B5F-08DD04FE370E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NTP", "NTP", "{70B1A0CE-45DD-4253-9CB4-2CD2127819A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "miscProjects", "miscProjects", "{3519EC20-3320-43D5-8F4B-B9F81F31026C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cvDBTester", "CoronaVirus\cvDBTester\cvDBTester.csproj", "{7F1063A9-E9DD-4008-8BDB-C5378E9150EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cvDBTester", "CoronaVirus\cvDBTester\cvDBTester.csproj", "{7F1063A9-E9DD-4008-8BDB-C5378E9150EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewScrapeFileWatcherConsole", "CoronaVirus\NewScrapeFileWatcherConsole\NewScrapeFileWatcherConsole.csproj", "{3F52F2E6-2456-4E93-9C46-18C4647E9024}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewScrapeFileWatcherConsole", "CoronaVirus\NewScrapeFileWatcherConsole\NewScrapeFileWatcherConsole.csproj", "{3F52F2E6-2456-4E93-9C46-18C4647E9024}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaVirusLib", "CoronaVirus\CoronaVirusLib\CoronaVirusLib.csproj", "{9F3E6A15-743A-453B-925A-2AF9F974FF74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cvDITest", "CoronaVirus\cvDITest\cvDITest.csproj", "{EB9DF34C-92F6-4C71-99E5-22B8C2FDEA4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cvDITest", "CoronaVirus\cvDITest\cvDITest.csproj", "{EB9DF34C-92F6-4C71-99E5-22B8C2FDEA4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GooglePubSub", "GooglePubSub", "{BBA0308F-8964-4E22-97A3-5B1152F8796E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

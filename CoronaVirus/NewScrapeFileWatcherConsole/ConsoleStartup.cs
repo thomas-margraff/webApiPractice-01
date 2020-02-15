@@ -30,6 +30,7 @@ namespace NewScrapeFileWatcherConsole
             var services = new ServiceCollection();
             services.AddDbContext<CvContext>(options => options.UseSqlServer(configuration.GetConnectionString("cvConnectionString")));
             services.AddSingleton<IConfiguration>(configuration);
+            services.AddScoped<RabbitMQReceiver>(); 
             services.AddScoped<FileWatcherConsole>();
             services.AddScoped<cvConfig>();
             services.AddScoped<cvParsers>();

@@ -44,11 +44,11 @@ namespace cvDBTester
         {
             // tableChangeNotifications();
             // testScrapeRuns();
-            // doScrapeFileImport();
+            doScrapeFileImport();
             // testIncludes();
             // testView();
             // this.runtest.ExistsVsNew();
-            ParseLocalFile();
+            // ParseLocalFile();
         }
 
         void tableChangeNotifications()

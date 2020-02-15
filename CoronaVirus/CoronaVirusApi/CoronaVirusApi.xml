@@ -4,6 +4,23 @@
         <name>CoronaVirusApi</name>
     </assembly>
     <members>
+        <member name="T:CoronaVirusApi.Controllers.ScrapeImportController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CoronaVirusApi.Controllers.ScrapeImportController.#ctor(CoronaVirusDAL.CvContext)">
+            <summary>
+             ctor
+            </summary>
+        </member>
+        <member name="M:CoronaVirusApi.Controllers.ScrapeImportController.ImportScrapeRun(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="scrapeRun"></param>
+            <returns></returns>
+        </member>
         <member name="T:CoronaVirusApi.Controllers.ScrapeRunsController">
             <summary>
             class

@@ -29,6 +29,10 @@ namespace CoronaVirusLib
             Console.WriteLine(new FileInfo(file).Name);
             cvScrapeData data = parsers.ParseJson(file);
 
+            if (data.heading.Contains("XX,XXX"))
+            {
+                return;
+            }
             var existScrape = ctx.ScrapeRuns.FirstOrDefault(r => r.Heading.Trim() == data.heading.Trim());
             if (existScrape != null)
             {
@@ -36,53 +40,50 @@ namespace CoronaVirusLib
             }
             cvDataUtils.createGeolocationsFromScrapeFile(data);
             cvDataUtils.createCountriesFromScrapeFile(data);
-            
-            using (var db = new CvContext())
-            {
-                ScrapeRun scrape = new ScrapeRun()
-                {
-                    CreateDate = DateTime.Now,
-                    Heading = data.heading,
-                    ScrapeDate = data.scrapeDate
-                };
-                db.ScrapeRuns.Add(scrape);
-                db.SaveChanges();
 
-                foreach (var geo in data.geoLocations)
+            ScrapeRun scrape = new ScrapeRun()
+            {
+                CreateDate = DateTime.Now,
+                Heading = data.heading,
+                ScrapeDate = data.scrapeDate
+            };
+            ctx.ScrapeRuns.Add(scrape);
+            ctx.SaveChanges();
+
+            foreach (var geo in data.geoLocations)
+            {
+                foreach (var detail in geo.details)
                 {
-                    foreach (var detail in geo.details)
+                    var country = ctx.Countries.FirstOrDefault(r => r.Name == detail.country);
+                    if (country == null && detail.country != "TOTAL")
                     {
-                        var country = db.Countries.FirstOrDefault(r => r.Name == detail.country);
-                        if (country == null && detail.country != "TOTAL")
-                        {
-                            throw new Exception("country not found: " + detail.country);
-                        }
-                        if (detail.country == "TOTAL")
-                        {
-                            continue;
-                        }
-                        
-                        CountryStats stats = new CountryStats()
-                        {
-                            ScrapeRunId = scrape.Id,
-                            CountryId = country.Id,
-                            CreateDate = DateTime.Now,
-                            CaseCount = int.Parse(detail.cases.Trim().Replace(",", "").Replace("*", "")),
-                            DeathCount = int.Parse(detail.deaths.Trim().Replace(",", "").Replace("*", "")),
-                            Notes = detail.notes
-                        };
-                        db.CountryStats.Add(stats);
+                        throw new Exception("country not found: " + detail.country);
                     }
+                    if (detail.country == "TOTAL")
+                    {
+                        continue;
+                    }
+
+                    CountryStats stats = new CountryStats()
+                    {
+                        ScrapeRunId = scrape.Id,
+                        CountryId = country.Id,
+                        CreateDate = DateTime.Now,
+                        CaseCount = int.Parse(detail.cases.Trim().Replace(",", "").Replace("*", "")),
+                        DeathCount = int.Parse(detail.deaths.Trim().Replace(",", "").Replace("*", "")),
+                        Notes = detail.notes
+                    };
+                    ctx.CountryStats.Add(stats);
                 }
-                Console.WriteLine();
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+            }
+            Console.WriteLine();
+            try
+            {
+                ctx.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
