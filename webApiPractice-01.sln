@@ -25,7 +25,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapiDatabaseFirst", "weba
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solutionItems", "_solutionItems", "{4B624552-54C4-41E2-A748-C69A0DCC5CCE}"
 	ProjectSection(SolutionItems) = preProject
-		GooglePubSub\cvPubSub\cvPubSub-1955bd13e99f.json = GooglePubSub\cvPubSub\cvPubSub-1955bd13e99f.json
 		docs.txt = docs.txt
 	EndProjectSection
 EndProject
@@ -54,8 +53,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaVirusLib", "CoronaVirus\CoronaVirusLib\CoronaVirusLib.csproj", "{9F3E6A15-743A-453B-925A-2AF9F974FF74}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cvDITest", "CoronaVirus\cvDITest\cvDITest.csproj", "{EB9DF34C-92F6-4C71-99E5-22B8C2FDEA4E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GooglePubSub", "GooglePubSub", "{BBA0308F-8964-4E22-97A3-5B1152F8796E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
