@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using RabbitMQLib;
+using RabbitMQLib.Messages;
 
 namespace ScrapeServiceWorker
 {
@@ -13,6 +15,8 @@ namespace ScrapeServiceWorker
         string subject = "Corona Virus Update!!";
         string body = "";
 
+        RMQMessage _rmqMsg = new RMQMessage("scrapeFileNotification", "scrapeFileNotification", "newscrape");
+        RMQMessage _rmqTestMsg = new RMQMessage("scrapeFileNotification", "scrapeFileNotification", "newscrapeTest");
         ScrapeCache _scrapeCache;
 
         public CVScraperInvocable(ScrapeCache scrapeCache)
@@ -22,6 +26,9 @@ namespace ScrapeServiceWorker
 
         public Task Invoke()
         {
+            // test
+            // RMQSender.Send(_rmqTestMsg);
+
             scrapeAndSend().Wait();
             return Task.CompletedTask;
         }
@@ -40,9 +47,13 @@ namespace ScrapeServiceWorker
 
             innerHtml = innerHtml.Replace("</strong>", "");
             var parts = innerHtml.Split(">");
-            
+
             if (this._scrapeCache.PreviousCVscrapeValue != parts[1])
             {
+                // send scrape notice
+                RMQSender.Send(_rmqMsg);
+
+                // send email notice
                 this._scrapeCache.PreviousCVscrapeValue = parts[1];
                 body = string.Format("<h2>{0}:<br>{1}</h2>", DateTime.Now, parts[1]);
 

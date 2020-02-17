@@ -1,9 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>dotnet-ScrapeServiceWorker-4AC96E52-0F7D-49B4-AC42-EDAA9B553496</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RabbitMQSender.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Coravel" Version="3.2.0" />
@@ -14,6 +18,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.0.0-rc1" />
     <PackageReference Include="Scrappy" Version="0.1.27" />
   </ItemGroup>
 
@@ -21,5 +26,6 @@
     <ProjectReference Include="..\DAL-SqlServer\DAL-SqlServer.csproj" />
     <ProjectReference Include="..\EmailLib\EmailLib.csproj" />
     <ProjectReference Include="..\ForexPriceLib\ForexPriceLib.csproj" />
+    <ProjectReference Include="..\miscProjects\RabbitMQLib\RabbitMQLib.csproj" />
   </ItemGroup>
 </Project>

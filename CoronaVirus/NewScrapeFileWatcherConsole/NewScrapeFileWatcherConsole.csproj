@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\miscProjects\RabbitMQLib\RabbitMQLib.csproj" />
     <ProjectReference Include="..\CoronaVirusDAL\CoronaVirusDAL.csproj" />
     <ProjectReference Include="..\CoronaVirusLib\CoronaVirusLib.csproj" />
   </ItemGroup>

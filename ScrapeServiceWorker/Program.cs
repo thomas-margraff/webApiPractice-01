@@ -39,7 +39,7 @@ namespace ScrapeServiceWorker
                 {
                     scheduler.Schedule<PriceDownloaderInvocable>().DailyAt(hrStart, minStart);
                     scheduler.Schedule<ScraperInvocable>().DailyAt(hrStartCalendarOffsetHours, minStart);
-                    scheduler.Schedule<CVScraperInvocable>().HourlyAt(27);
+                    scheduler.Schedule<CVScraperInvocable>().EveryThirtyMinutes();
 
                     #region cron docs
                     //  run every two hours and 11 minutes
@@ -70,7 +70,7 @@ namespace ScrapeServiceWorker
                 {
                     #region debug
                     //debug
-                    //scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds();
+                    scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds(); //.EveryMinute();
                     //scheduler.Schedule<ScraperInvocable>().EveryFifteenSeconds();
                     //scheduler.Schedule<PriceDownloaderInvocable>().EveryFifteenSeconds();
                     #endregion
