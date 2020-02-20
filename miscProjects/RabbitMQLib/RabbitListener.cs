@@ -51,6 +51,11 @@ namespace RabbitMQLib
             throw new NotImplementedException();
         }
 
+        public void Listen()
+        {
+            this.Register();
+        }
+
         // Registered Consumer Monitor Here
         public void Register()
         {

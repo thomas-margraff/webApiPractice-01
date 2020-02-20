@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Messages\cvScrapeMessage.cs" />
+    <Compile Remove="RMQReceiver.cs" />
   </ItemGroup>
 
   <ItemGroup>

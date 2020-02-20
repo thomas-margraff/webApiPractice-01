@@ -1,0 +1,7 @@
+{
+  "Exchange": "",
+  "HostName": "gull-01.rmq.cloudamqp.com",
+  "VirtualHost":  "noekmbda",
+  "UserName": "noekmbda",
+  "Password": "jtKtg3LU2uEQOCJRpEgMhdSqf2N7S_Cv"
+}

@@ -7,6 +7,8 @@ using RabbitMQLib.Messages;
 
 namespace RabbitMQLib
 {
+    // https://developpaper.com/the-correct-way-to-use-rabbitmq-in-net-core/
+
     public class RMQSender
     {
         public static void Send(RMQMessage rmqMsg, string message)

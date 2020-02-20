@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RabbitMQLib.Messages
+namespace TestLib.Messages
 {
     // https://developpaper.com/the-correct-way-to-use-rabbitmq-in-net-core/
     public class RMQMessage : BaseMessage
@@ -11,17 +11,20 @@ namespace RabbitMQLib.Messages
         {
         }
 
-        public RMQMessage(string queueName, string routingKeyName)
+        public RMQMessage(string exchange, string queueName, string routingKeyName)
         {
+            this.ExchangeName = exchange;
             this.QueueName = queueName;
             this.RoutingKeyName = routingKeyName;
         }
 
-        public RMQMessage(string queueName, string routingKeyName, string message) 
+        public RMQMessage(string exchange, string queueName, string routingKeyName, string message)
         {
             this.QueueName = queueName;
             this.RoutingKeyName = routingKeyName;
             this.Message = message;
         }
+
+
     }
 }

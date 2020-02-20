@@ -1,0 +1,32 @@
+﻿{
+  "Connection": {
+    "HostName": "gull-01.rmq.cloudamqp.com",
+    "Port": 5672,
+    "UserName": "noekmbda",
+    "Password": "jtKtg3LU2uEQOCJRpEgMhdSqf2N7S_Cv",
+    "VirtualHost": "noekmbda",
+    "AutomaticRecoveryEnabled": true,
+    "TopologyRecoveryEnabled": true,
+    "RequestedConnectionTimeout": 60000,
+    "RequestedHeartbeat": 60
+  },
+  "Exchange": {
+    "Name": "cv.scraper.exchange",
+    "Type": "direct",
+    "Durable": true,
+    "AutoDelete": false,
+    "Arguments": null
+  },
+  "Queue": {
+    "Name": "cv.scraper.queue",
+    "Durable": true,
+    "Exclusive": false,
+    "AutoDelete": false,
+    "Arguments": null
+  },
+  "Binder": {
+    "ExchangeName": "cv.scraper.exchange",
+    "QueueName": "cv.scraper.queue",
+    "RoutingKey": "cv.scraper.routingkey"
+  }
+}
