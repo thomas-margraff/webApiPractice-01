@@ -18,10 +18,12 @@ namespace ScrapeServiceWorker
         RMQMessage _rmqMsg = new RMQMessage("scrapeFileNotification", "scrapeFileNotification", "newscrape");
         RMQMessage _rmqTestMsg = new RMQMessage("scrapeFileNotification", "scrapeFileNotification", "newscrapeTest");
         ScrapeCache _scrapeCache;
+        private readonly ScrapeConfig _scrapeConfig;
 
-        public CVScraperInvocable(ScrapeCache scrapeCache)
+        public CVScraperInvocable(ScrapeCache scrapeCache, ScrapeConfig scrapeConfig)
         {
             this._scrapeCache = scrapeCache;
+            this._scrapeConfig = scrapeConfig;
         }
 
         public Task Invoke()
@@ -37,7 +39,8 @@ namespace ScrapeServiceWorker
         {
             string html = "";
             var browser = new Browser();
-            var page = await browser.Open("https://bnonews.com/index.php/2020/02/the-latest-coronavirus-cases/");
+            var url = _scrapeConfig.CoronaVirusScrape.ScrapeUrl;
+            var page = await browser.Open(url);
             html = page.Select("#mvp-content-main").Text();
 
             // The table below shows confirmed cases of coronavirus (2019-nCoV) in China and other countries. To see a distribution map and a timeline, scroll down. 
@@ -57,7 +60,7 @@ namespace ScrapeServiceWorker
                 this._scrapeCache.PreviousCVscrapeValue = parts[1];
                 body = string.Format("<h2>{0}:<br>{1}</h2>", DateTime.Now, parts[1]);
 
-                Console.WriteLine("{0} {1} email", DateTime.Now, parts[1]);
+                Console.WriteLine("{0} {1} CHANGED", DateTime.Now, parts[1]);
                 // 
                 List<string> recipients = new List<string>{
                     { "thomaspmar@hotmail.com" },

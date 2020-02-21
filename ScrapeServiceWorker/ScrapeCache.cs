@@ -7,6 +7,5 @@ namespace ScrapeServiceWorker
     public class ScrapeCache
     {
         public string PreviousCVscrapeValue { get; set; }
-
     }
 }

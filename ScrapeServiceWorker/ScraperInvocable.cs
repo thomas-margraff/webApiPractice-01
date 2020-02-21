@@ -20,22 +20,16 @@ namespace ScrapeServiceWorker
 {
     public class ScraperInvocable : IInvocable
     {
-        private readonly ntpContext _ctx;
         private readonly IIndicatorDataRepository _repository;
-        private readonly IConfiguration _configuration;
         private readonly ScrapeConfig _scrapeConfig;
         StringBuilder emailBody;
         string subject = "Calendar Scrape";
         string recipient = "tmargraff@gmail.com";
 
-        public ScraperInvocable(ntpContext ctx, 
-                                IIndicatorDataRepository repository, 
-                                IConfiguration configuration,
+        public ScraperInvocable(IIndicatorDataRepository repository, 
                                 ScrapeConfig scrapeConfig)
         {
-            this._ctx = ctx;
             this._repository = repository;
-            this._configuration = configuration;
             this._scrapeConfig = scrapeConfig;
         }
 
@@ -69,7 +63,7 @@ namespace ScrapeServiceWorker
         public async Task<IEnumerable<IndicatorData>> DoScrape()
         {
             string jsonData = "";
-            string url = this._scrapeConfig.ScrapeUrl;
+            string url = this._scrapeConfig.CalendarScrape.ScrapeUrl;
             using (var client = new HttpClient())
             {
                 try
@@ -92,7 +86,7 @@ namespace ScrapeServiceWorker
                 recs.Add(rec);
             }
 
-            if (this._scrapeConfig.BulkUpdate)
+            if (this._scrapeConfig.CalendarScrape.BulkUpdate)
             {
                 emailBody.AppendLine(string.Format("Begin update database {0} calendar records", recs.Count()));
                 var recsUpd = _repository.BulkUpdate(recs);
@@ -103,19 +97,5 @@ namespace ScrapeServiceWorker
             emailBody.AppendLine(string.Format("Scraped {0} calendar records no database update", recs.Count()));
             return recs;
         }
-
-        //public async Task GetRecs()
-        //{
-        //    emailBody.AppendLine("Before scrape: " + DateTime.Now);
-        //    var url = "http://localhost:7000/api/scrape/getscrape/";
-        //    using (var client = new HttpClient())
-        //    {
-        //        var json = await client.GetStringAsync(url);
-        //        var recs = JsonConvert.DeserializeObject<List<IndicatorData>>(json);
-        //        emailBody.AppendLine("After scrape: " + DateTime.Now);
-        //        emailBody.AppendLine("recs scraped: " + recs.Count());
-        //        emailBody.AppendLine("");
-        //    }
-        //}
     }
 }

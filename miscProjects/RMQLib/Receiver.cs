@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TestLib.Messages;
+using RMQLib.Messages;
 using static System.Console;
 
-namespace TestLib
+namespace RMQLib
 {
     // https://developpaper.com/the-correct-way-to-use-rabbitmq-in-net-core/
 
@@ -71,7 +71,7 @@ namespace TestLib
                                         type: ctx.Exchange.Type);
                 }
             }
-            else 
+            else
             {
                 channel.ExchangeDeclare(exchange: ctx.Exchange.Name, type: ctx.Exchange.Type);
             }
@@ -84,7 +84,7 @@ namespace TestLib
                                      autoDelete: ctx.Queue.AutoDelete,
                                      arguments: ctx.Queue.Arguments);
             }
-            else 
+            else
             {
                 ctx.Queue.Name = channel.QueueDeclare().QueueName;
                 ctx.Binder.QueueName = ctx.Queue.Name;

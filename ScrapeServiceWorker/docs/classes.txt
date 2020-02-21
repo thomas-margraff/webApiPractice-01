@@ -1,0 +1,9 @@
+﻿Forex Factory Scraper
+
+in class: ScraperInvocable
+
+1. get scrape json data from web service
+2. parse scrape data to typed list - List<IndicatorData>
+3. save data in sql server repository
+4. send scrape email notice
+

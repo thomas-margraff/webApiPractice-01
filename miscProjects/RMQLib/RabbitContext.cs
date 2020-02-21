@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Json;
-using TestLib.Messages;
-using TestLib.Models;
+using RMQLib.Messages;
+using RMQLib.Models;
 
-namespace TestLib
+namespace RMQLib
 {
     public class RabbitContext
     {

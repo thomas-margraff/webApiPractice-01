@@ -15,9 +15,9 @@ namespace TestSend
     {
         static void Main(string[] args)
         {
-            // sendJsonMessages();
+            sendJsonMessages();
             // sendLogMessages();
-            sendJsonMessagesWithLogging();
+            // sendJsonMessagesWithLogging();
         }
 
         static void sendLogMessages()
@@ -36,6 +36,7 @@ namespace TestSend
 
         static void sendJsonMessages()
         {
+            var ctx = new RabbitContext().Create("cv.scraper.json");
             cvJsonMessage cvJsonMsg = new cvJsonMessage();
 
             while (true)

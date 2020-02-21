@@ -1,0 +1,32 @@
+﻿{
+  "Connection": {
+    "HostName": "gull-01.rmq.cloudamqp.com",
+    "Port": 5672,
+    "UserName": "noekmbda",
+    "Password": "jtKtg3LU2uEQOCJRpEgMhdSqf2N7S_Cv",
+    "VirtualHost": "noekmbda",
+    "AutomaticRecoveryEnabled": true,
+    "TopologyRecoveryEnabled": true,
+    "RequestedConnectionTimeout": 60000,
+    "RequestedHeartbeat": 60
+  },
+  "Exchange": {
+    "Name": "logs",
+    "Type": "fanout",
+    "Durable": false,
+    "AutoDelete": true,
+    "Arguments": null
+  },
+  "Queue": {
+    "Name": "",
+    "Durable": false,
+    "Exclusive": true,
+    "AutoDelete": true,
+    "Arguments": null
+  },
+  "Binder": {
+    "ExchangeName": "logs",
+    "QueueName": "",
+    "RoutingKey": ""
+  }
+}

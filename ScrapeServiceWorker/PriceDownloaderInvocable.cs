@@ -1,17 +1,10 @@
 ﻿using Coravel.Invocable;
-using Coravel.Queuing.Interfaces;
-using DAL_SqlServer;
-using DAL_SqlServer.Models;
 using DAL_SqlServer.Repository;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
@@ -22,23 +15,16 @@ namespace ScrapeServiceWorker
 {
     public class PriceDownloaderInvocable: IInvocable
     {
-        private readonly ntpContext _ctx;
         private readonly IIndicatorDataRepository _repository;
-        private readonly IConfiguration _configuration;
         private readonly ScrapeConfig _scrapeConfig;
         private bool isRunning = false;
         StringBuilder emailBody;
         string subject = "Forex Prices Download";
         string recipient = "tmargraff@gmail.com";
 
-        public PriceDownloaderInvocable(ntpContext ctx,
-                                IIndicatorDataRepository repository,
-                                IConfiguration configuration,
-                                ScrapeConfig scrapeConfig)
+        public PriceDownloaderInvocable(IIndicatorDataRepository repository, ScrapeConfig scrapeConfig)
         {
-            this._ctx = ctx;
             this._repository = repository;
-            this._configuration = configuration;
             this._scrapeConfig = scrapeConfig;
         }
 
@@ -105,12 +91,14 @@ namespace ScrapeServiceWorker
                 // 2020/01/100120
                 var urlDt = string.Format("{0}/{1}/{2}{3}{04}", yyyy, mm, dd, mm, yy);
 
-                string url = this._scrapeConfig.ForexiteUrl + urlDt + ".zip";
+                string url = this._scrapeConfig.ForexiteDownload.ForexiteUrl + urlDt + ".zip";
                 using (WebClient client = new WebClient())
                 {
                     try
                     {
-                        client.DownloadFile(new Uri(url), Path.Combine(@"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL", fname));
+                        // "I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL"
+                        client.DownloadFile(new Uri(url), 
+                                            Path.Combine(this._scrapeConfig.ForexiteDownload.ForexiteArchivePath, fname));
                     }
                     catch (Exception ex)
                     {
