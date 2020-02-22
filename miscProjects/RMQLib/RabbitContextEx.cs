@@ -14,9 +14,11 @@ namespace RMQLib
             ctx = new RabbitContext();
 
             var filePath = Path.Combine(@"Configuration", fileName);
-            string fullFilePath = Path.Combine(Environment.CurrentDirectory, filePath);
+            string fullFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
             string json = File.ReadAllText(fullFilePath);
+
             ctx = JsonConvert.DeserializeObject<RabbitContext>(json);
+
             return ctx;
         }
     }

@@ -1,4 +1,4 @@
-﻿{
+{
   "Connection": {
     "HostName": "gull-01.rmq.cloudamqp.com",
     "Port": 5672,
@@ -11,22 +11,22 @@
     "RequestedHeartbeat": 60
   },
   "Exchange": {
-    "Name": "cv.scraper.exchange",
+    "Name": "cv.exchange",
     "Type": "direct",
     "Durable": true,
     "AutoDelete": false,
     "Arguments": null,
     "Queues": [
       {
-        "Name": "cv.scraper.queue",
+        "Name": "cv.queue",
         "Durable": true,
         "Exclusive": false,
         "AutoDelete": false,
         "Arguments": null,
         "Binders": [
           {
-            "ExchangeName": "cv.scraper.exchange",
-            "QueueName": "cv.scraper.queue",
+            "ExchangeName": "cv.exchange",
+            "QueueName": "cv.queue",
             "RoutingKey": "importscrape"
           }
         ]
@@ -39,7 +39,7 @@
         "Arguments": null,
         "Binders": [
           {
-            "ExchangeName": "cv.scraper.exchange",
+            "ExchangeName": "cv.exchange",
             "QueueName": "",
             "RoutingKey": "doscrape"
           }
@@ -48,22 +48,22 @@
     ]
   },
   "Queue": {
-    "Name": "cv.scraper.queue",
+    "Name": "cv.queue",
     "Durable": true,
     "Exclusive": false,
     "AutoDelete": false,
     "Arguments": null,
     "Binders": [
       {
-        "ExchangeName": "cv.scraper.exchange",
-        "QueueName": "cv.scraper.queue",
-        "RoutingKey": "cv.scraper.routingkey"
+        "ExchangeName": "cv.exchange",
+        "QueueName": "cv.queue",
+        "RoutingKey": "cv.routingkey"
       }
     ]
   },
   "Binder": {
-    "ExchangeName": "cv.scraper.exchange",
-    "QueueName": "cv.scraper.queue",
-    "RoutingKey": "cv.scraper.routingkey"
+    "ExchangeName": "cv.exchange",
+    "QueueName": "cv.queue",
+    "RoutingKey": "cv.routingkey"
   }
 }

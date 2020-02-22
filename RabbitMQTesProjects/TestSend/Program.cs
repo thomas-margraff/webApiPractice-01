@@ -1,13 +1,11 @@
 ﻿using System;
 using System.IO;
-using TestLib;
-using TestLib.Messages;
-using TestLib.Models;
-using TestMessages;
 using System.Text.Json;
 using Newtonsoft.Json;
 using static System.Console;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using RMQLib;
+using RMQLib.Messages;
 
 namespace TestSend
 {
@@ -15,11 +13,23 @@ namespace TestSend
     {
         static void Main(string[] args)
         {
-            sendJsonMessages();
+            scrapeServiceWorkerSend();
+            // sendJsonMessages();
             // sendLogMessages();
             // sendJsonMessagesWithLogging();
         }
 
+        static void scrapeServiceWorkerSend()
+        {
+            var sender = new RMQScrapeServiceWorker();
+            while (true)
+            {
+                WriteLine("enter a message");
+                var msg = ReadLine();
+                sender.Send(msg);
+                WriteLine("");
+            }
+        }
         static void sendLogMessages()
         {
             LogMessage logMsg = new LogMessage();
@@ -37,14 +47,15 @@ namespace TestSend
         static void sendJsonMessages()
         {
             var ctx = new RabbitContext().Create("cv.scraper.json");
-            cvJsonMessage cvJsonMsg = new cvJsonMessage();
+            cvJsonMessageSend cvJsonMsg = new cvJsonMessageSend();
 
             while (true)
             {
                 WriteLine(" enter a message");
                 var msg = ReadLine();
-                RabbitMessage rGenMsg = new RabbitMessage("cv.general", msg);
-                cvJsonMsg.Publish(rGenMsg);
+                cvJsonMsg.Publish(msg);
+                //RabbitMessage rGenMsg = new RabbitMessage("cv.general", msg);
+                //cvJsonMsg.Publish(rGenMsg);
                 WriteLine(" sent");
                 WriteLine("");
             }
@@ -52,7 +63,7 @@ namespace TestSend
 
         static void sendJsonMessagesWithLogging()
         {
-            cvJsonMessage cvJsonMsg = new cvJsonMessage();
+            cvJsonMessageSend cvJsonMsg = new cvJsonMessageSend();
             LogMessage logMsg = new LogMessage();
 
             while (true)
@@ -60,7 +71,7 @@ namespace TestSend
                 WriteLine(" enter a message");
                 var msg = ReadLine();
                 RabbitMessage rGenMsg = new RabbitMessage("cv.general", msg);
-                cvJsonMsg.Publish(rGenMsg);
+                cvJsonMsg.Publish(rGenMsg.MessageName);
                 logMsg.Publish("sent a message: " + msg);
                 WriteLine(" sent");
                 WriteLine("");

@@ -1,0 +1,65 @@
+{
+  "Connection": null,
+  "Exchange": {
+    "Name": null,
+    "Type": null,
+    "Durable": false,
+    "AutoDelete": false,
+    "Arguments": null,
+    "Queues": [
+      {
+        "Name": "q1",
+        "Durable": true,
+        "Exclusive": false,
+        "AutoDelete": false,
+        "Arguments": null,
+        "Binders": [
+          {
+            "ExchangeName": "ex1",
+            "QueueName": "q1",
+            "RoutingKey": "r1"
+          },
+          {
+            "ExchangeName": "ex1",
+            "QueueName": "q1",
+            "RoutingKey": "r1"
+          }
+        ]
+      },
+      {
+        "Name": "q2",
+        "Durable": true,
+        "Exclusive": false,
+        "AutoDelete": false,
+        "Arguments": null,
+        "Binders": [
+          {
+            "ExchangeName": "ex2",
+            "QueueName": "q2",
+            "RoutingKey": "r2"
+          },
+          {
+            "ExchangeName": "ex2",
+            "QueueName": "q2",
+            "RoutingKey": "r2"
+          }
+        ]
+      }
+    ]
+  },
+  "Queue": {
+    "Name": null,
+    "Durable": false,
+    "Exclusive": false,
+    "AutoDelete": false,
+    "Arguments": null,
+    "Binders": []
+  },
+  "Binder": {
+    "ExchangeName": null,
+    "QueueName": null,
+    "RoutingKey": null
+  },
+  "Senders": [],
+  "Receivers": []
+}

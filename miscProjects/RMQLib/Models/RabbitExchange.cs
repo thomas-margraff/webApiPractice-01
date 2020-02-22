@@ -11,10 +11,11 @@ namespace RMQLib.Models
         public bool Durable { get; set; }
         public bool AutoDelete { get; set; }
         public IDictionary<string, object> Arguments { get; set; } = null;
+        public List<RabbitQueue> Queues { get; set; }
 
         public RabbitExchange()
         {
-
+            Queues = new List<RabbitQueue>();
         }
     }
 }

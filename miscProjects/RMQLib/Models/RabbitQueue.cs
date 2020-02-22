@@ -11,10 +11,11 @@ namespace RMQLib.Models
         public bool Exclusive { get; set; }
         public bool AutoDelete { get; set; }
         public IDictionary<string, object> Arguments { get; set; } = null;
+        public List<RabbitBinder> Binders { get; set; }
 
         public RabbitQueue()
         {
-
+            Binders = new List<RabbitBinder>();
         }        
     }
 }

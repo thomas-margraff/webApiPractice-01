@@ -1,12 +1,13 @@
 ﻿using Coravel.Invocable;
 using EmailLib;
+using RMQLib;
+using RMQLib.Messages;
+using ScrapeServiceWorker.RMQ;
 using Scrappy;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using RabbitMQLib;
-using RabbitMQLib.Messages;
 
 namespace ScrapeServiceWorker
 {
@@ -15,21 +16,23 @@ namespace ScrapeServiceWorker
         string subject = "Corona Virus Update!!";
         string body = "";
 
-        RMQMessage _rmqMsg = new RMQMessage("scrapeFileNotification", "scrapeFileNotification", "newscrape");
-        RMQMessage _rmqTestMsg = new RMQMessage("scrapeFileNotification", "scrapeFileNotification", "newscrapeTest");
-        ScrapeCache _scrapeCache;
+        private readonly ScrapeCache _scrapeCache;
         private readonly ScrapeConfig _scrapeConfig;
+        private readonly cvJsonMessage _cvPublisher;
 
         public CVScraperInvocable(ScrapeCache scrapeCache, ScrapeConfig scrapeConfig)
         {
             this._scrapeCache = scrapeCache;
             this._scrapeConfig = scrapeConfig;
+
+            _cvPublisher = new cvJsonMessage(scrapeConfig.CoronaVirusScrape);
+            
         }
 
         public Task Invoke()
         {
             // test
-            // RMQSender.Send(_rmqTestMsg);
+            // _cvPublisher.Publish("");
 
             scrapeAndSend().Wait();
             return Task.CompletedTask;
@@ -54,7 +57,7 @@ namespace ScrapeServiceWorker
             if (this._scrapeCache.PreviousCVscrapeValue != parts[1])
             {
                 // send scrape notice
-                RMQSender.Send(_rmqMsg);
+                _cvPublisher.Publish("");
 
                 // send email notice
                 this._scrapeCache.PreviousCVscrapeValue = parts[1];

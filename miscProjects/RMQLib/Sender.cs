@@ -13,10 +13,7 @@ namespace RMQLib
         private RabbitContext ctx;
         private IConnection connection;
 
-        public Sender(RabbitContext ctx)
-        {
-            this.ctx = ctx;
-        }
+        public Sender(RabbitContext ctx) { this.ctx = ctx; }
 
         private IConnection connect()
         {
@@ -30,6 +27,35 @@ namespace RMQLib
             Send(json);
         }
 
+        //public void Send(string message)
+        //{
+        //    // if (this.connection == null)
+        //    this.connect();
+
+        //    using (var connection = this.connection)
+        //    using (var channel = connection.CreateModel())
+        //    {
+        //        channel.ExchangeDeclare(exchange: ctx.Exchange.Name,
+        //                                durable: ctx.Exchange.Durable,
+        //                                type: ctx.Exchange.Type);  // ExchangeType.Fanout);
+        //        foreach (var q in ctx.Exchange.Queues)
+        //        {
+        //            channel.QueueDeclare(queue: q.Name,
+        //                                 durable: q.Durable,
+        //                                 exclusive: q.Exclusive,
+        //                                 autoDelete: q.AutoDelete,
+        //                                 arguments: q.Arguments);
+        //        }
+
+        //        var body = Encoding.UTF8.GetBytes(message);
+
+        //        channel.BasicPublish(exchange: ctx.Binder.ExchangeName,
+        //                             routingKey: ctx.Binder.RoutingKey,
+        //                             basicProperties: null,
+        //                             body: body);
+        //    }
+        //}
+
         public void Send(string message)
         {
             // if (this.connection == null)
@@ -38,7 +64,7 @@ namespace RMQLib
             using (var connection = this.connection)
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: ctx.Exchange.Name, 
+                channel.ExchangeDeclare(exchange: ctx.Exchange.Name,
                                         durable: ctx.Exchange.Durable,
                                         type: ctx.Exchange.Type);  // ExchangeType.Fanout);
 

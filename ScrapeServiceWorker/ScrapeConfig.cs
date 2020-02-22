@@ -46,6 +46,17 @@ namespace ScrapeServiceWorker
         public bool IsDebug { get; set; }
         public string ScrapeUrl { get; set; }
         public bool DryRun { get; set; }
+        public string RMQConfigFileDebug { get; set; }
+        public string RMQConfigFile { get; set; }
         public CoronaVirusScrape() { }
+
+        public string GetConfigFile()
+        {
+            if (this.IsDebug)
+                return RMQConfigFileDebug;
+
+            return RMQConfigFile;
+
+        }
     }
 }

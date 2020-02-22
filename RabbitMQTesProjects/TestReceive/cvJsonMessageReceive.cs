@@ -10,12 +10,12 @@ namespace TestReceive
     {
         public cvJsonMessageReceive(RabbitContext ctx) : base(ctx) 
         {
+            ctx.Binder.RoutingKey = "importscrape";
             this.Register();
         }
 
         public override bool Process(string message)
         {
-            // Console.WriteLine($"received {message}");
             WriteLine(message);
             return true;
         }

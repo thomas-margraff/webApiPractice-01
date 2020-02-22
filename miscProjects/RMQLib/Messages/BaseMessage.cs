@@ -29,7 +29,7 @@ namespace RMQLib.Messages
             this.DateTimeSent = DateTime.Now;
         }
 
-        public BaseMessage(string exchange, string queueName, string routingKeyName, string message) : base()
+            public BaseMessage(string exchange, string queueName, string routingKeyName, string message) : base()
         {
             this.ExchangeName = exchange;
             this.QueueName = queueName;

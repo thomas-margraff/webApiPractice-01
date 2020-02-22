@@ -15,10 +15,13 @@
     "Type": "direct",
     "Durable": true,
     "AutoDelete": false,
-    "Arguments": null
+    "Arguments": null,
+    "Queues": {
+
+    }
   },
   "Queue": {
-    "Name": "",
+    "Name": "cv.scraper.queue",
     "Durable": true,
     "Exclusive": false,
     "AutoDelete": false,
@@ -26,7 +29,7 @@
   },
   "Binder": {
     "ExchangeName": "cv.scraper.exchange",
-    "QueueName": "",
+    "QueueName": "cv.scraper.queue",
     "RoutingKey": "cv.scraper.routingkey"
   }
 }

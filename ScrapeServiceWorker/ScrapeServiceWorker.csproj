@@ -26,6 +26,6 @@
     <ProjectReference Include="..\DAL-SqlServer\DAL-SqlServer.csproj" />
     <ProjectReference Include="..\EmailLib\EmailLib.csproj" />
     <ProjectReference Include="..\ForexPriceLib\ForexPriceLib.csproj" />
-    <ProjectReference Include="..\miscProjects\RabbitMQLib\RabbitMQLib.csproj" />
+    <ProjectReference Include="..\miscProjects\RMQLib\RMQLib.csproj" />
   </ItemGroup>
 </Project>

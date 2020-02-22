@@ -73,7 +73,9 @@ namespace TestLib
             }
             else 
             {
-                channel.ExchangeDeclare(exchange: ctx.Exchange.Name, type: ctx.Exchange.Type);
+                channel.ExchangeDeclare(exchange: ctx.Exchange.Name,
+                                        durable: ctx.Exchange.Durable,
+                                        type: ctx.Exchange.Type);
             }
 
             if (!string.IsNullOrWhiteSpace(ctx.Queue.Name))

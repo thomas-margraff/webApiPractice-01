@@ -1,19 +1,26 @@
-﻿using System;
+﻿using RMQLib;
+using RMQLib.Messages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using TestLib;
-using TestLib.Messages;
 
 namespace TestSend
 {
-    public class cvJsonMessage
+    public class cvJsonMessageSend
     {
         private RabbitContext ctx;
 
-        public cvJsonMessage()
+        public cvJsonMessageSend()
         {
             ctx = new RabbitContext().Create("cv.scraper.json");
+            ctx.Binder.RoutingKey = "doscrape";
+        }
+
+        public void Publish(string msg)
+        {
+            var sender = new Sender(ctx);
+            sender.Send(msg);
         }
 
         public void Publish(RabbitMessage msg)

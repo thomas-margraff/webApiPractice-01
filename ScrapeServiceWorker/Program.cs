@@ -35,46 +35,45 @@ namespace ScrapeServiceWorker
                 var minStart = scrapeConfig.StartMinute;
                 var hrStartCalendarOffsetHours = scrapeConfig.CalendarOffsetHours;
 
-                if (!scrapeConfig.IsDebug)
-                {
+                if (!scrapeConfig.ForexiteDownload.IsDebug)
                     scheduler.Schedule<PriceDownloaderInvocable>().DailyAt(hrStart, minStart);
+                else
+                    scheduler.Schedule<PriceDownloaderInvocable>().EveryFifteenSeconds();
+
+                if (!scrapeConfig.CalendarScrape.IsDebug)
                     scheduler.Schedule<ScraperInvocable>().DailyAt(hrStartCalendarOffsetHours, minStart);
+                else
+                    scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds();
+                if (!scrapeConfig.CoronaVirusScrape.IsDebug)
                     scheduler.Schedule<CVScraperInvocable>().EveryThirtyMinutes();
+                else
+                    scheduler.Schedule<CVScraperInvocable>().EveryThirtySeconds();
 
                     #region cron docs
-                    //  run every two hours and 11 minutes
-                    // scheduler.Schedule<CVScraperInvocable>().Cron("11 */2 * * *");
+                        //  run every two hours and 11 minutes
+                        // scheduler.Schedule<CVScraperInvocable>().Cron("11 */2 * * *");
 
-                    /* 
-                              1 2 3 4 5                  
-                        Cron("* * * * *)
+                        /* 
+                                  1 2 3 4 5                  
+                            Cron("* * * * *)
 
-                        1	Minute	0 to 59, or * (no specific value)
-                        2	Hour	0 to 23, or * for any value. All times UTC.
-                        3	Day of the month	1 to 31, or * (no specific value)
-                        4	Month	1 to 12, or * (no specific value)
-                        5	Day of the week	0 to 7 (0 and 7 both represent Sunday), or * (no specific value)
+                            1	Minute	0 to 59, or * (no specific value)
+                            2	Hour	0 to 23, or * for any value. All times UTC.
+                            3	Day of the month	1 to 31, or * (no specific value)
+                            4	Month	1 to 12, or * (no specific value)
+                            5	Day of the week	0 to 7 (0 and 7 both represent Sunday), or * (no specific value)
 
-                        Examples: Cron time string format
-                        https://support.acquia.com/hc/en-us/articles/360004224494-Cron-time-string-format
+                            Examples: Cron time string format
+                            https://support.acquia.com/hc/en-us/articles/360004224494-Cron-time-string-format
 
-                        https://support.acquia.com/hc/en-us/articles/360004224494-Cron-time-string-format
+                            https://support.acquia.com/hc/en-us/articles/360004224494-Cron-time-string-format
 
-                     */
+                         */
 
-                    // run every two hours on the hour
-                    // scheduler.Schedule<CVScraperInvocable>().Cron("00 */2 * * *");
-                    #endregion
-                }
-                else
-                {
-                    #region debug
-                    //debug
-                    scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds(); //.EveryMinute();
-                    //scheduler.Schedule<ScraperInvocable>().EveryFifteenSeconds();
-                    //scheduler.Schedule<PriceDownloaderInvocable>().EveryFifteenSeconds();
-                    #endregion
-                }
+                        // run every two hours on the hour
+                        // scheduler.Schedule<CVScraperInvocable>().Cron("00 */2 * * *");
+                        #endregion
+                
             }).OnError((exception) =>
                 {
                     Console.WriteLine("It's broken!");

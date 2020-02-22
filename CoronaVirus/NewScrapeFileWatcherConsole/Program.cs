@@ -24,7 +24,7 @@ namespace NewScrapeFileWatcherConsole
             _serviceProvider = services.BuildServiceProvider(true);
 
             IServiceScope scope = _serviceProvider.CreateScope();
-            scope.ServiceProvider.GetRequiredService<RabbitMQReceiver>().Run();
+            scope.ServiceProvider.GetRequiredService<ImportRunner>().Run();
             startup.DisposeServices();
         }
     }
