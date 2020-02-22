@@ -1,0 +1,36 @@
+{
+  "name": "@tmargraff/cvscraper-cli",
+  "version": "1.0.82",
+  "description": "cv scraper cli",
+  "main": "index.js",
+  "bin": {
+    "cvscraper-cli": "./bin/main.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --outDir bin",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tmargraff",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/amqp-connection-manager": "^2.0.5",
+    "@types/amqplib": "^0.5.13",
+    "@types/axios": "^0.14.0",
+    "@types/cheerio": "^0.22.16",
+    "@types/json2csv": "^4.5.1",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^13.7.0",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "amqp-connection-manager": "^3.2.0",
+    "amqplib": "^0.5.5",
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "json2csv": "^4.5.4",
+    "moment": "^2.24.0"
+  }
+}
