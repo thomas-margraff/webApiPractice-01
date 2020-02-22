@@ -8,7 +8,7 @@
   },
   "publishConfig": {
     "access": "public"
-  },
+  }, 
   "scripts": {
     "build": "tsc --outDir bin",
     "test": "echo \"Error: no test specified\" && exit 1"
