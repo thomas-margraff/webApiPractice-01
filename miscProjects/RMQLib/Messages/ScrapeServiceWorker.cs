@@ -34,6 +34,7 @@ namespace RMQLib.Messages
             _ctx.Queue.Name = "";
 
             _sender.Send(msg);
+            
         }
     }
 

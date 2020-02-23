@@ -19,7 +19,11 @@ export class Sender {
                 });
 
                 channel.publish(exchange, routingKey, Buffer.from(msg));
+               
             });
+            setTimeout(function() {
+                conn.close();
+            }, 500);
         });
     }        
 }

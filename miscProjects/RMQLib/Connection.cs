@@ -21,6 +21,7 @@ namespace RMQLib
             factory.VirtualHost = options.VirtualHost;
             factory.HostName = options.HostName;
 
+            // #1
             IConnection conn = factory.CreateConnection();
 
             return conn;

@@ -8,6 +8,7 @@ using CoronaVirusLib.Parsers;
 using System.IO;
 using CoronaVirusDAL.Utilities;
 using CoronaVirusLib.Configuration;
+using Newtonsoft.Json;
 
 namespace CoronaVirusLib
 {
@@ -28,7 +29,18 @@ namespace CoronaVirusLib
         {
             Console.WriteLine(new FileInfo(file).Name);
             cvScrapeData data = parsers.ParseJson(file);
+            Console.WriteLine(new FileInfo(file).Name);
+            ImportScrape(data);
+        }
 
+        public void ImportScrapeJson(string json)
+        {
+            cvScrapeData data = JsonConvert.DeserializeObject<cvScrapeData>(json);
+            ImportScrape(data);
+        }
+        
+        public void ImportScrape(cvScrapeData data)
+        {
             if (data.heading.Contains("XX,XXX"))
             {
                 return;
@@ -38,6 +50,7 @@ namespace CoronaVirusLib
             {
                 return;
             }
+            Console.WriteLine("updating...");
             cvDataUtils.createGeolocationsFromScrapeFile(data);
             cvDataUtils.createCountriesFromScrapeFile(data);
 

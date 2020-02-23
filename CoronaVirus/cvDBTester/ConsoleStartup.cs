@@ -33,6 +33,7 @@ namespace cvDBTester
             services.AddScoped<cvConfig>();
             services.AddScoped<cvParsers>();
             services.AddScoped<ImportScrapeData>();
+            services.AddScoped<coronavirus_tracker_api>(); 
 
             return services;
         }

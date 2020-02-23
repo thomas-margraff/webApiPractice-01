@@ -24,13 +24,13 @@ export class Main {
 
 let debug = false;
 
+//#region testing
 // if (debug) {
 //     let sender = new Sender();
 //     sender.send('message 1', 'test').then(r => { });
 //     sender.send('message 2', 'test').then(r => { });
 // }
 
-//#region testing
 // let fname = Utils.DateToString(Utils.DateNowToString()) + '-bno.html'
 // let fpath = path.join(DataDirectories.HTML_DIR, fname);
 // console.log(fname);
@@ -46,7 +46,6 @@ let debug = false;
 // main.readFromHtmlFileAndParse(fpath);
 
 //#endregion testing
-// ensure csv and json folders exist
 
 // wait for rmq notification
 let receiver: Receiver = new Receiver();
@@ -54,8 +53,8 @@ receiver.receive().then(r => {
     console.log('waiting');
 });
 
-
 if (!debug) {
+    // ensure csv and json folders exist
     try {
         DataDirectories.checkFoldersExist();    
     } catch (error) {

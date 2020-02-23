@@ -154,6 +154,7 @@ export class cvParser {
         let fname = Utils.DateToString(scrapeData.scrapeDate) + '-bno.json'
         let fpath = path.join(DataDirectories.JSON_DIR, fname);
         this.scrapedJsonFilePath = fpath;
+
         fs.writeFile(fpath, JSON.stringify(scrapeData, null, 2), (err) => {
     		if (err) {
                 cvLogger.log('an error happened while saving the json file ' + err);
@@ -182,5 +183,8 @@ export class cvParser {
             }
         });
     }
-
+    
+    scrapeDataToJson(scrapeData: cvScrapeData): string {
+        return JSON.stringify(scrapeData, null, 2)
+    }
 }        

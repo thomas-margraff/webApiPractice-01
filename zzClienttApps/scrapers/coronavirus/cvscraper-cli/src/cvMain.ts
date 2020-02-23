@@ -8,7 +8,7 @@ import { Sender } from './messaging/simple/send';
 
 export class cvMain {
     parser = new cvParser();
-    
+
     public async webScrapeAxios() {
         let scrapeData: cvScrapeData = new cvScrapeData();
         try {
@@ -25,10 +25,15 @@ export class cvMain {
             this.parser.saveHtml(this.parser.scrapedHtml);
             this.parser.saveJson(scrapeData);
             this.parser.saveToCsv(scrapeData);
-            this.sendScrapeNotification(this.parser.scrapedJsonFilePath).then( r => {
+            this.sendScrapeNotification(this.parser.scrapeDataToJson(scrapeData), "importscrapejson").then( r => {
                 cvLogger.log(Utils.DateNowToString() + ' complete scrape');
                 cvLogger.log(''); 
             });
+
+            // this.sendScrapeNotification(this.parser.scrapedJsonFilePath).then( r => {
+            //     cvLogger.log(Utils.DateNowToString() + ' complete scrape');
+            //     cvLogger.log(''); 
+            // });
         });
     }
 
@@ -61,7 +66,7 @@ export class cvMain {
         }, delay);
     }
 
-    private async sendScrapeNotification(msg) {
+    private async sendScrapeNotification(msg, routingKey?) {
         let sender = new Sender();
         sender.send(msg).then(r => { });
     }

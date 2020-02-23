@@ -1,6 +1,6 @@
 {
   "name": "@tmargraff/cvscraper-cli",
-  "version": "1.0.82",
+  "version": "1.0.91",
   "description": "cv scraper cli",
   "main": "index.js",
   "bin": {

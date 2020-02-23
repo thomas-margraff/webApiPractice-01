@@ -1,0 +1,69 @@
+{
+  "Connection": {
+    "HostName": "gull-01.rmq.cloudamqp.com",
+    "Port": 5672,
+    "UserName": "noekmbda",
+    "Password": "jtKtg3LU2uEQOCJRpEgMhdSqf2N7S_Cv",
+    "VirtualHost": "noekmbda",
+    "AutomaticRecoveryEnabled": true,
+    "TopologyRecoveryEnabled": true,
+    "RequestedConnectionTimeout": 60000,
+    "RequestedHeartbeat": 60
+  },
+  "Exchange": {
+    "Name": "cv.exchange",
+    "Type": "direct",
+    "Durable": true,
+    "AutoDelete": false,
+    "Arguments": null,
+    "Queues": [
+      {
+        "Name": "cv.queue",
+        "Durable": true,
+        "Exclusive": false,
+        "AutoDelete": false,
+        "Arguments": null,
+        "Binders": [
+          {
+            "ExchangeName": "cv.exchange",
+            "QueueName": "cv.queue",
+            "RoutingKey": "importscrape"
+          }
+        ]
+      },
+      {
+        "Name": "",
+        "Durable": true,
+        "Exclusive": false,
+        "AutoDelete": false,
+        "Arguments": null,
+        "Binders": [
+          {
+            "ExchangeName": "cv.exchange",
+            "QueueName": "",
+            "RoutingKey": "doscrape"
+          }
+        ]
+      }
+    ]
+  },
+  "Queue": {
+    "Name": "cv.queue",
+    "Durable": true,
+    "Exclusive": false,
+    "AutoDelete": false,
+    "Arguments": null,
+    "Binders": [
+      {
+        "ExchangeName": "cv.exchange",
+        "QueueName": "cv.queue",
+        "RoutingKey": "cv.routingkey"
+      }
+    ]
+  },
+  "Binder": {
+    "ExchangeName": "cv.exchange",
+    "QueueName": "cv.queue",
+    "RoutingKey": "cv.routingkey"
+  }
+}

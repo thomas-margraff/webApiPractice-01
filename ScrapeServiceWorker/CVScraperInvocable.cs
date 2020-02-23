@@ -15,7 +15,7 @@ namespace ScrapeServiceWorker
     {
         string subject = "Corona Virus Update!!";
         string body = "";
-
+        private bool isRunning = false;
         private readonly ScrapeCache _scrapeCache;
         private readonly ScrapeConfig _scrapeConfig;
         private readonly cvJsonMessage _cvPublisher;
@@ -26,15 +26,20 @@ namespace ScrapeServiceWorker
             this._scrapeConfig = scrapeConfig;
 
             _cvPublisher = new cvJsonMessage(scrapeConfig.CoronaVirusScrape);
-            
         }
 
         public Task Invoke()
         {
+            if (isRunning)
+                return Task.CompletedTask;
+
+            isRunning = true;            
             // test
-            // _cvPublisher.Publish("");
+            if (_scrapeConfig.CoronaVirusScrape.IsDebug)
+                _cvPublisher.Publish("");
 
             scrapeAndSend().Wait();
+            isRunning = false;
             return Task.CompletedTask;
         }
 

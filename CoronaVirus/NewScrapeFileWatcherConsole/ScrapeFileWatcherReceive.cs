@@ -44,19 +44,47 @@ namespace NewScrapeFileWatcherConsole
             this._cvConfig = cvConfig;
             this._importData = importData;
 
-            ctx.Binder.RoutingKey = "importscrape";
+            ctx.Binder.RoutingKey = "importscrapejson";
             this.Register();
         }
 
-        public override bool Process(string file)
+        public override bool Process(string json)
         {
-            if (string.IsNullOrWhiteSpace(file))
+            if (string.IsNullOrWhiteSpace(json))
                 return true;
 
-            WriteLine("new message {0}", file);
-            importFile(file);
+            importJson(json);
             return true;
         }
+
+        private void importJson(string json)
+        {
+            WriteLine("{0} New json data received", DateTime.Now);
+
+            try
+            {
+                WriteLine("start import");
+                _importData.ImportScrapeJson(json);
+                WriteLine("end import");
+                WriteLine("");
+            }
+            catch (Exception ex)
+            {
+                WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
+        //public override bool Process(string file)
+        //{
+        //    if (string.IsNullOrWhiteSpace(file))
+        //        return true;
+
+        //    WriteLine("new message {0}", file);
+        //    importFile(file);
+        //    return true;
+        //}
+
 
         private void importFile(string file)
         {
