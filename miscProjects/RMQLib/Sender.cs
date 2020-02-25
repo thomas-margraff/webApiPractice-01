@@ -21,40 +21,18 @@ namespace RMQLib
             return this.connection;
         }
 
+        public void SetRoutingKey(string queueName, string routingKey)
+        {
+            ctx.Binder.RoutingKey = routingKey;
+            ctx.Binder.QueueName = queueName;
+            ctx.Queue.Name = queueName;
+        }
+
         public void Send<T>(T obj)
         {
             string json = JsonSerializer.Serialize(obj);
             Send(json);
         }
-
-        //public void Send(string message)
-        //{
-        //    // if (this.connection == null)
-        //    this.connect();
-
-        //    using (var connection = this.connection)
-        //    using (var channel = connection.CreateModel())
-        //    {
-        //        channel.ExchangeDeclare(exchange: ctx.Exchange.Name,
-        //                                durable: ctx.Exchange.Durable,
-        //                                type: ctx.Exchange.Type);  // ExchangeType.Fanout);
-        //        foreach (var q in ctx.Exchange.Queues)
-        //        {
-        //            channel.QueueDeclare(queue: q.Name,
-        //                                 durable: q.Durable,
-        //                                 exclusive: q.Exclusive,
-        //                                 autoDelete: q.AutoDelete,
-        //                                 arguments: q.Arguments);
-        //        }
-
-        //        var body = Encoding.UTF8.GetBytes(message);
-
-        //        channel.BasicPublish(exchange: ctx.Binder.ExchangeName,
-        //                             routingKey: ctx.Binder.RoutingKey,
-        //                             basicProperties: null,
-        //                             body: body);
-        //    }
-        //}
 
         public void Send(string message)
         {

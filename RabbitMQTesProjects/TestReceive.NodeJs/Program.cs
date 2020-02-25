@@ -1,5 +1,5 @@
 ﻿using System;
-using TestLib;
+using RMQLib;
 using static System.Console;
 
 namespace TestReceive.NodeJs

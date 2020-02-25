@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TestLib\TestLib.csproj" />
+    <ProjectReference Include="..\..\miscProjects\RMQLib\RMQLib.csproj" />
   </ItemGroup>
 
 </Project>

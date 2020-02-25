@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TestLib;
+using RMQLib;
 using static System.Console;
 
 namespace TestReceive

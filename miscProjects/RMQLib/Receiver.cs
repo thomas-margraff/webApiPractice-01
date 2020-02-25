@@ -42,6 +42,13 @@ namespace RMQLib
             }
         }
 
+        public void SetRoutingKey(string queueName, string routingKey)
+        {
+            ctx.Binder.RoutingKey = routingKey;
+            ctx.Binder.QueueName = queueName;
+            ctx.Queue.Name = queueName;
+        }
+
         public Task StartAsync(CancellationToken cancellationToken)
         {
             Register();

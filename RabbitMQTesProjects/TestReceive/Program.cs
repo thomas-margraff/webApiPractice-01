@@ -1,6 +1,6 @@
 ﻿using System;
-using TestLib;
-using TestLib.Messages;
+using RMQLib;
+using RMQLib.Messages;
 using static System.Console;
 
 namespace TestReceive
