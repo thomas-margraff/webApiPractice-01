@@ -69,6 +69,6 @@ if (!debug) {
     }
     
     // do 1 initial scrape on startup
-    // let main: cvMain = new cvMain();
-    // main.oneTimeScrape();
+    let main: cvMain = new cvMain();
+    main.oneTimeScrape();
 }
