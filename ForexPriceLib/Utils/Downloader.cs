@@ -101,6 +101,7 @@ namespace ForexPriceLib.Utils
         {
             var dt = getFirstScrape();
             var dtLastScrape = getLastScrape();
+            dtLastScrape = DateTime.Today.AddDays(-1);
             List<DateTime> missingFiles = new List<DateTime>();
 
             while (dt <= dtLastScrape)

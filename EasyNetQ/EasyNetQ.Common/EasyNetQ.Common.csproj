@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EasyNetQ\EasyNetQ.Common\EasyNetQ.Common.csproj" />
+    <PackageReference Include="EasyNetQ" Version="3.7.1" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@
 // npm uninstall -g @tmargraff/cvscraper-cli
 // cvscraper-cli
 
+import { ScrapeMessageSubscriber } from './messaging/simple/ScrapeMessageSubscriber';
 import { cvLogger } from './cvLogger';
 import { cvMain } from './cvMain';
 import { Utils, DataDirectories } from './cv-utils';
@@ -22,7 +23,7 @@ export class Main {
     }    
 }
 
-let debug = false;
+let debug = true;
 
 //#region testing
 // if (debug) {
@@ -50,7 +51,12 @@ let debug = false;
 // wait for rmq notification
 let receiver: Receiver = new Receiver();
 receiver.receive().then(r => {
-    console.log('waiting');
+    console.log('receiver waiting');
+});
+
+let scrapeReceive:ScrapeMessageSubscriber = new ScrapeMessageSubscriber();
+scrapeReceive.receive().then(r => {
+    console.log('scrapeReceive waiting');
 });
 
 if (!debug) {
@@ -63,6 +69,6 @@ if (!debug) {
     }
     
     // do 1 initial scrape on startup
-    let main: cvMain = new cvMain();
-    main.oneTimeScrape();
+    // let main: cvMain = new cvMain();
+    // main.oneTimeScrape();
 }

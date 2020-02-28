@@ -44,7 +44,7 @@ namespace NTP.Prices.Forexite.Test
 
 
             // await getNfpTimeStats();
-            await getNfpIndicatorDetail();
+            // await getNfpIndicatorDetail();
 
             int i = 0;
 
@@ -63,8 +63,8 @@ namespace NTP.Prices.Forexite.Test
             // var s = new SymbolUtils();
             // s.GetSymbolListFromFiles();
 
-            // Downloader dl = new Downloader();
-            // dl.DownloadMissingPriceFiles();
+            Downloader dl = new Downloader();
+            dl.DownloadMissingPriceFiles();
 
             // await getNfpTimeStats();
             // await getIndicators();

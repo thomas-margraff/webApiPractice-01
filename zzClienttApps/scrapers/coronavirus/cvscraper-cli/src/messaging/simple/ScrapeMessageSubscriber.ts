@@ -1,8 +1,8 @@
-import { MessageProcessor } from './../../messageProcessor';
+import { MessageProcessor } from '../../messageProcessor';
 import amqp from "amqplib/callback_api"; 
 
-export class Receiver {
-    private connStr = 'amqp://noekmbda:jtKtg3LU2uEQOCJRpEgMhdSqf2N7S_Cv@gull.rmq.cloudamqp.com/noekmbda';
+export class ScrapeMessageSubscriber {
+    private connStr = 'localhost';
     
     constructor() {}
 
@@ -15,23 +15,15 @@ export class Receiver {
                 if (error1) {
                     throw error1;
                 }
-
-                let exchange = 'cv.scraper.exchange';
-                let queue = '';
-
-                channel.assertExchange(exchange, 'direct', {
-                    durable: true
-                });   
-                
-                //channel.assertQueue(queue, { durable: true });
+                let queue = 'cv.scraper.queue.doscrape';
                 channel.assertQueue(queue, {
+                    durable: true,
                     exclusive: false
                 }, function(error2, q) {
                     if (error2) {
                         throw error2;
                     }
                     queue = q.queue;
-                    channel.bindQueue(q.queue, exchange, 'doscrape');
                     channel.consume(q.queue, function(msg) {
                     // console.log(" [x] %s: '%s'", msg.fields.routingKey, msg.content.toString());
                     MessageProcessor.HandleMessage(msg);
