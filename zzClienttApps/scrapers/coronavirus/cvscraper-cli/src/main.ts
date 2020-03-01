@@ -23,42 +23,13 @@ export class Main {
     }    
 }
 
-let debug = true;
-
-//#region testing
-// if (debug) {
-//     let sender = new Sender();
-//     sender.send('message 1', 'test').then(r => { });
-//     sender.send('message 2', 'test').then(r => { });
-// }
-
-// let fname = Utils.DateToString(Utils.DateNowToString()) + '-bno.html'
-// let fpath = path.join(DataDirectories.HTML_DIR, fname);
-// console.log(fname);
-// let t = moment().add(1800000, 'ms').format("h:mm A");
-// console.log(t);
-
-// console.log(Utils.DateNowToString());
-// console.log(scrapeDelay.HalfHour);
-// console.log(runEnv.dev);
-// console.log(runEnv.prod);
-
-// let fpath = path.join(DataDirectories.HTML_DIR, '2020.02.12-2142-bno.html');
-// main.readFromHtmlFileAndParse(fpath);
-
-//#endregion testing
-
 // wait for rmq notification
 let receiver: Receiver = new Receiver();
 receiver.receive().then(r => {
     console.log('receiver waiting');
 });
 
-let scrapeReceive:ScrapeMessageSubscriber = new ScrapeMessageSubscriber();
-scrapeReceive.receive().then(r => {
-    console.log('scrapeReceive waiting');
-});
-
+let debug = false;
 if (!debug) {
     // ensure csv and json folders exist
     try {

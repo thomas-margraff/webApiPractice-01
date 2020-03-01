@@ -2,14 +2,15 @@
 using EmailLib;
 using RMQLib;
 using RMQLib.Messages;
-using ScrapeServiceWorker.RMQ;
 using Scrappy;
 using System;
+using ScrapeServiceWorker.Configuration;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using CoronaVirusLib.Messages;
 
-namespace ScrapeServiceWorker
+namespace ScrapeServiceWorker.CoronaVirusScraper
 {
     public class CVScraperInvocable : IInvocable
     {
@@ -18,14 +19,15 @@ namespace ScrapeServiceWorker
         private bool isRunning = false;
         private readonly ScrapeCache _scrapeCache;
         private readonly ScrapeConfig _scrapeConfig;
-        private readonly cvJsonMessage _cvPublisher;
+        private readonly RabbitContext _ctx;
+        private readonly Sender _sender;
 
         public CVScraperInvocable(ScrapeCache scrapeCache, ScrapeConfig scrapeConfig)
         {
             this._scrapeCache = scrapeCache;
             this._scrapeConfig = scrapeConfig;
-
-            _cvPublisher = new cvJsonMessage(scrapeConfig.CoronaVirusScrape);
+            _ctx = new RabbitContext().Create(scrapeConfig.CoronaVirusScrape.GetConfigFile());
+            _sender = new Sender(_ctx);
         }
 
         public Task Invoke()
@@ -33,10 +35,11 @@ namespace ScrapeServiceWorker
             if (isRunning)
                 return Task.CompletedTask;
 
-            isRunning = true;            
+            isRunning = true;
+
             // test
-            if (_scrapeConfig.CoronaVirusScrape.IsDebug)
-                _cvPublisher.Publish("");
+            if (_scrapeConfig.CoronaVirusScrape.IsScheduleDebug)
+                _sender.SendMessage(new CoronaVirusScrapeMessage());
 
             scrapeAndSend().Wait();
             isRunning = false;
@@ -62,7 +65,7 @@ namespace ScrapeServiceWorker
             if (this._scrapeCache.PreviousCVscrapeValue != parts[1])
             {
                 // send scrape notice
-                _cvPublisher.Publish("");
+                _sender.SendMessage(new CoronaVirusScrapeMessage());
 
                 // send email notice
                 this._scrapeCache.PreviousCVscrapeValue = parts[1];

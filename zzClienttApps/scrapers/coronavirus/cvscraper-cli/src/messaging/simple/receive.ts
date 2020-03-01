@@ -3,11 +3,12 @@ import amqp from "amqplib/callback_api";
 
 export class Receiver {
     private connStr = 'amqp://noekmbda:jtKtg3LU2uEQOCJRpEgMhdSqf2N7S_Cv@gull.rmq.cloudamqp.com/noekmbda';
-    
+    private localHost = 'amqp://localhost'
+
     constructor() {}
 
     public async receive() {
-        amqp.connect('amqp://localhost', function(error0, connection) {
+        amqp.connect(this.connStr, function(error0, connection) {
             if (error0) {
                 throw error0;
             }

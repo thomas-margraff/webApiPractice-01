@@ -12,6 +12,20 @@ namespace RMQLib
 {
     public class Connection
     {
+        public static IConnection Connect(RabbitContext ctx)
+        {
+            RabbitConnection options = ctx.Connection; 
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = options.UserName;
+            factory.Password = options.Password;
+            factory.VirtualHost = options.VirtualHost;
+            factory.HostName = options.HostName;
+            
+            IConnection conn = factory.CreateConnection();
+
+            return conn;
+        }
+
         public static IConnection Connect()
         {
             RabbitConnection options = new RabbitConnection();
@@ -26,5 +40,6 @@ namespace RMQLib
 
             return conn;
         }
+    
     }
 }

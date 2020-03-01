@@ -15,7 +15,7 @@ using TableDependency.SqlClient.Base.EventArgs;
 
 namespace cvDBTester
 {
-    public class DBTester
+    public class ScrapeFileImport
     {
         private readonly CvContext ctx;
         private readonly IConfiguration cfg;
@@ -24,7 +24,7 @@ namespace cvDBTester
         private readonly cvConfig cvConfiguration;
         private ScrapeRunsTest runtest;
 
-        public DBTester(CvContext ctx,
+        public ScrapeFileImport(CvContext ctx,
                         IConfiguration cfg,
                         cvParsers parsers,
                         ImportScrapeData importer,

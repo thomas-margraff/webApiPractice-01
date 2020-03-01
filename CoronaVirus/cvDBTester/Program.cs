@@ -19,7 +19,7 @@ namespace cvDBTester
             _serviceProvider = services.BuildServiceProvider(true);
 
             IServiceScope scope = _serviceProvider.CreateScope();
-            scope.ServiceProvider.GetRequiredService<coronavirus_tracker_api>().Run();
+            scope.ServiceProvider.GetRequiredService<ScrapeFileImport>().Run();
             startup.DisposeServices();
             
         }

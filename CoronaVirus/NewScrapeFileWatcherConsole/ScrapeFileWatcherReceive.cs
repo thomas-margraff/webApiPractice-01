@@ -1,5 +1,6 @@
 ﻿using CoronaVirusLib;
 using CoronaVirusLib.Configuration;
+using CoronaVirusLib.Messages;
 using RMQLib;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,9 @@ namespace NewScrapeFileWatcherConsole
         {
             this._cvConfig = cvConfig;
             this._importData = importData;
+            var scrapeDataMessage = new CoronaVirusScrapeDataMessage();
 
-            ctx.Binder.RoutingKey = "importscrapejson";
+            ctx.Binder.RoutingKey = scrapeDataMessage.RoutingKey;
             this.Register();
         }
 
@@ -59,12 +61,22 @@ namespace NewScrapeFileWatcherConsole
 
         private void importJson(string json)
         {
+            string dashes = new String('=', 65);
+            WriteLine(dashes);
+            ForegroundColor = ConsoleColor.Green;
             WriteLine("{0} New json data received", DateTime.Now);
 
             try
             {
+                ForegroundColor = ConsoleColor.White;
                 WriteLine("start import");
                 _importData.ImportScrapeJson(json);
+                var rec = _importData.GetLatestStatsForUnitedStates();
+                WriteLine(rec.Heading);
+                WriteLine("  Latest United States Stats");
+                WriteLine("    Cases : {0}", rec.Cases);
+                WriteLine("    Deaths: {0}", rec.Deaths);
+                WriteLine("    Notes : {0}", rec.Notes);
                 WriteLine("end import");
                 WriteLine("");
             }

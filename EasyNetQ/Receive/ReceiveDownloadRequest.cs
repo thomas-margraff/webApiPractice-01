@@ -1,6 +1,7 @@
 ﻿using EasyNetQ;
 using EasyNetQ.Common.Connection;
 using EasyNetQ.Common.Messages;
+using EasyNetQ.Common.Messages.Download;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Receive
         {
             using (var bus = RabbitHutch.CreateBus(Connection.Local()))
             {
-                bus.Receive<DownloadFileMessage>("downloadfile.forexite", message => HandleDownloadFileMessage(message));
+                bus.Receive<ForexiteDownloadMessage>("downloadfile.forexite", message => HandleDownloadFileMessage(message));
 
                 Console.WriteLine("Listening for messages. Hit <return> to quit.");
                 ReadLine();
@@ -22,7 +23,7 @@ namespace Receive
             }
         }
 
-        static void HandleDownloadFileMessage(DownloadFileMessage message)
+        static void HandleDownloadFileMessage(ForexiteDownloadMessage message)
         {
             int i = 0;
         }

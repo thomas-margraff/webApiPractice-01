@@ -1,6 +1,7 @@
 ﻿using EasyNetQ;
 using EasyNetQ.Common.Connection;
 using EasyNetQ.Common.Messages;
+using EasyNetQ.Common.Messages.Download;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Send
         {
             using (var bus = RabbitHutch.CreateBus(Connection.Local()))
             {
-                DownloadFileMessage downloadFileMessage = new DownloadFileMessage();
+                ForexiteDownloadMessage downloadFileMessage = new ForexiteDownloadMessage();
                 
                 CoronaVirusScrapeMessage cvMsg = new CoronaVirusScrapeMessage();
                 bus.Send("cv.scraper.queue.doscrape", cvMsg);

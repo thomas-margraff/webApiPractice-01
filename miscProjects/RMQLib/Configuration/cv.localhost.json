@@ -1,0 +1,69 @@
+﻿{
+  "Connection": {
+    "HostName": "localhost",
+    "Port": 5672,
+    "UserName": "guest",
+    "Password": "guest",
+    "VirtualHost": "vhost",
+    "AutomaticRecoveryEnabled": true,
+    "TopologyRecoveryEnabled": true,
+    "RequestedConnectionTimeout": 60000,
+    "RequestedHeartbeat": 60
+  },
+  "Exchange": {
+    "Name": "cv.scraper.exchange",
+    "Type": "direct",
+    "Durable": true,
+    "AutoDelete": false,
+    "Arguments": null,
+    "Queues": [
+      {
+        "Name": "cv.scraper.queue",
+        "Durable": true,
+        "Exclusive": false,
+        "AutoDelete": false,
+        "Arguments": null,
+        "Binders": [
+          {
+            "ExchangeName": "cv.scraper.exchange",
+            "QueueName": "cv.scraper.queue",
+            "RoutingKey": "importscrape"
+          }
+        ]
+      },
+      {
+        "Name": "",
+        "Durable": true,
+        "Exclusive": false,
+        "AutoDelete": false,
+        "Arguments": null,
+        "Binders": [
+          {
+            "ExchangeName": "cv.scraper.exchange",
+            "QueueName": "",
+            "RoutingKey": "doscrape"
+          }
+        ]
+      }
+    ]
+  },
+  "Queue": {
+    "Name": "cv.scraper.queue",
+    "Durable": true,
+    "Exclusive": false,
+    "AutoDelete": false,
+    "Arguments": null,
+    "Binders": [
+      {
+        "ExchangeName": "cv.scraper.exchange",
+        "QueueName": "cv.scraper.queue",
+        "RoutingKey": "cv.scraper.routingkey"
+      }
+    ]
+  },
+  "Binder": {
+    "ExchangeName": "cv.scraper.exchange",
+    "QueueName": "cv.scraper.queue",
+    "RoutingKey": "cv.scraper.routingkey"
+  }
+}

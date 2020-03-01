@@ -9,14 +9,11 @@ export class MessageProcessor {
             // main.oneTimeScrape();
         }
         if (msg.fields.routingKey === 'doscrape') {
-            console.log("processing", message)
             main.oneTimeScrape();
         }
 
         if (msg.fields.routingKey === 'cv.scraper.queue.doscrape') {
-            console.log("processing", message)
             main.oneTimeScrape();
         }
-        
     }
 }

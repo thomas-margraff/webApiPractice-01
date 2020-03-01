@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 using System.Threading;
 using ForexPriceLib.Utils;
 using EmailLib;
+using ScrapeServiceWorker.Configuration;
 
-namespace ScrapeServiceWorker
+namespace ScrapeServiceWorker.Forexite
 {
     public class PriceDownloaderInvocable: IInvocable
     {
@@ -85,7 +86,6 @@ namespace ScrapeServiceWorker
 
                 var fname = string.Format("FXIT-{0}{1}{2}.zip", yyyy, mm, dd);
                 emailBody.AppendLine(fname);
-                
 
                 // "https://www.forexite.com/free_forex_quotes/2020/01/100120.zip";
                 // 2020/01/100120

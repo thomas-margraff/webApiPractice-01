@@ -32,12 +32,12 @@ namespace RMQLib
                     Password = ctx.Connection.Password
                 };
 
-                this.connection = Connection.Connect();
+                this.connection = Connection.Connect(this.ctx);
                 this.channel = connection.CreateModel();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"RabbitListener init error,ex:{ex.Message}");
+                Console.WriteLine("RabbitListener init error ex:{0}", ex.Message);
                 throw ex;
             }
         }
@@ -63,6 +63,12 @@ namespace RMQLib
 
         public void Listen()
         {
+            this.Register();
+        }
+
+        public void Register<T>(T msg) where T : IBaseDataMessage
+        {
+            this.SetRoutingKey(msg.RoutingQueueName, msg.RoutingKey);
             this.Register();
         }
 
@@ -120,17 +126,17 @@ namespace RMQLib
             consumer.Registered += (model, ea) =>
             {
                 var tag = ea.ConsumerTag;
-                WriteLine("$registered tag {tag}");
+                WriteLine("registered tag: {0}", tag);
             };
             consumer.Shutdown += (model, ea) =>
             {
                 var cause = ea.Cause;
-                WriteLine("$shutdown cause {cause}");
+                WriteLine("shutdown cause {0}", cause);
             };
             consumer.Unregistered += (model, ea) =>
             {
                 var tag = ea.ConsumerTag;
-                WriteLine("Unregistered tag{tag}");
+                WriteLine("Unregistered tag: {0}", tag);
             };
 
             channel.BasicConsume(queue: ctx.Queue.Name, consumer: consumer);

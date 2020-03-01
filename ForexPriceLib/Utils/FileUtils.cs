@@ -33,7 +33,7 @@ namespace ForexPriceLib.Utils
                 dt.Year.ToString().Substring(2, 2)) + ext); // ".zip");
         }
 
-        public static string DateToFileName1(DateTime dt)
+        public static string DateToZipFileName(DateTime dt)
         {
             return string.Format("{0}.{1}.{2}{3}{4}",
                 dt.Year,
@@ -43,5 +43,31 @@ namespace ForexPriceLib.Utils
                 dt.Year.ToString().Substring(2, 2)) + ".zip";
         }
 
+        public static string DateToUrlFileName(DateTime dt)
+        {
+            string yyyy = dt.Year.ToString();
+            string yy = yyyy.Substring(2, 2);
+            string mm = dt.Month.ToString();
+            if (mm.Length == 1) mm = "0" + mm;
+            string dd = dt.Day.ToString();
+            if (dd.Length == 1) dd = "0" + dd;
+
+            var urlDt = string.Format("{0}/{1}/{2}{3}{04}", yyyy, mm, dd, mm, yy);
+            return urlDt;
+        }
+
+        public static DateTime FileNameToDate(string filePath)
+        {
+            DateTime dt = DateTime.Now;
+            var finfo = new FileInfo(filePath);
+            var fname = finfo.Name.Replace("FXIT-", "").Substring(0, 8);
+            var yyyy = Convert.ToInt16(fname.Substring(0, 4));
+            var mm = Convert.ToInt16(fname.Substring(4, 2));
+            var dd = Convert.ToInt16(fname.Substring(6, 2));
+
+            dt = new DateTime(yyyy, mm, dd);
+
+            return dt;
+        }
     }
 }

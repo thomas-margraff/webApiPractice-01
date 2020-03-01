@@ -36,6 +36,11 @@ namespace CoronaVirusLib
         public void ImportScrapeJson(string json)
         {
             cvScrapeData data = JsonConvert.DeserializeObject<cvScrapeData>(json);
+            if (!data.geoLocations.Any())
+            {
+                Console.WriteLine("no geolocations...");
+                return;
+            }
             ImportScrape(data);
         }
         
@@ -89,7 +94,6 @@ namespace CoronaVirusLib
                     ctx.CountryStats.Add(stats);
                 }
             }
-            Console.WriteLine();
             try
             {
                 ctx.SaveChanges();
@@ -110,5 +114,16 @@ namespace CoronaVirusLib
             }
         }
 
+        public vwScrapeRun GetLatestStatsForUnitedStates()
+        {
+            return GetLatestForCountry("United States");
+        }
+
+        public vwScrapeRun GetLatestForCountry(string country)
+        {
+            return ctx.vwScrapeRuns.Where(r => r.Country == country )
+                .OrderByDescending(r => r.ScrapeCreateDate)
+                .FirstOrDefault();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EasyNetQ;
 using EasyNetQ.Common.Connection;
 using EasyNetQ.Common.Messages;
+using EasyNetQ.Common.Messages.Download;
 using EmailLib;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Receive
                             .Add<CoronaVirusScrapeMessage>(message => HandleCvMessage(message))
                             .Add<TextMessage>(message => HandleTextMessage(message))
                             .Add<EmailMessage>(message => HandleEmailMessage(message))
-                            .Add<DownloadFileMessage>(message => HandleDownloadFileMessage(message)));
+                            .Add<ForexiteDownloadMessage>(message => HandleDownloadFileMessage(message)));
 
                 Console.WriteLine("Listening for messages. Hit <return> to quit.");
                 ReadLine();
@@ -52,7 +53,7 @@ namespace Receive
             }
         }
 
-        private void HandleDownloadFileMessage(DownloadFileMessage txtMsg)
+        private void HandleDownloadFileMessage(ForexiteDownloadMessage txtMsg)
         {
             WriteLine("Download file message");
         }

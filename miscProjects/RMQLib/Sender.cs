@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RabbitMQ.Client;
 using System.Text.Json;
+using RMQLib.Messages;
 
 namespace RMQLib
 {
@@ -17,7 +18,7 @@ namespace RMQLib
 
         private IConnection connect()
         {
-            this.connection = Connection.Connect();
+            this.connection = Connection.Connect(this.ctx);
             return this.connection;
         }
 
@@ -26,6 +27,16 @@ namespace RMQLib
             ctx.Binder.RoutingKey = routingKey;
             ctx.Binder.QueueName = queueName;
             ctx.Queue.Name = queueName;
+        }
+
+        public void SendMessage<T>(T obj) where T : IBaseDataMessage
+        {
+            ctx.Binder.RoutingKey = obj.RoutingKey;
+            ctx.Binder.QueueName = obj.RoutingQueueName;
+            ctx.Queue.Name = obj.RoutingQueueName;
+
+            string json = JsonSerializer.Serialize(obj);
+            Send(json);
         }
 
         public void Send<T>(T obj)

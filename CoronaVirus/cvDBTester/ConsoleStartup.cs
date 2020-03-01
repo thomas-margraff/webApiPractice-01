@@ -29,7 +29,7 @@ namespace cvDBTester
             var services = new ServiceCollection();
             services.AddDbContext<CvContext>(options => options.UseSqlServer(configuration.GetConnectionString("cvConnectionString")));
             services.AddSingleton<IConfiguration>(configuration);
-            services.AddScoped<DBTester>();
+            services.AddScoped<ScrapeFileImport>();
             services.AddScoped<cvConfig>();
             services.AddScoped<cvParsers>();
             services.AddScoped<ImportScrapeData>();
