@@ -12,14 +12,14 @@ namespace ScrapeServiceWorker.CoronaVirusApiTracker
     {
         private bool isRunning = false;
         private readonly ScrapeConfig _scrapeConfig;
-        private readonly Sender _sender;
+        private readonly RmqSender _sender;
         private readonly RabbitContext _ctx;
 
         public cvApiTrackerInvocable(ScrapeConfig scrapeConfig)
         {
             this._scrapeConfig = scrapeConfig;
             _ctx = new RabbitContext().Create(scrapeConfig.CoronaVirusApiTracker.GetConfigFile());
-            _sender = new Sender(_ctx);
+            _sender = new RmqSender(_ctx);
         }
 
         public Task Invoke()

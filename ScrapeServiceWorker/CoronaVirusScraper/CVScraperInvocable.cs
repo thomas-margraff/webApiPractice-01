@@ -20,14 +20,14 @@ namespace ScrapeServiceWorker.CoronaVirusScraper
         private readonly ScrapeCache _scrapeCache;
         private readonly ScrapeConfig _scrapeConfig;
         private readonly RabbitContext _ctx;
-        private readonly Sender _sender;
+        private readonly RmqSender _sender;
 
         public CVScraperInvocable(ScrapeCache scrapeCache, ScrapeConfig scrapeConfig)
         {
             this._scrapeCache = scrapeCache;
             this._scrapeConfig = scrapeConfig;
             _ctx = new RabbitContext().Create(scrapeConfig.CoronaVirusScrape.GetConfigFile());
-            _sender = new Sender(_ctx);
+            _sender = new RmqSender(_ctx);
         }
 
         public Task Invoke()

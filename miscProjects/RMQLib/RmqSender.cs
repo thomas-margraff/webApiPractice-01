@@ -9,12 +9,12 @@ namespace RMQLib
 {
     // https://developpaper.com/the-correct-way-to-use-rabbitmq-in-net-core/
 
-    public class Sender
+    public class RmqSender
     {
         private RabbitContext ctx;
         private IConnection connection;
 
-        public Sender(RabbitContext ctx) { this.ctx = ctx; }
+        public RmqSender(RabbitContext ctx) { this.ctx = ctx; }
 
         private IConnection connect()
         {

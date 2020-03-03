@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EasyNetQ\EasyNetQ.Common\EasyNetQ.Common.csproj" />
+    <ProjectReference Include="..\miscProjects\RMQLib\RMQLib.csproj" />
   </ItemGroup>
 
 </Project>

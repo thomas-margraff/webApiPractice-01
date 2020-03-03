@@ -7,7 +7,7 @@ namespace RMQLib.Messages.Logging
     public class AppLogSend
     {
         RabbitContext _ctx;
-        Sender _sender;
+        RmqSender _sender;
 
         public Guid Id { get; set; }
         public string AppName { get; set; }
@@ -16,7 +16,7 @@ namespace RMQLib.Messages.Logging
         {
             this.Id = Guid.NewGuid();
             _ctx = ctx;
-            _sender = new Sender(_ctx);
+            _sender = new RmqSender(_ctx);
         }
 
     }

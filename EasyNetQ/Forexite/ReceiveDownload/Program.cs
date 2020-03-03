@@ -23,7 +23,6 @@ namespace ReceiveDownload
                 Console.WriteLine("Listening for forexite download messages. Hit <return> to quit.");
                 ReadLine();
             }
-
         }
 
         static void HandleDownloadFileMessage(ForexiteDownloadMessage msg)

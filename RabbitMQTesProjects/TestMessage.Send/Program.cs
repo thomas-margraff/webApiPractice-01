@@ -11,7 +11,7 @@ namespace TestMessage.Send
         static void Main(string[] args)
         {
             ctx = new RabbitContext().Create("cv.test.json");
-            Sender sender = new Sender(ctx);
+            RmqSender sender = new RmqSender(ctx);
 
             while (true)
             {

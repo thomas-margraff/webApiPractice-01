@@ -85,6 +85,7 @@ namespace ScrapeServiceWorker.Forexite
                 if (dd.Length == 1) dd = "0" + dd;
 
                 var fname = string.Format("FXIT-{0}{1}{2}.zip", yyyy, mm, dd);
+                fname = FileUtils.DateToFxiFileName(dt, ".zip");
                 emailBody.AppendLine(fname);
 
                 // "https://www.forexite.com/free_forex_quotes/2020/01/100120.zip";

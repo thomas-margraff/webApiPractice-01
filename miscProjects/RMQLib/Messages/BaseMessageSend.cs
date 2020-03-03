@@ -9,12 +9,12 @@ namespace RMQLib.Messages
     public class BaseMessageSend
     {
         RabbitContext _ctx;
-        Sender _sender;
+        RmqSender _sender;
 
         public BaseMessageSend(RabbitContext ctx)
         {
             _ctx = ctx;
-            _sender = new Sender(_ctx);
+            _sender = new RmqSender(_ctx);
         }
 
         public virtual void SetMessageRouting()

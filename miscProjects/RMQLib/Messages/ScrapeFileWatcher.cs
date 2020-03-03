@@ -8,12 +8,12 @@ namespace RMQLib.Messages
     public class ScrapeFileWatcherSend
     {
         RabbitContext _ctx;
-        Sender _sender;
+        RmqSender _sender;
 
         public ScrapeFileWatcherSend(RabbitContext ctx)
         {
             _ctx = ctx;
-            _sender = new Sender(_ctx);
+            _sender = new RmqSender(_ctx);
         }
 
         public void Send(string msg)

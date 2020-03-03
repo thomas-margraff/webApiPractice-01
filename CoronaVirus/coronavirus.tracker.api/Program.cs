@@ -13,7 +13,7 @@ namespace coronavirus.tracker.api
     {
         static void Main(string[] args)
         {
-            RabbitContext ctx = new RabbitContext().Create("cv.localhost.json");
+            RabbitContext ctx = new RabbitContext().Create("cv.scraper.json");
             var receiver = new apiDataReceiver(ctx);
             receiver.Run();
         }

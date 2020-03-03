@@ -60,41 +60,47 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQTesProjects", "Rabb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMQLib", "miscProjects\RMQLib\RMQLib.csproj", "{8864E915-BC83-4E41-9264-17E246E55E2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMessage.Send", "RabbitMQTesProjects\TestMessage.Send\TestMessage.Send.csproj", "{62B0FEA1-4659-4977-9E8E-7312FC913F90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMessage.Send", "RabbitMQTesProjects\TestMessage.Send\TestMessage.Send.csproj", "{62B0FEA1-4659-4977-9E8E-7312FC913F90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMessage.Receive", "RabbitMQTesProjects\TestMessage.Receive\TestMessage.Receive.csproj", "{EE36AD12-6611-4533-9E3C-9678BCB2F9A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMessage.Receive", "RabbitMQTesProjects\TestMessage.Receive\TestMessage.Receive.csproj", "{EE36AD12-6611-4533-9E3C-9678BCB2F9A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Udemy", "Udemy", "{11CEC19E-4973-45CF-8006-F1373EE937EE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{58541B20-FA33-4F7C-ADD3-AD182C7AA66C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Producer", "RabbitMQTesProjects\Udemy\Microservices\ProducerConsumerRabbitMQ\Producer\Producer.csproj", "{8E070321-2DB1-44E7-BB1C-0A33AF1902FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Producer", "RabbitMQTesProjects\Udemy\Microservices\ProducerConsumerRabbitMQ\Producer\Producer.csproj", "{8E070321-2DB1-44E7-BB1C-0A33AF1902FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProducerConsumerRabbitMQ", "ProducerConsumerRabbitMQ", "{4C18F283-A9B7-4152-B109-2D567E1DBDA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consumer", "RabbitMQTesProjects\Udemy\Microservices\ProducerConsumerRabbitMQ\Consumer\Consumer.csproj", "{9C78BA51-A910-462D-8F06-70D06279729D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer", "RabbitMQTesProjects\Udemy\Microservices\ProducerConsumerRabbitMQ\Consumer\Consumer.csproj", "{9C78BA51-A910-462D-8F06-70D06279729D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EasyNetQ", "EasyNetQ", "{FE2E8693-8C05-426D-B50C-17F12512362C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Send", "EasyNetQ\Send\Send.csproj", "{BB7D6AAF-D4B9-404B-BC53-01356BB4815A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Send", "EasyNetQ\Send\Send.csproj", "{BB7D6AAF-D4B9-404B-BC53-01356BB4815A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQ.Common", "EasyNetQ\EasyNetQ.Common\EasyNetQ.Common.csproj", "{876E0D08-DC57-4D04-ADA3-EB3C9A36A67A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNetQ.Common", "EasyNetQ\EasyNetQ.Common\EasyNetQ.Common.csproj", "{876E0D08-DC57-4D04-ADA3-EB3C9A36A67A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receive", "EasyNetQ\Receive\Receive.csproj", "{6F9B58A2-D290-4229-981A-D3C71DDCAAA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Receive", "EasyNetQ\Receive\Receive.csproj", "{6F9B58A2-D290-4229-981A-D3C71DDCAAA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLib", "miscProjects\CommonLib\CommonLib.csproj", "{8596CC31-16C3-4D4F-823D-09056CA68552}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLib", "miscProjects\CommonLib\CommonLib.csproj", "{8596CC31-16C3-4D4F-823D-09056CA68552}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forexite", "Forexite", "{DCCD83C2-1BC9-4FAF-9ACB-6E0DAB9DF0A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendDownload", "EasyNetQ\Forexite\SendDownload\SendDownload.csproj", "{AC1AF35E-F1D8-4D84-AE47-6B446CD76D35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SendDownload", "EasyNetQ\Forexite\SendDownload\SendDownload.csproj", "{AC1AF35E-F1D8-4D84-AE47-6B446CD76D35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiveDownload", "EasyNetQ\Forexite\ReceiveDownload\ReceiveDownload.csproj", "{FD0BD405-F5F4-4A59-9863-B0826333D326}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReceiveDownload", "EasyNetQ\Forexite\ReceiveDownload\ReceiveDownload.csproj", "{FD0BD405-F5F4-4A59-9863-B0826333D326}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coronavirus.tracker.api", "CoronaVirus\coronavirus.tracker.api\coronavirus.tracker.api.csproj", "{9E31524E-B9E6-4C1D-8104-2293BDBB2118}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coronavirus.tracker.api", "CoronaVirus\coronavirus.tracker.api\coronavirus.tracker.api.csproj", "{9E31524E-B9E6-4C1D-8104-2293BDBB2118}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApps", "ConsoleApps", "{E269678A-C881-4A85-8367-B1532289D809}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{6E5B90DC-5437-447E-B3F9-1A3C826CBC9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ.WorkerService.Consumer", "miscProjects\RMQ.WorkerService.Consumer\RMQ.WorkerService.Consumer.csproj", "{67BBFF6D-552A-4173-8426-2E64321E9E61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ.Test.Sender", "miscProjects\RMQ.Test.Sender\RMQ.Test.Sender.csproj", "{807B846D-62C1-4019-B9BE-4E86DDFA5460}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -234,6 +240,14 @@ Global
 		{9E31524E-B9E6-4C1D-8104-2293BDBB2118}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E31524E-B9E6-4C1D-8104-2293BDBB2118}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E31524E-B9E6-4C1D-8104-2293BDBB2118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67BBFF6D-552A-4173-8426-2E64321E9E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67BBFF6D-552A-4173-8426-2E64321E9E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67BBFF6D-552A-4173-8426-2E64321E9E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67BBFF6D-552A-4173-8426-2E64321E9E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{807B846D-62C1-4019-B9BE-4E86DDFA5460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{807B846D-62C1-4019-B9BE-4E86DDFA5460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{807B846D-62C1-4019-B9BE-4E86DDFA5460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{807B846D-62C1-4019-B9BE-4E86DDFA5460}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -260,7 +274,7 @@ Global
 		{9F3E6A15-743A-453B-925A-2AF9F974FF74} = {6E5B90DC-5437-447E-B3F9-1A3C826CBC9C}
 		{EB9DF34C-92F6-4C71-99E5-22B8C2FDEA4E} = {E269678A-C881-4A85-8367-B1532289D809}
 		{15D0A263-17DA-41AF-88C1-D38E7262B6B8} = {E269678A-C881-4A85-8367-B1532289D809}
-		{8864E915-BC83-4E41-9264-17E246E55E2E} = {3519EC20-3320-43D5-8F4B-B9F81F31026C}
+		{8864E915-BC83-4E41-9264-17E246E55E2E} = {30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}
 		{62B0FEA1-4659-4977-9E8E-7312FC913F90} = {1BFA1749-9F32-4CB2-AF93-697955DF2D59}
 		{EE36AD12-6611-4533-9E3C-9678BCB2F9A9} = {1BFA1749-9F32-4CB2-AF93-697955DF2D59}
 		{11CEC19E-4973-45CF-8006-F1373EE937EE} = {1BFA1749-9F32-4CB2-AF93-697955DF2D59}
@@ -278,6 +292,9 @@ Global
 		{9E31524E-B9E6-4C1D-8104-2293BDBB2118} = {E269678A-C881-4A85-8367-B1532289D809}
 		{E269678A-C881-4A85-8367-B1532289D809} = {9DF60326-3EB6-42EF-A5A5-3CBB1153E765}
 		{6E5B90DC-5437-447E-B3F9-1A3C826CBC9C} = {9DF60326-3EB6-42EF-A5A5-3CBB1153E765}
+		{30CAAFA1-3F22-4FB3-B267-6E3A66B735FC} = {3519EC20-3320-43D5-8F4B-B9F81F31026C}
+		{67BBFF6D-552A-4173-8426-2E64321E9E61} = {30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}
+		{807B846D-62C1-4019-B9BE-4E86DDFA5460} = {30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D39B816-E320-4355-A246-EF76F06D22BE}
