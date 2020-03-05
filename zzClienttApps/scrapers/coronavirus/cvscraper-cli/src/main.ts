@@ -20,16 +20,19 @@ import moment from 'moment';
 export class Main {
     static log(val:any) {
         console.log(val);
+        alert(val);
     }    
 }
-
+function doSomething() {
+    alert("in main");
+}
 // wait for rmq notification
 let receiver: Receiver = new Receiver();
 receiver.receive().then(r => {
     console.log('receiver waiting');
 });
 
-let debug = false;
+let debug = true;
 if (!debug) {
     // ensure csv and json folders exist
     try {

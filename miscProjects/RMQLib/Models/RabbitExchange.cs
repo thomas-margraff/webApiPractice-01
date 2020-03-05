@@ -1,9 +1,17 @@
-﻿using System;
+﻿using RabbitMQ.Client;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace RMQLib.Models
 {
+    /* Exchange Types
+    Direct = "direct";
+    Fanout = "fanout";
+    Headers = "headers";
+    Topic = "topic";          
+    */
+
     public class RabbitExchange
     {
         public string Name { get; set; }

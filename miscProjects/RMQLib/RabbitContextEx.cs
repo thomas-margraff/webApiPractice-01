@@ -9,6 +9,19 @@ namespace RMQLib
 {
     public static class RabbitContextExtensions
     {
+        public static RabbitContext Create(this RabbitContext ctx, string exchange, string exchangeType, string routingKey = "")
+        {
+            ctx = new RabbitContext();
+            
+            ctx.Connection = new RabbitConnection();
+            ctx.Connection.ClearDefaults();
+            ctx.Connection.HostName = "localhost";
+            ctx.Exchange.Name = exchange;
+            ctx.Exchange.Type= exchangeType;
+            ctx.Binder.ExchangeName = exchange;
+            ctx.Binder.RoutingKey = routingKey;
+            return ctx;
+        }
         public static RabbitContext Create(this RabbitContext ctx, string fileName)
         {
             ctx = new RabbitContext();

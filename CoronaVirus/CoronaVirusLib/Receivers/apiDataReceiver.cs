@@ -45,7 +45,7 @@ namespace CoronaVirusLib.Receivers
                 r.country,
                 r.province,
                 r.latest
-            });
+            }).OrderBy(r => r.country).ThenBy(r => r.province.Trim());
 
             string dashes = new String('=', 55);
             Clear();

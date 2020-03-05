@@ -87,41 +87,41 @@ namespace NewScrapeFileWatcherConsole
             }
         }
 
-        //public override bool Process(string file)
+        //#region - import file code - deprocated
+        ////public override bool Process(string file)
+        ////{
+        ////    if (string.IsNullOrWhiteSpace(file))
+        ////        return true;
+
+        ////    WriteLine("new message {0}", file);
+        ////    importFile(file);
+        ////    return true;
+        ////}
+
+        //private void importFile(string file)
         //{
-        //    if (string.IsNullOrWhiteSpace(file))
-        //        return true;
+        //    WriteLine("{0} New scrape file received", DateTime.Now);
 
-        //    WriteLine("new message {0}", file);
-        //    importFile(file);
-        //    return true;
+        //    // sleep 15 seconds - let the file get written...
+        //    Thread.Sleep(15000);
+        //    if (!File.Exists(file))
+        //    {
+        //        WriteLine("{0} doesn't exist", file);
+        //        return;
+        //    }
+        //    try
+        //    {
+        //        WriteLine("start import");
+        //        _importData.ImportScrapeFile(file);
+        //        WriteLine("end import");
+        //        WriteLine("");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        WriteLine(ex.Message);
+        //        throw ex;
+        //    }
         //}
-
-
-        private void importFile(string file)
-        {
-            WriteLine("{0} New scrape file received", DateTime.Now);
-
-            // sleep 15 seconds - let the file get written...
-            Thread.Sleep(15000);
-            if (!File.Exists(file))
-            {
-                WriteLine("{0} doesn't exist", file);
-                return;
-            }
-            try
-            {
-                WriteLine("start import");
-                _importData.ImportScrapeFile(file);
-                WriteLine("end import");
-                WriteLine("");
-            }
-            catch (Exception ex)
-            {
-                WriteLine(ex.Message);
-                throw ex;
-            }
-        }
-
+        //#endregion - import file code - deprocated
     }
 }

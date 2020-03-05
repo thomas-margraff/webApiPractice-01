@@ -18,7 +18,14 @@ namespace RMQLib.Models
 
         public RabbitConnection()
         {
+        }
 
+        public void ClearDefaults()
+        {
+            HostName = string.Empty;
+            UserName = null;
+            Password = null;
+            VirtualHost = null;
         }
     }
 }

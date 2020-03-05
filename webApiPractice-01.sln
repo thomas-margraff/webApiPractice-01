@@ -26,6 +26,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solutionItems", "_solutionItems", "{4B624552-54C4-41E2-A748-C69A0DCC5CCE}"
 	ProjectSection(SolutionItems) = preProject
 		docs.txt = docs.txt
+		RMQ.Messages.txt = RMQ.Messages.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL-SqlServer-Models", "DAL-SqlServer-Models\DAL-SqlServer-Models.csproj", "{7A8FA6DD-6E13-40CE-8A1B-DB0F1BF4CFC6}"
@@ -101,6 +102,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ.WorkerService.Consumer", "miscProjects\RMQ.WorkerService.Consumer\RMQ.WorkerService.Consumer.csproj", "{67BBFF6D-552A-4173-8426-2E64321E9E61}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ.Test.Sender", "miscProjects\RMQ.Test.Sender\RMQ.Test.Sender.csproj", "{807B846D-62C1-4019-B9BE-4E86DDFA5460}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ.Test.Receiver", "miscProjects\RMQ.Test.Receiver\RMQ.Test.Receiver.csproj", "{47B9D8EB-FD92-4BE2-B494-39F1B128A029}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApps", "ConsoleApps", "{0C24F461-66D6-4C5E-913F-879922BF54C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -248,6 +253,10 @@ Global
 		{807B846D-62C1-4019-B9BE-4E86DDFA5460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{807B846D-62C1-4019-B9BE-4E86DDFA5460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{807B846D-62C1-4019-B9BE-4E86DDFA5460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B9D8EB-FD92-4BE2-B494-39F1B128A029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47B9D8EB-FD92-4BE2-B494-39F1B128A029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47B9D8EB-FD92-4BE2-B494-39F1B128A029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47B9D8EB-FD92-4BE2-B494-39F1B128A029}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -294,7 +303,9 @@ Global
 		{6E5B90DC-5437-447E-B3F9-1A3C826CBC9C} = {9DF60326-3EB6-42EF-A5A5-3CBB1153E765}
 		{30CAAFA1-3F22-4FB3-B267-6E3A66B735FC} = {3519EC20-3320-43D5-8F4B-B9F81F31026C}
 		{67BBFF6D-552A-4173-8426-2E64321E9E61} = {30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}
-		{807B846D-62C1-4019-B9BE-4E86DDFA5460} = {30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}
+		{807B846D-62C1-4019-B9BE-4E86DDFA5460} = {0C24F461-66D6-4C5E-913F-879922BF54C3}
+		{47B9D8EB-FD92-4BE2-B494-39F1B128A029} = {0C24F461-66D6-4C5E-913F-879922BF54C3}
+		{0C24F461-66D6-4C5E-913F-879922BF54C3} = {30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D39B816-E320-4355-A246-EF76F06D22BE}

@@ -16,11 +16,11 @@ namespace RMQLib
         {
             RabbitConnection options = ctx.Connection; 
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = options.UserName;
-            factory.Password = options.Password;
-            factory.VirtualHost = options.VirtualHost;
-            factory.HostName = options.HostName;
+            if (!string.IsNullOrWhiteSpace(options.UserName)) factory.UserName = options.UserName;
+            if (!string.IsNullOrWhiteSpace(options.Password)) factory.Password = options.Password;
+            if (!string.IsNullOrWhiteSpace(options.UserName)) factory.VirtualHost = options.VirtualHost;
             
+            factory.HostName = options.HostName;
             IConnection conn = factory.CreateConnection();
 
             return conn;

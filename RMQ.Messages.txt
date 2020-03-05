@@ -1,0 +1,50 @@
+
+Send/Receive scrape message
+	
+	SENDER (C#):
+		send message to listener to do a bno news web page scrape
+	
+		class		: CoronaVirusScrapeMessage
+
+		exchange	: cv.scraper.exchange
+		type		: direct
+		eurable		: true
+		queue		: cv.scraper.queue
+		durable		: true
+		routingkey  : doscrape
+
+		data		: none
+
+	RECEIVER (typescript):
+		scrape the page and send parsed json data
+
+		class		: receive.ts
+
+		exchange	: cv.scraper.exchange
+		type		: direct
+		eurable		: true
+		queue		: cv.scraper.queue
+		durable		: true
+		routingkey  : doscrape
+
+		SEND
+			class		: send.ts
+
+			exchange	: cv.scraper.exchange
+			type		: direct
+			eurable		: true
+			queue		: ??? 
+			durable		: true
+			routingkey  : importscrape
+
+		RECEIVE - message listener with bno news web scrape json
+			class		: CoronaVirusScrapeDataMessage
+
+			exchange	: cv.scraper.exchange
+			type		: direct
+			eurable		: true
+			queue		: cv.scraper.queue
+			durable		: true
+			routingkey  : importscrape
+
+

@@ -18,7 +18,7 @@ export class Receiver {
                 }
 
                 let exchange = 'cv.scraper.exchange';
-                let queue = '';
+                let queue = 'cv.scraper.queue';
 
                 channel.assertExchange(exchange, 'direct', {
                     durable: true
