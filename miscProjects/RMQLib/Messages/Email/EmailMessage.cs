@@ -14,7 +14,7 @@ namespace RMQLib.Messages.Email
         public string SmtpHost { get; set; } = "smtp.gmail.com";
         public int Port { get; set; } = 587;
         public string EmailUserName { get; set; } = "tmargraff@gmail.com";
-        public string EmailPassword { get; set; } = "Sapphire5211";
+        public string EmailPassword { get; set; } = "S@pphire5211";
 
         public EmailMessage():
             base()

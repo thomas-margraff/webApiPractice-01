@@ -11,7 +11,7 @@ using static System.Console;
 
 namespace coronavirus.tracker.api
 {
-    public class apiDataReceiver : Receiver
+    public class apiDataReceiver : RMQReceiver
     {
         private int runCount = 0;
         private RabbitContext ctx;

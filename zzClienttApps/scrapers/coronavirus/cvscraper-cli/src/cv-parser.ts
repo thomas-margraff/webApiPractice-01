@@ -40,6 +40,7 @@ export class cvParser {
         let scrapeData: cvScrapeData = new cvScrapeData();
 
         let url = 'https://bnonews.com/index.php/2020/02/the-latest-coronavirus-cases/';
+        url = 'https://docs.google.com/spreadsheets/u/0/d/e/2PACX-1vR30F8lYP3jG7YOq8es0PBpJIE5yvRVZffOyaqC0GgMBN6yt0Q-NI8pxS7hd1F9dYXnowSC6zpZmW9D/pubhtml/sheet?headers=false&gid=0';
         try {
            let res = await axios({
                 url: url,

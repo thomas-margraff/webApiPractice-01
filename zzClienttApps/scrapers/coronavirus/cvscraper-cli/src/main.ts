@@ -32,17 +32,14 @@ receiver.receive().then(r => {
     console.log('receiver waiting');
 });
 
-let debug = true;
-if (!debug) {
-    // ensure csv and json folders exist
-    try {
-        DataDirectories.checkFoldersExist();    
-    } catch (error) {
-        console.error(error);
-        process.exit(1);
-    }
-    
-    // do 1 initial scrape on startup
-    let main: cvMain = new cvMain();
-    main.oneTimeScrape();
+// ensure csv and json folders exist
+try {
+    DataDirectories.checkFoldersExist();    
+} catch (error) {
+    console.error(error);
+    process.exit(1);
 }
+
+// do 1 initial scrape on startup
+let main: cvMain = new cvMain();
+main.oneTimeScrape();

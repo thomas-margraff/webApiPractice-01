@@ -17,7 +17,7 @@ namespace RMQLib
         public RabbitQueue Queue { get; set; }
         public RabbitBinder Binder { get; set; }
         public List<RmqSender> Senders { get; set; }
-        public List<Receiver> Receivers { get; set; }
+        public List<RMQReceiver> Receivers { get; set; }
 
         public RabbitContext()
         {
@@ -25,7 +25,7 @@ namespace RMQLib
             this.Queue = new RabbitQueue();
             this.Binder = new RabbitBinder();
             this.Senders = new List<RmqSender>();
-            this.Receivers = new List<Receiver>();
+            this.Receivers = new List<RMQReceiver>();
         }
 
         public IConnection Connect()

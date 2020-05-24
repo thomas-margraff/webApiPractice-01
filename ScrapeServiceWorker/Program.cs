@@ -44,10 +44,10 @@ namespace ScrapeServiceWorker
                 var minStart = scrapeConfig.StartMinute;
                 var hrStartCalendarOffsetHours = scrapeConfig.CalendarOffsetHours;
 
-                if (!scrapeConfig.CoronaVirusApiTracker.IsDebug)
-                    scheduler.Schedule<cvApiTrackerInvocable>().EveryFifteenMinutes();
-                else
-                    scheduler.Schedule<cvApiTrackerInvocable>().EveryFifteenSeconds();
+                //if (!scrapeConfig.CoronaVirusApiTracker.IsDebug)
+                //    scheduler.Schedule<cvApiTrackerInvocable>().EveryTenMinutes();
+                //else
+                //    scheduler.Schedule<cvApiTrackerInvocable>().EveryFifteenSeconds();
 
                 if (!scrapeConfig.ForexiteDownload.IsDebug)
                     scheduler.Schedule<PriceDownloaderInvocable>().DailyAt(hrStart, minStart);
@@ -57,10 +57,10 @@ namespace ScrapeServiceWorker
                 if (!scrapeConfig.CalendarScrape.IsDebug)
                     scheduler.Schedule<ScraperInvocable>().DailyAt(hrStartCalendarOffsetHours, minStart);
                 else
-                    scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds();
+                    scheduler.Schedule<ScraperInvocable>().EveryThirtySeconds();
 
                 if (!scrapeConfig.CoronaVirusScrape.IsScheduleDebug)
-                    scheduler.Schedule<CVScraperInvocable>().EveryThirtyMinutes();
+                    scheduler.Schedule<CVScraperInvocable>().Hourly();
                 else
                     scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds();
 

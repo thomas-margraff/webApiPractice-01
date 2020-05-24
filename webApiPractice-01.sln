@@ -99,13 +99,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{6E5B90DC-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ.WorkerService.Consumer", "miscProjects\RMQ.WorkerService.Consumer\RMQ.WorkerService.Consumer.csproj", "{67BBFF6D-552A-4173-8426-2E64321E9E61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMQ.WorkerService.Consumer", "miscProjects\RMQ.WorkerService.Consumer\RMQ.WorkerService.Consumer.csproj", "{67BBFF6D-552A-4173-8426-2E64321E9E61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ.Test.Sender", "miscProjects\RMQ.Test.Sender\RMQ.Test.Sender.csproj", "{807B846D-62C1-4019-B9BE-4E86DDFA5460}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMQ.Test.Sender", "miscProjects\RMQ.Test.Sender\RMQ.Test.Sender.csproj", "{807B846D-62C1-4019-B9BE-4E86DDFA5460}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ.Test.Receiver", "miscProjects\RMQ.Test.Receiver\RMQ.Test.Receiver.csproj", "{47B9D8EB-FD92-4BE2-B494-39F1B128A029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMQ.Test.Receiver", "miscProjects\RMQ.Test.Receiver\RMQ.Test.Receiver.csproj", "{47B9D8EB-FD92-4BE2-B494-39F1B128A029}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApps", "ConsoleApps", "{0C24F461-66D6-4C5E-913F-879922BF54C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure", "azure", "{023A1BC6-EBCC-4E05-9AC9-04872B812314}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionTestApp", "azure\functions\FunctionTestApp\FunctionTestApp.csproj", "{6ADBC8AF-C1E7-4DD6-9FE7-E594E8F53E13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -257,6 +261,10 @@ Global
 		{47B9D8EB-FD92-4BE2-B494-39F1B128A029}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47B9D8EB-FD92-4BE2-B494-39F1B128A029}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47B9D8EB-FD92-4BE2-B494-39F1B128A029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ADBC8AF-C1E7-4DD6-9FE7-E594E8F53E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ADBC8AF-C1E7-4DD6-9FE7-E594E8F53E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ADBC8AF-C1E7-4DD6-9FE7-E594E8F53E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ADBC8AF-C1E7-4DD6-9FE7-E594E8F53E13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -306,6 +314,7 @@ Global
 		{807B846D-62C1-4019-B9BE-4E86DDFA5460} = {0C24F461-66D6-4C5E-913F-879922BF54C3}
 		{47B9D8EB-FD92-4BE2-B494-39F1B128A029} = {0C24F461-66D6-4C5E-913F-879922BF54C3}
 		{0C24F461-66D6-4C5E-913F-879922BF54C3} = {30CAAFA1-3F22-4FB3-B267-6E3A66B735FC}
+		{6ADBC8AF-C1E7-4DD6-9FE7-E594E8F53E13} = {023A1BC6-EBCC-4E05-9AC9-04872B812314}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D39B816-E320-4355-A246-EF76F06D22BE}

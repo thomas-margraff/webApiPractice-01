@@ -11,7 +11,7 @@ using static System.Console;
 
 namespace CoronaVirusLib.Receivers
 {
-    public class ScrapeImportReceiver : Receiver
+    public class ScrapeImportReceiver : RMQReceiver
     {
         private readonly cvConfig _cvConfig;
         private readonly ImportScrapeData _importData;

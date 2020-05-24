@@ -24,17 +24,20 @@ namespace ScrapeServiceWorker.CoronaVirusApiTracker
 
         public Task Invoke()
         {
-            if (isRunning)
-                return Task.CompletedTask;
-
-            isRunning = true;
-
-            CoronaVirusApiTrackerMessage msg = CallApi().Result;
-            _sender.SendMessage(msg);
-            
-            isRunning = false;
-            
+            // api broken 4/7/2020
             return Task.CompletedTask;
+
+            //if (isRunning)
+            //    return Task.CompletedTask;
+
+            //isRunning = true;
+
+            //CoronaVirusApiTrackerMessage msg = CallApi().Result;
+            //_sender.SendMessage(msg);
+            
+            //isRunning = false;
+            
+            //return Task.CompletedTask;
         }
 
         private async Task<CoronaVirusApiTrackerMessage> CallApi()

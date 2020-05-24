@@ -16,6 +16,7 @@ using NtpDataLib.Models;
 using NtpDataLib.Extensions;
 using System.IO.Compression;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 namespace NTP.Prices.Forexite.Test
 {
@@ -63,6 +64,8 @@ namespace NTP.Prices.Forexite.Test
             // var s = new SymbolUtils();
             // s.GetSymbolListFromFiles();
 
+            deleteBadFiles();
+
             Downloader dl = new Downloader();
             dl.DownloadMissingPriceFiles();
 
@@ -73,13 +76,30 @@ namespace NTP.Prices.Forexite.Test
             wait();
         }
 
+        static void deleteBadFiles()
+        {
+            var files = Directory.GetFiles("I:\\ForexData\\Forexite\\ARCHIVE_PRICES\\ZIP_ORIGINAL");
+            foreach (var file in files)
+            {
+                var zfile = file.Replace("fxit","FXIT");
+                var zfinfo = new FileInfo(zfile);
+
+                var nfile = zfile.Replace("..zip", ".zip");
+                var nfinfo = new FileInfo(nfile);
+                File.Move(zfile, nfile, true);
+                Console.WriteLine("{0} -> {1}", zfinfo.Name, nfinfo.Name);
+                Thread.Sleep(500);
+
+            }
+        }
+
         static async Task getNfpIndicatorDetail()
         {
             //var ntpIndicatorData = new NtpIndicatorData();
             //List<IndicatorData> recs = await ntpIndicatorData.GetIndicatorsForCcyAndName("USD", "Non-Farm Employment Change");
 
             IndicatorPrices nfp = await new IndicatorPrices().Load("USD", "Non-Farm Employment Change");
-                        
+
             var bytes = SerializeAndCompress(nfp);
             File.WriteAllBytes("nfpbytes.byt", bytes);
 

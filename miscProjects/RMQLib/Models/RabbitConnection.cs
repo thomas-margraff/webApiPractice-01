@@ -6,6 +6,7 @@ namespace RMQLib.Models
 {
     public class RabbitConnection
     {
+        public string Name { get; set; }
         public string HostName { get; set; } = "gull-01.rmq.cloudamqp.com";
         public int Port { get; set; } = 5672;
         public string UserName { get; set; } = "noekmbda";

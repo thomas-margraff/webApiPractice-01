@@ -7,6 +7,10 @@ namespace RMQ.Test.Receiver
     {
         static void Main(string[] args)
         {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(string.Format(" {0,2} {1,10} {2,5} {3,5}", "arg0", "arg1", "arg2", "arg3"));
+            }
             string exchange = "direct_logs";
             string exchangeType = "direct";
             string routingKey = "info";
@@ -18,7 +22,7 @@ namespace RMQ.Test.Receiver
             // fanout
             RabbitContext ctx = new RabbitContext().Create(exchange, exchangeType, routingKey);
             var receiver = new LogDirectReceiver(ctx);
-            receiver.Run();
+            // receiver.Run();
 
         }
     }

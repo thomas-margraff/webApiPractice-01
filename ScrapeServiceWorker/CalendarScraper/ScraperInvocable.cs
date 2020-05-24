@@ -1,4 +1,4 @@
-﻿using Coravel.Invocable;
+﻿    using Coravel.Invocable;
 using Coravel.Queuing.Interfaces;
 using DAL_SqlServer;
 using DAL_SqlServer.Models;
@@ -23,6 +23,7 @@ namespace ScrapeServiceWorker.CalendarScraper
     {
         private readonly IIndicatorDataRepository _repository;
         private readonly ScrapeConfig _scrapeConfig;
+        private bool isRunning;
         StringBuilder emailBody;
         string subject = "Calendar Scrape";
         string recipient = "tmargraff@gmail.com";
@@ -36,6 +37,11 @@ namespace ScrapeServiceWorker.CalendarScraper
 
         public Task Invoke()
         {
+            if (isRunning)
+                return Task.CompletedTask;
+
+            isRunning = true;
+
             emailBody = new StringBuilder();
             var dtFmt = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
             emailBody.AppendLine(string.Format("Start calendar scrape at {0}", dtFmt));
@@ -49,7 +55,8 @@ namespace ScrapeServiceWorker.CalendarScraper
                 emailBody.AppendLine(string.Format("ERROR {0}", ex.Message));
                 Console.WriteLine("ERROR " + emailBody.ToString());
                 Gmail.Send(subject + " ERROR " + DateTime.Now, emailBody.ToString(), recipient);
-
+                
+                isRunning = false;
                 return Task.FromException(ex);
             }
             
@@ -57,7 +64,8 @@ namespace ScrapeServiceWorker.CalendarScraper
             emailBody.AppendLine(string.Format("End calendar scrape at {0}", dtFmt));
             Gmail.Send(subject + " " + DateTime.Now, emailBody.ToString(), recipient);
             Console.WriteLine(emailBody.ToString());
-
+            
+            isRunning = false;
             return Task.CompletedTask;
         }
 

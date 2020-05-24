@@ -12,15 +12,19 @@ namespace RMQ.Test.Sender
     {
         private static RmqSender _sender;
         private static RabbitContext _ctx;
+        private static RMQSession _session;
+        private static apiTracker _receiver;
 
         static void Main(string[] args)
         {
-            apiTrackerSender();
+            // BnoScraper();
+            apiTrackerSenderNew();
+
+            // apiTrackerSender();
             // emailSender();
             // fanoutSender();
             // directSender();
             // sendScrapeMessage();
-
 
             Console.WriteLine("press enter to continue...");
             Console.ReadLine();
@@ -73,18 +77,30 @@ namespace RMQ.Test.Sender
             }
         }
 
+        static void BnoScraper()
+        {
+            CvBnoScraper scraper = new CvBnoScraper();
+            scraper.Run();
+        }
+        static void apiTrackerSenderNew()
+        {
+            apiTracker apiTracker = new apiTracker();
+            apiTracker.Run();
+        }
+
         static void apiTrackerSender()
         {
             _ctx = new RabbitContext().Create("cv.localhost.json");
             _sender = new RmqSender(_ctx);
+            _session.Sender.SetRoutingKey("cvApiTracker", "cvApiTracker");
 
             while (true)
             {
-                CoronaVirusApiTrackerMessage msg = CallApi().Result;
-                
-                _sender.SendMessage(msg);
-                Console.WriteLine("press enter to send another message...");
+                Console.WriteLine("(apiTrackerSender) press enter to send another message...");
                 Console.ReadLine();
+                CoronaVirusApiTrackerMessage msg = CallApi().Result;
+                // _session.Sender.Send(msg);
+                _sender.SendMessage(msg);
             }
         }
 

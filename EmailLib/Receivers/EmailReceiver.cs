@@ -9,7 +9,7 @@ using static System.Console;
 
 namespace EmailLib.Receivers
 {
-    public class EmailReceiver : Receiver
+    public class EmailReceiver : RMQReceiver
     {
         private readonly RabbitContext _ctx;
 

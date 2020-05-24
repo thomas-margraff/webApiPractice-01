@@ -6,7 +6,7 @@ using static System.Console;
 
 namespace RMQ.Test.Receiver
 {
-    public class LogDirectReceiver : RMQLib.Receiver
+    public class LogDirectReceiver : RMQLib.RMQReceiver
     {
         private RabbitContext _ctx;
 

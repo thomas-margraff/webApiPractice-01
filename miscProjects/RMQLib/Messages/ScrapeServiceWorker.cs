@@ -38,7 +38,7 @@ namespace RMQLib.Messages
         }
     }
 
-    public class ScrapeServiceWorkerReceive : Receiver
+    public class ScrapeServiceWorkerReceive : RMQReceiver
     {
         public ScrapeServiceWorkerReceive(RabbitContext ctx) : base(ctx)
         {

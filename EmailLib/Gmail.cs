@@ -66,7 +66,7 @@ namespace EmailLib
                 smtpClient.Credentials = new System.Net.NetworkCredential()
                 {
                     UserName = "tmargraff@gmail.com",
-                    Password = "Sapphire5211"
+                    Password = "S@pphire5211"
                 };
 
                 smtpClient.EnableSsl = true;

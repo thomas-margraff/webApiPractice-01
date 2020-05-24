@@ -33,7 +33,7 @@ namespace NewScrapeFileWatcherConsole
         }
     }
 
-    public class ScrapeFileWatcherReceive : Receiver
+    public class ScrapeFileWatcherReceive : RMQReceiver
     {
         private readonly cvConfig _cvConfig;
         private readonly ImportScrapeData _importData;

@@ -1,0 +1,74 @@
+﻿{
+  "Connections": [
+    { 
+      "Name": "cloudAmqp",
+      "HostName": "gull-01.rmq.cloudamqp.com",
+      "Port": 5672,
+      "UserName": "noekmbda",
+      "Password": "jtKtg3LU2uEQOCJRpEgMhdSqf2N7S_Cv",
+      "VirtualHost": "noekmbda",
+      "AutomaticRecoveryEnabled": true,
+      "TopologyRecoveryEnabled": true,
+      "RequestedConnectionTimeout": 60000,
+      "RequestedHeartbeat": 60
+    },
+    {
+      "Name": "local",
+      "HostName": "localhost",
+      "Port": 5672,
+      "UserName": "guest",
+      "Password": "guest",
+      "VirtualHost": "vhost",
+      "AutomaticRecoveryEnabled": true,
+      "TopologyRecoveryEnabled": true,
+      "RequestedConnectionTimeout": 60000,
+      "RequestedHeartbeat": 60
+    }
+  ],
+  "Exchanges": [
+    {
+      "Name": "cv.scraper.exchange",
+      "Type": "direct",
+      "Durable": true,
+      "AutoDelete": false,
+      "Arguments": null
+    },
+    {
+      "Name": "cv.messages.exchange",
+      "Type": "topic",
+      "Durable": false,
+      "AutoDelete": false,
+      "Arguments": null
+    },
+    {
+      "Name": "cv.fanout",
+      "Type": "fanout",
+      "Durable": false,
+      "AutoDelete": false,
+      "Arguments": null
+    }
+  ],
+  "Queues": [
+    {
+      "Name": "cv.scraper.queue",
+      "Durable": true,
+      "Exclusive": false,
+      "AutoDelete": false,
+      "Arguments": null,
+    },
+    {
+      "Name": "cv.messages.queue",
+      "Durable": false,
+      "Exclusive": false,
+      "AutoDelete": false,
+      "Arguments": null
+    },
+    {
+      "Name": "cv.messages",
+      "Durable": true,
+      "Exclusive": false,
+      "AutoDelete": false,
+      "Arguments": null
+    }
+  ]
+}

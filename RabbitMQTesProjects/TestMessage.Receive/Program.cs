@@ -14,7 +14,7 @@ namespace TestMessage.Receive
         }
     }
 
-    public class TestReceiver: Receiver
+    public class TestReceiver: RMQReceiver
     {
         public TestReceiver(RabbitContext ctx) :base(ctx)
         {

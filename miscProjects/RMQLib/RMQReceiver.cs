@@ -12,13 +12,13 @@ namespace RMQLib
 {
     // https://developpaper.com/the-correct-way-to-use-rabbitmq-in-net-core/
 
-    public class Receiver
+    public class RMQReceiver
     {
         private RabbitContext ctx;
         private readonly IConnection connection;
         private readonly IModel channel;
 
-        public Receiver(RabbitContext ctx)
+        public RMQReceiver(RabbitContext ctx)
         {
             this.ctx = ctx;
 
@@ -68,8 +68,13 @@ namespace RMQLib
 
         public void Register<T>(T msg) where T : IBaseDataMessage
         {
-            this.SetRoutingKey(msg.RoutingQueueName, msg.RoutingKey);
-            this.Register();
+            this.Register(msg.RoutingQueueName, msg.RoutingKey);
+        }
+
+        public void Register(string routingQueueName, string routingKey)
+        {
+            this.SetRoutingKey(routingQueueName, routingKey);
+            Register();
         }
 
         // Registered Consumer Monitor Here

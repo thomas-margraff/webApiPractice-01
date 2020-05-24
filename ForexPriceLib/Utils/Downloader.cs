@@ -132,7 +132,7 @@ namespace ForexPriceLib.Utils
         {
             var file = Directory.GetFiles(@"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL").OrderByDescending(r => r).FirstOrDefault();
             var finfo = new FileInfo(file);
-            var fname = finfo.Name.Replace("FXIT-", "").Substring(0, 8);
+            var fname = finfo.Name.ToUpper().Replace("FXIT-", ""); //.Substring(0, 8);
             var yyyy = Convert.ToInt16(fname.Substring(0, 4));
             var mm = Convert.ToInt16(fname.Substring(4, 2));
             var dd = Convert.ToInt16(fname.Substring(6, 2));
@@ -146,7 +146,7 @@ namespace ForexPriceLib.Utils
         {
             var file = Directory.GetFiles(@"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL").OrderBy(r => r).FirstOrDefault();
             var finfo = new FileInfo(file);
-            var fname = finfo.Name.Replace("FXIT-", "").Substring(0, 8);
+            var fname = finfo.Name.ToUpper().Replace("FXIT-", "");    //.Substring(0, 8);
             var yyyy = Convert.ToInt16(fname.Substring(0, 4));
             var mm = Convert.ToInt16(fname.Substring(4, 2));
             var dd = Convert.ToInt16(fname.Substring(6, 2));

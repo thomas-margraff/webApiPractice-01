@@ -12,6 +12,7 @@ namespace RMQLib
     public class RmqSender
     {
         private RabbitContext ctx;
+        private RMQContext rmqCtx;
         private IConnection connection;
 
         public RmqSender(RabbitContext ctx) { this.ctx = ctx; }

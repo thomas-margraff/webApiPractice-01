@@ -13,6 +13,9 @@ namespace CoronaVirusLib.Messages
         {
             base.RoutingQueueName = "cvApiTracker";
             base.RoutingKey = "cvApiTracker";
+
+            //base.RoutingQueueName = "cv.messages";
+            //base.RoutingKey = "cv.messages";
         }
     }
 }
