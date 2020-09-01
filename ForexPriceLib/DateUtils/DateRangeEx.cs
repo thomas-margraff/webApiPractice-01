@@ -50,5 +50,30 @@ namespace ForexPriceLib.DateUtils
             }
             return recs;
         }
+
+        public static DateRange ThisWeek(this DateRange dr)
+        {
+            var dt = DateTime.Now;
+            dr = new DateRange(dt.Previous(DayOfWeek.Sunday), dt.Next(DayOfWeek.Friday));
+            return dr;
+        }
+
+        public static DateRange ThisWeek(this DateTime dt)
+        {
+            dt = DateTime.Now;
+            var dr = new DateRange(dt.Previous(DayOfWeek.Sunday), dt.Next(DayOfWeek.Friday));
+            return dr;
+        }
+
+        public static DateRange WeekOf(this DateTime startDate)
+        {
+            if (startDate.DayOfWeek == DayOfWeek.Sunday)
+                return new DateRange(startDate, startDate.Next(DayOfWeek.Friday));
+
+            if (startDate.DayOfWeek == DayOfWeek.Saturday)
+                return new DateRange(startDate.Previous(DayOfWeek.Sunday), startDate.Previous(DayOfWeek.Friday));
+
+            return new DateRange(startDate.Previous(DayOfWeek.Sunday), startDate.Next(DayOfWeek.Friday));
+        }
     }
 }

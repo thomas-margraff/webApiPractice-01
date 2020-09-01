@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
+﻿using DAL_SqlServer.ModelExtensions;
+using DAL_SqlServer.Models;
+using ForexPriceLib.FileExtensions;
 using ForexPriceLib.Models;
 using ForexPriceLib.Utils;
-using ForexPriceLib.FileExtensions;
-using System.Net.Http;
-using System.Threading.Tasks;
+using CommonLib.DateUtils;
 using IndicatorDataLib;
-using DAL_SqlServer.Models;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using DAL_SqlServer.ModelExtensions;
-using NtpDataLib.Models;
 using NtpDataLib.Extensions;
+using NtpDataLib.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using System.Threading.Tasks;
+using HstFileReader;
 
 namespace NTP.Prices.Forexite.Test
 {
@@ -30,6 +31,9 @@ namespace NTP.Prices.Forexite.Test
         static AppConfig appConfig;
         async static Task Main(string[] args)
         {
+            ReadHstFile();
+
+            // pricesForMultipleDates();
             #region config
             var builder = new ConfigurationBuilder()
                            .SetBasePath(Directory.GetCurrentDirectory())
@@ -64,10 +68,11 @@ namespace NTP.Prices.Forexite.Test
             // var s = new SymbolUtils();
             // s.GetSymbolListFromFiles();
 
-            deleteBadFiles();
+            // deleteBadFiles();
 
-            Downloader dl = new Downloader();
-            dl.DownloadMissingPriceFiles();
+            // Downloader dl = new Downloader();
+            // dl.DownloadPriceFile(DateTime.Today.AddDays(-4));
+            // dl.DownloadMissingPriceFiles();
 
             // await getNfpTimeStats();
             // await getIndicators();
@@ -76,12 +81,71 @@ namespace NTP.Prices.Forexite.Test
             wait();
         }
 
+        static void ReadHstFile()
+        {
+            var reader = new HstReader();
+            reader.ReadFileVersion();
+        }
+
+        static void downloadMissingPriceFiles()
+        {
+            Downloader dl = new Downloader();
+            // dl.DownloadPriceFile(DateTime.Today.AddDays(-4));
+            dl.DownloadMissingPriceFiles();
+
+        }
+
+        static void pricesForMultipleDates()
+        {
+            // 6/5/2020 - 14:30
+            // 1/10/2020 - 14:30
+            ForexiteFile fx = new ForexiteFile(new DateTime(2020, 1, 10));
+            var recs = fx.GetPriceRecords("EURUSD");
+
+            // recs.AddRange(fx.GetPriceRecords(new DateTime(2020, 3, 6), "EURUSD"));
+
+            recs.ToCsvFileOHLC("prices.csv", true);
+
+        }
+
+        static void pricesForWeek()
+        {
+            /*             
+            var dtToday = DateTime.Now;
+            var dayOfWeek = Convert.ToInt16(dtToday.DayOfWeek);
+            var sun = dtToday.AddDays(dayOfWeek * -1);
+            var sat = sun.AddDays(6);
+            */
+
+            // downloadMissingPriceFiles();
+
+            // var dt = DateTime.Now;
+            var dr = DateTime.Now.ThisWeek();
+            var dr1 = DateTime.Now.AddDays(-11).WeekOf();
+
+            ForexiteFile fx = new ForexiteFile(DateTime.Now.Previous(DayOfWeek.Saturday));
+            dr = DateTime.Now.PreviousWeek();
+            ForexPrices fxp = new ForexPrices();
+            foreach (var dt in dr)
+            {
+                fxp.PriceRecords.AddRange(fx.GetForexPrices(dt).PriceRecords);
+            }
+
+            int t = 0;
+
+            // fx.DownloadFile();
+            var csv = fxp.SymbolTimeStats.ToCsv(true);
+            File.WriteAllLines("symbolTimeStats.csv", csv);
+
+            int u = 0;
+        }
+
         static void deleteBadFiles()
         {
             var files = Directory.GetFiles("I:\\ForexData\\Forexite\\ARCHIVE_PRICES\\ZIP_ORIGINAL");
             foreach (var file in files)
             {
-                var zfile = file.Replace("fxit","FXIT");
+                var zfile = file.Replace("fxit", "FXIT");
                 var zfinfo = new FileInfo(zfile);
 
                 var nfile = zfile.Replace("..zip", ".zip");

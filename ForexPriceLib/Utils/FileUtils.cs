@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace ForexPriceLib.Utils
@@ -12,14 +13,20 @@ namespace ForexPriceLib.Utils
             // FXIT-20200103.csv 
             // FXIT-20200103.zip
             string yyyy = dt.Year.ToString();
-            string yy = yyyy.Substring(2, 2);
-            string mm = dt.Month.ToString();
-            if (mm.Length == 1) mm = "0" + mm;
-            string dd = dt.Day.ToString();
-            if (dd.Length == 1) dd = "0" + dd;
+            string mm = dt.Month.ToString().PadLeft(2, '0');
+            string dd = dt.Day.ToString().PadLeft(2, '0');
 
-            var fname = string.Format("FXIT-{0}{1}{2}.{3}", yyyy, mm, dd, ext);
+            var fname = string.Format("FXIT-{0}{1}{2}.{3}", yyyy, mm, dd, ext.Replace(".", ""));
             return fname;
+        }
+
+        public static string DateToFileName(DateTime dt)
+        {
+            // FXIT-20200103.csv 
+            return string.Format("FXIT-{0}{1}{2}",
+                dt.Year,
+                dt.Month.ToString().PadLeft(2, '0'),
+                dt.Day.ToString().PadLeft(2, '0'));
         }
 
         public static string DateToFileName(DateTime dt, string ext)
@@ -69,5 +76,13 @@ namespace ForexPriceLib.Utils
 
             return dt;
         }
+
+        public static DateTime GetLastScrape(string folder)
+        {
+            var file = Directory.GetFiles(folder).OrderByDescending(r => r).FirstOrDefault();
+            var dt = FileUtils.FileNameToDate(file);
+            return dt;
+        }
+
     }
 }

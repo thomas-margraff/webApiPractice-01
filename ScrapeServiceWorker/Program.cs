@@ -59,10 +59,10 @@ namespace ScrapeServiceWorker
                 else
                     scheduler.Schedule<ScraperInvocable>().EveryThirtySeconds();
 
-                if (!scrapeConfig.CoronaVirusScrape.IsScheduleDebug)
-                    scheduler.Schedule<CVScraperInvocable>().Hourly();
-                else
-                    scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds();
+                //if (!scrapeConfig.CoronaVirusScrape.IsScheduleDebug)
+                //    scheduler.Schedule<CVScraperInvocable>().DailyAtHour(5);
+                //else
+                //    scheduler.Schedule<CVScraperInvocable>().EveryFifteenSeconds();
 
                 #region cron docs
                 //  run every two hours and 11 minutes

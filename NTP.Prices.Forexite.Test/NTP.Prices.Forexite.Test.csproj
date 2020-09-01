@@ -33,11 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetZip" Version="1.13.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
+    <PackageReference Include="DotNetZip" Version="1.13.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.IO.Compression.ZipFile" Version="4.3.0" />
   </ItemGroup>
@@ -46,6 +46,7 @@
     <ProjectReference Include="..\DAL-SqlServer\DAL-SqlServer.csproj" />
     <ProjectReference Include="..\ForexPriceLib\ForexPriceLib.csproj" />
     <ProjectReference Include="..\IndicatorDataLib\IndicatorDataLib.csproj" />
+    <ProjectReference Include="..\miscProjects\CommonLib\CommonLib.csproj" />
     <ProjectReference Include="..\NtpDataLib\NtpDataLib.csproj" />
   </ItemGroup>
 

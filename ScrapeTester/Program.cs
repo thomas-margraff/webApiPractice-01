@@ -30,7 +30,7 @@ namespace ScrapeTester
         {
             string html = "";
             var browser = new Browser();
-            var page = await browser.Open("https://bnonews.com/index.php/2020/01/the-latest-coronavirus-cases/");
+            var page = await browser.Open("https://www.youtube.com/watch?time_continue=4&v=AaLTdrdVcLE&feature=emb_logo");  // https://bnonews.com/index.php/2020/01/the-latest-coronavirus-cases/");
             html = page.Select("#mvp-content-main").Text();
 
             // The table below shows confirmed cases of coronavirus (2019-nCoV) in China and other countries. To see a distribution map and a timeline, scroll down. 

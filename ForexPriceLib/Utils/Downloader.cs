@@ -10,6 +10,7 @@ namespace ForexPriceLib.Utils
 {
     public class Downloader
     {
+        public string zipFileFolder = @"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL_2001-2019";
         public void DownloadMissingPriceFiles()
         {
             var dates = this.GetMissingDownloadFiles();
@@ -21,7 +22,7 @@ namespace ForexPriceLib.Utils
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                   throw;
                 }
                 
                 Thread.Sleep(2000);
@@ -30,30 +31,30 @@ namespace ForexPriceLib.Utils
 
         public void DownloadPriceFile(DateTime dt)
         {
-            string yyyy = dt.Year.ToString();
-            string yy = yyyy.Substring(2, 2);
-            string mm = dt.Month.ToString();
-            if (mm.Length == 1) mm = "0" + mm;
-            string dd = dt.Day.ToString();
-            if (dd.Length == 1) dd = "0" + dd;
+            this.DownloadPriceFile(dt, zipFileFolder); 
+        }
 
-            var fname = string.Format("FXIT-{0}{1}{2}.zip", yyyy, mm, dd);
-            Console.WriteLine(fname);
+        public void DownloadPriceFile(DateTime dt, string folder)
+        {
+            var fname = FileUtils.DateToFxiFileName(dt, "zip");
+            Console.WriteLine("{0} {1} - downloading", fname, dt.DayOfWeek);
 
             // "https://www.forexite.com/free_forex_quotes/2020/01/100120.zip";
             // 2020/01/100120
-            var urlDt = string.Format("{0}/{1}/{2}{3}{04}", yyyy, mm, dd, mm, yy);
+            var urlDt = FileUtils.DateToUrlFileName(dt);
 
             string url = "https://www.forexite.com/free_forex_quotes/" + urlDt + ".zip";
             using (WebClient client = new WebClient())
             {
                 try
                 {
-                    client.DownloadFile(new Uri(url), Path.Combine(@"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL", fname));
+                    client.DownloadFile(new Uri(url), Path.Combine(folder, fname));
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    int i = 0;
+                    if (i == 10)
+                        throw ex;
                 }
             }
 
@@ -84,11 +85,11 @@ namespace ForexPriceLib.Utils
             
             while (dt <= DateTime.Today)
             {
-                if (dt.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    dt = dt.AddDays(1);
-                    continue;
-                }
+                //if (dt.DayOfWeek == DayOfWeek.Saturday)
+                //{
+                //    dt = dt.AddDays(1);
+                //    continue;
+                //}
                 this.DownloadPriceFile(dt);
                 
                 Thread.Sleep(2000);
@@ -100,19 +101,20 @@ namespace ForexPriceLib.Utils
         public List<DateTime> GetMissingDownloadFiles()
         {
             var dt = getFirstScrape();
-            var dtLastScrape = getLastScrape();
-            dtLastScrape = DateTime.Today.AddDays(-1);
+            var dtLastScrape = GetLastScrape();
+            // dtLastScrape = DateTime.Today.AddDays(-1);
             List<DateTime> missingFiles = new List<DateTime>();
 
             while (dt <= dtLastScrape)
             {
-                if (dt.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    dt = dt.AddDays(1);
-                    continue;
-                }
+                //if (dt.DayOfWeek == DayOfWeek.Saturday)
+                //{
+                //    dt = dt.AddDays(1);
+                //    continue;
+                //}
                 var fname = FileUtils.DateToFxiFileName(dt, "zip");
-                var fpath = Path.Combine(@"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL", fname);
+                var fpath = Path.Combine(zipFileFolder, fname);
+                
                 if (!File.Exists(fpath))
                 {
                     Console.WriteLine(fname + "  MISSING!");
@@ -128,23 +130,21 @@ namespace ForexPriceLib.Utils
 
         }
 
-        private DateTime getLastScrape()
+        public DateTime GetLastScrape()
         {
-            var file = Directory.GetFiles(@"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL").OrderByDescending(r => r).FirstOrDefault();
-            var finfo = new FileInfo(file);
-            var fname = finfo.Name.ToUpper().Replace("FXIT-", ""); //.Substring(0, 8);
-            var yyyy = Convert.ToInt16(fname.Substring(0, 4));
-            var mm = Convert.ToInt16(fname.Substring(4, 2));
-            var dd = Convert.ToInt16(fname.Substring(6, 2));
+            return GetLastScrape(zipFileFolder);
+        }
 
-            var dt = new DateTime(yyyy, mm, dd);
-
+        public DateTime GetLastScrape(string folder)
+        {
+            var file = Directory.GetFiles(folder).OrderByDescending(r => r).FirstOrDefault();
+            var dt = FileUtils.FileNameToDate(file);
             return dt;
         }
 
         private DateTime getFirstScrape()
         {
-            var file = Directory.GetFiles(@"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL").OrderBy(r => r).FirstOrDefault();
+            var file = Directory.GetFiles(zipFileFolder).OrderBy(r => r).FirstOrDefault();
             var finfo = new FileInfo(file);
             var fname = finfo.Name.ToUpper().Replace("FXIT-", "");    //.Substring(0, 8);
             var yyyy = Convert.ToInt16(fname.Substring(0, 4));

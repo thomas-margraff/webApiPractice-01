@@ -98,9 +98,13 @@ namespace ForexPriceLib.FileExtensions
         {
             return JsonConvert.SerializeObject(timeStats, Formatting.Indented);
         }
-        public static List<string> ToCsv(this List<ForexTimePeriodStats> timeStats)
+        public static List<string> ToCsv(this List<ForexTimePeriodStats> timeStats, bool withHeader = false)
         {
             List<string> csv = new List<string>();
+
+            if (withHeader)
+                csv.Add(ForexTimePeriodStats.ToTimeStatCsvHeader());
+
             foreach (ForexTimePeriodStats rec in timeStats)
             {
                 csv.Add(rec.ToTimeStatCsv());

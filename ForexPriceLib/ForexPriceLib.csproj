@@ -1,18 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DateUtils\**" />
+    <EmbeddedResource Remove="DateUtils\**" />
+    <None Remove="DateUtils\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Utils\ForexDomainObjectExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetZip" Version="1.13.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.1" />
+    <PackageReference Include="DotNetZip" Version="1.13.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

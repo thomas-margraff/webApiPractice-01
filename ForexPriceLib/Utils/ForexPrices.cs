@@ -26,6 +26,13 @@ namespace ForexPriceLib.Utils
     [Serializable]
     public class ForexPrices
     {
+        public ForexPrices(List<ForexPriceRecord> recs)
+        {
+            _downloadExceptions = new List<string>();
+            _priceRecords = recs;
+
+        }
+
         public ForexPrices()
         {
             _downloadExceptions = new List<string>();

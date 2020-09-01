@@ -1,0 +1,16 @@
+﻿file object
+	date of prices
+
+	name
+		web - forexite site
+		local file system
+		cloud
+
+	location
+		web - forexite site
+		local file system
+		cloud
+
+
+Forexite broker works in GMT+1 time zone in winter and in GMT+2 time zone in summer. We convert historical data from all brokers into GMT time zone.
+Forexite brokers starts working at 00:00 in hsi time zone. So in GMT time zone Forexite broker starts working in winter at 23:00 and in summer at 22:00.
