@@ -119,8 +119,9 @@ namespace RMQLib
 
             consumer.Received += (model, ea) =>
             {
-                var body = ea.Body;
-                var message = Encoding.UTF8.GetString(body);
+                //var body = ea.Body.ToString();
+                //var message = Encoding.UTF8.GetString(body);
+                var message = ea.Body.ToString();
                 var result = Process(message);
                 if (result)
                 {
@@ -130,7 +131,7 @@ namespace RMQLib
 
             consumer.Registered += (model, ea) =>
             {
-                var tag = ea.ConsumerTag;
+                var tag = ea.ConsumerTags;
                 WriteLine("registered tag: {0}", tag);
             };
             consumer.Shutdown += (model, ea) =>
@@ -140,7 +141,7 @@ namespace RMQLib
             };
             consumer.Unregistered += (model, ea) =>
             {
-                var tag = ea.ConsumerTag;
+                var tag = ea.ConsumerTags;
                 WriteLine("Unregistered tag: {0}", tag);
             };
 
