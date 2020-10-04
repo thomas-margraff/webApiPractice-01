@@ -10,7 +10,7 @@ namespace ForexPriceLib.Utils
 {
     public class Downloader
     {
-        public string zipFileFolder = @"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL_2001-2019";
+        public string zipFileFolder = @"I:\ForexData\Forexite\ARCHIVE_PRICES\ZIP_ORIGINAL";
         public void DownloadMissingPriceFiles()
         {
             var dates = this.GetMissingDownloadFiles();

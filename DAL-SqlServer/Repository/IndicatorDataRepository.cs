@@ -50,7 +50,7 @@ namespace DAL_SqlServer.Repository
 
         public List<IndicatorData> BulkUpdate(List<IndicatorData> recs)
         {
-            List<IndicatorData> updRecs = new List<IndicatorData>();
+             List<IndicatorData> updRecs = new List<IndicatorData>();
 
             foreach (var rec in recs)
             {

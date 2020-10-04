@@ -25,6 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapiDatabaseFirst", "weba
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solutionItems", "_solutionItems", "{4B624552-54C4-41E2-A748-C69A0DCC5CCE}"
 	ProjectSection(SolutionItems) = preProject
+		AppFunctionality.txt = AppFunctionality.txt
 		docs.txt = docs.txt
 		RMQ.Messages.txt = RMQ.Messages.txt
 	EndProjectSection

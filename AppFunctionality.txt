@@ -1,0 +1,6 @@
+Calendar Scrape
+	copy html page to local file system
+	parse calendar data from html page
+	save parsed data:
+		SQL Server
+

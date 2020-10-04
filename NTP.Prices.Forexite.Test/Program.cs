@@ -31,7 +31,8 @@ namespace NTP.Prices.Forexite.Test
         static AppConfig appConfig;
         async static Task Main(string[] args)
         {
-            ReadHstFile();
+            // ReadHstFile();
+            downloadMissingPriceFiles();
 
             // pricesForMultipleDates();
             #region config
